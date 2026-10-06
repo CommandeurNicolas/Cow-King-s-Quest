@@ -1,0 +1,10 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- Three crown points, separated from the head for clarity at small sizes. -->
+    <path android:fillColor="#E8BE79"
+        android:pathData="M42,27 L48,31 L54,23 L60,31 L66,27 L63,37 L45,37 Z" />
+    <!-- Real cutouts preserve the face when Android applies a monochrome tint. -->
+    <path android:fillColor="#E8BE79" android:fillType="evenOdd"
+        android:pathData="M40,46 C31,47 26,39 30,32 C31,39 35,40 42,39 L47,42 L61,42 L66,39 C73,40 77,39 78,32 C82,39 77,47 68,46 L66,61 Q64,73 54,79 Q44,73 42,61 Z M44,49 L51,52 L49,56 L44,54 Z M64,49 L57,52 L59,56 L64,54 Z M48,65 Q54,61 60,65 L60,70 Q54,74 48,70 Z" />
+</vector>

@@ -1,0 +1,65 @@
+# Gradle / Kotlin caches and generated build output (all modules)
+.gradle/
+.kotlin/
+build/
+bin/
+gen/
+out/
+app/release/
+
+# Packaged applications and compiled bytecode
+*.apk
+*.aab
+*.aar
+*.ap_
+*.dex
+*.class
+
+# Android SDK paths and local signing configuration
+local.properties
+keystore.properties
+signing.properties
+*.jks
+*.keystore
+
+# Local environment files; keep shareable examples
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# Local service configuration
+google-services.json
+
+# Android Studio / IntelliJ user and generated project files
+.idea/
+*.iml
+*.ipr
+*.iws
+.navigation/
+captures/
+vcs.xml
+
+# Native build and legacy generated output
+.externalNativeBuild/
+.cxx/
+proguard/
+
+# Logs and diagnostic dumps
+*.log
+*.hprof
+hs_err_pid*
+replay_pid*
+
+# OS metadata and editor temporary files
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+
+# Keep Gradle wrapper scripts/JAR, gradle.properties, source, tests,
+# documentation, and artwork versioned. Do not add a blanket *.jar rule.
