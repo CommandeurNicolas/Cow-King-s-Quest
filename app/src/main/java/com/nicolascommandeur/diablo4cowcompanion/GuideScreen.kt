@@ -42,6 +42,7 @@ import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
@@ -51,19 +52,24 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 
 @Composable
-fun CowHuntApp(
+internal fun CowHuntApp(
     state: HuntState,
     completedSteps: Set<String>,
     onHuntChange: (HuntState) -> Unit,
     onGuideChange: (Set<String>) -> Unit,
-    openLink: ((String) -> Unit)? = null
+    openLink: ((String) -> Unit)? = null,
+    visitorSession: CowVisitorSession? = null,
+    splashFinished: Boolean = true
 ) {
     var page by rememberSaveable { mutableStateOf("counter") }
     var routesFrom by rememberSaveable { mutableStateOf("counter") }
     val savedPages = rememberSaveableStateHolder()
+    var countBounds by remember { mutableStateOf<Rect?>(null) }
+
     BackHandler(enabled = page != "counter") {
         page = if (page == "routes") routesFrom else "counter"
     }
+
     val selectedTab = if (page == "routes") routesFrom else page
     val navigationColors = NavigationBarItemDefaults.colors(
         selectedIconColor = MaterialTheme.colorScheme.primary,
@@ -72,6 +78,7 @@ fun CowHuntApp(
         unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
         unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
     )
+
     Scaffold(
         bottomBar = {
             NavigationBar(
@@ -103,19 +110,35 @@ fun CowHuntApp(
             savedPages.SaveableStateProvider(page) {
                 when (page) {
                     "counter" -> CowCounter(
-                        state, onChange = onHuntChange,
-                        onOpenRoutes = { routesFrom = "counter"; page = "routes" })
+                        state,
+                        onChange = onHuntChange,
+                        onCountBounds = { countBounds = it },
+                        onOpenRoutes = { routesFrom = "counter"; page = "routes" }
+                    )
 
                     "routes" -> FarmingRoutesScreen(
                         state.hunts[state.selected],
-                        onBack = { page = routesFrom }, openLink = openLink
+                        onBack = { page = routesFrom },
+                        openLink = openLink
                     )
 
                     else -> GuideScreen(
-                        completedSteps, onGuideChange, openLink,
-                        onOpenRoutes = { routesFrom = "guide"; page = "routes" })
+                        completedSteps,
+                        onGuideChange,
+                        openLink,
+                        onOpenRoutes = {
+                            routesFrom = "guide"
+                            page = "routes"
+                        }
+                    )
                 }
             }
+
+            CowVisitor(
+                visitorSession,
+                splashFinished,
+                countBounds = countBounds.takeIf { page == "counter" }
+            )
         }
     }
 }

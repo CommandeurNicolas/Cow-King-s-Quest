@@ -16,6 +16,7 @@ An unofficial, offline Android companion for Diablo IV’s secret cow level. Tra
 - Full-screen maps with pinch zoom, bounded panning, and **Reset zoom**.
 - A charcoal-and-gold interface, crowned cow launcher icon, and matching dark splash screen.
 - Locally saved progress and an optional **Keep screen awake** setting while the counter is open.
+- A little surprise might be waiting when you launch the app.
 
 ## Using the app
 
@@ -55,6 +56,28 @@ Tap **Where to farm cows · Maps & routes** from either tab. Each route card inc
 
 Tap an image or **Enlarge map** for the full-screen viewer. Maps are bundled with the app and work offline. Their rounded corners are drawn by the UI; the source images are unchanged. Route estimates never add kills automatically.
 
+### A rare visitor
+
+Keep an eye out when you open the app. Some secrets are best discovered for yourself.
+
+<details>
+<summary>Trigger a preview (contains spoilers)</summary>
+
+With a **debug build** installed and a device or emulator connected through ADB,
+run these commands to preview the surprise without waiting for a lucky launch:
+
+```sh
+adb shell am force-stop com.nicolascommandeur.diablo4cowcompanion
+adb shell am start -n com.nicolascommandeur.diablo4cowcompanion/.MainActivity --ez cow_visitor_preview true
+```
+
+The first command stops the app so the preview starts fresh; your saved progress
+is preserved. The second launches it with the preview enabled. Release builds
+ignore this option. To return to normal behavior, force-stop the app again and
+open it from its launcher icon.
+
+</details>
+
 ## Saved progress and scope
 
 The app stores character names, counts, undo history, relic collection status, the selected character, and the screen-awake preference on the device. Checklist completion uses separate storage. Older single-zone preferences are ignored in favor of displaying all valid zones.
@@ -78,3 +101,7 @@ The bundled guide and routes were researched on **October 5, 2026**. These links
 - [Games Fuze — Skovos quest sequence](https://gamesfuze.com/guides/cow-level-full-guide-lord-of-hatred-in-diablo-4/).
 
 Farming screenshots are credited in the app. Their original URLs and attribution are recorded in [farming map sources](assets/farming-map-sources.md). Diablo IV game imagery belongs to Blizzard Entertainment. Cow King’s Quest is an unofficial project and is not affiliated with Blizzard.
+
+Additional game artwork is credited to Blizzard Entertainment, with extraction by
+napalm22. See [artwork credits and provenance (contains spoilers)](assets/hell-bovine-source.md).
+Third-party game artwork is excluded from the repository's MIT license.

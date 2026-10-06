@@ -1,6 +1,7 @@
 package com.nicolascommandeur.diablo4cowcompanion
 
 import android.animation.ValueAnimator
+import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
@@ -46,9 +47,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.layout.boundsInRoot
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
@@ -69,15 +73,19 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
+
+        // Rotation restores the activity without showing another launch splash.
+        var splashFinished by mutableStateOf(savedInstanceState != null)
         splashScreen.setOnExitAnimationListener { splash ->
             if (ValueAnimator.areAnimatorsEnabled()) {
                 splash.view.animate()
                     .alpha(0f)
                     .setDuration(160L)
-                    .withEndAction { splash.remove() }
+                    .withEndAction { splash.remove(); splashFinished = true }
                     .start()
             } else {
                 splash.remove()
+                splashFinished = true
             }
         }
 
@@ -89,6 +97,19 @@ class MainActivity : ComponentActivity() {
         // Load local data
         val store = HuntStore(this)
         val guideStore = GuideStore(this)
+
+        // Moo ?
+        val visitorSession = if (
+            applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0 &&
+            intent.getBooleanExtra("cow_visitor_preview", false)
+        ) {
+            // Forced Moo.
+            CowVisitorLaunch.previewSession
+        } else {
+            // Random Moo, with a guaranteed visit every 666 cold launches.
+            CowVisitorLaunch.session(this)
+        }
+
         setContent {
             var state by remember { mutableStateOf(store.load()) }
             var completedSteps by remember { mutableStateOf(guideStore.load()) }
@@ -97,7 +118,9 @@ class MainActivity : ComponentActivity() {
                     state = state,
                     completedSteps = completedSteps,
                     onHuntChange = { next -> state = next; store.save(next) },
-                    onGuideChange = { next -> completedSteps = next; guideStore.save(next) }
+                    onGuideChange = { next -> completedSteps = next; guideStore.save(next) },
+                    visitorSession = visitorSession,
+                    splashFinished = splashFinished
                 )
             }
         }
@@ -108,6 +131,7 @@ class MainActivity : ComponentActivity() {
 fun CowCounter(
     state: HuntState,
     onOpenRoutes: (() -> Unit)? = null,
+    onCountBounds: ((Rect) -> Unit)? = null,
     onChange: (HuntState) -> Unit
 ) {
     val hunt = state.hunts[state.selected]
@@ -274,6 +298,7 @@ fun CowCounter(
                             fontFamily = FontFamily.Serif,
                             color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier
+                                .onGloballyPositioned { onCountBounds?.invoke(it.boundsInRoot()) }
                                 .semantics {
                                     contentDescription = "${hunt.count} cows slain out of 666"
                                 },
