@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -46,6 +45,8 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -303,44 +304,73 @@ fun GuideScreen(
                         }
                     }
                     if (section.id in expanded) {
-                        items(section.steps, key = { "step_${it.id}" }) { step ->
-                            val checked = step.id in completed
-                            Surface(
-                                shape = RoundedCornerShape(12.dp),
-                                color = MaterialTheme.colorScheme.surface
-                            ) {
-                                Row(
-                                    verticalAlignment = Alignment.Top,
+                        section.description?.let { description ->
+                            item(key = "description_${section.id}") {
+                                Text(
+                                    description,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                                     modifier = Modifier
-                                        .fillMaxWidth()
-                                        .testTag("step_${step.id}")
-                                        .toggleable(
-                                            value = checked,
-                                            role = Role.Checkbox,
-                                            onValueChange = {
-                                                onChange(if (it) completed + step.id else completed - step.id)
-                                            })
-                                        .padding(end = 16.dp, top = 12.dp, bottom = 12.dp),
-                                ) {
-                                    Checkbox(
-                                        checked = checked,
-                                        onCheckedChange = null,
-                                        modifier = Modifier.padding(12.dp)
+                                        .padding(horizontal = 4.dp, vertical = 4.dp)
+                                        .testTag("description_${section.id}")
+                                )
+                            }
+                        }
+                        section.steps.forEachIndexed { index, step ->
+                            val groupTitle = step.groupTitle
+                            if (groupTitle != null && groupTitle != section.steps.getOrNull(index - 1)?.groupTitle) {
+                                item(key = "group_${section.id}_${step.id}") {
+                                    Text(
+                                        groupTitle,
+                                        style = MaterialTheme.typography.titleMedium,
+                                        color = MaterialTheme.colorScheme.primary,
+                                        modifier = Modifier
+                                            .padding(top = 8.dp)
+                                            .semantics { heading() }
                                     )
-                                    Column(
-                                        verticalArrangement = Arrangement.spacedBy(6.dp),
-                                        modifier = Modifier.weight(1f),
+                                }
+                            }
+                            item(key = "step_${step.id}") {
+                                val checked = step.id in completed
+                                Surface(
+                                    shape = RoundedCornerShape(12.dp),
+                                    color = MaterialTheme.colorScheme.surface,
+                                    modifier = Modifier.padding(start = if (step.groupTitle != null) 16.dp else 0.dp)
+                                ) {
+                                    Row(
+                                        verticalAlignment = Alignment.Top,
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .testTag("step_${step.id}")
+                                            .toggleable(
+                                                value = checked,
+                                                role = Role.Checkbox,
+                                                onValueChange = {
+                                                    onChange(if (it) completed + step.id else completed - step.id)
+                                                })
+                                            .padding(end = 16.dp, top = 12.dp, bottom = 12.dp),
                                     ) {
-                                        Text(
-                                            step.title, style = MaterialTheme.typography.titleSmall,
-                                            color = if (checked) MaterialTheme.colorScheme.primary
-                                            else MaterialTheme.colorScheme.onSurface
+                                        Checkbox(
+                                            checked = checked,
+                                            onCheckedChange = null,
+                                            modifier = Modifier.padding(12.dp)
                                         )
-                                        Text(
-                                            step.detail,
-                                            style = MaterialTheme.typography.bodyMedium,
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                                        )
+                                        Column(
+                                            verticalArrangement = Arrangement.spacedBy(6.dp),
+                                            modifier = Modifier.weight(1f),
+                                        ) {
+                                            Text(
+                                                step.title,
+                                                style = MaterialTheme.typography.titleSmall,
+                                                color = if (checked) MaterialTheme.colorScheme.primary
+                                                else MaterialTheme.colorScheme.onSurface
+                                            )
+                                            Text(
+                                                step.detail,
+                                                style = MaterialTheme.typography.bodyMedium,
+                                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                                            )
+                                        }
                                     }
                                 }
                             }
