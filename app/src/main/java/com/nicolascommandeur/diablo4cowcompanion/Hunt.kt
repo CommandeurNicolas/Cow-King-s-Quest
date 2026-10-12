@@ -1,6 +1,7 @@
 package com.nicolascommandeur.diablo4cowcompanion
 
 const val COW_GOAL = 666
+const val ZONE_REMINDER_COUNT = 600
 
 enum class Relic(val title: String, val shortName: String, val zones: List<String>) {
     SHARD(

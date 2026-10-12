@@ -149,6 +149,9 @@ fun CowCounter(
         onChange(state.copy(hunts = state.hunts.mapIndexed { index, old ->
             if (index == state.selected) next else old
         }))
+        if (hunt.count < ZONE_REMINDER_COUNT && next.count in ZONE_REMINDER_COUNT until COW_GOAL) {
+            dialog = "zone"
+        }
     }
 
     fun add(amount: Int) {
@@ -320,6 +323,7 @@ fun CowCounter(
                                 hunt.collected -> "Relic secured. One step closer."
                                 hunt.count == COW_GOAL -> "Count complete. Check for your relic."
                                 hunt.count == COW_GOAL - 1 -> "One left. Head to ${hunt.relic.zoneInstruction}."
+                                hunt.count >= ZONE_REMINDER_COUNT -> "Switch to ${hunt.relic.zoneInstruction} before more kills."
                                 else -> "${COW_GOAL - hunt.count} cows to go"
                             },
                             textAlign = TextAlign.Center,
@@ -401,7 +405,7 @@ fun CowCounter(
                         )
                         Text(hunt.relic.title, style = MaterialTheme.typography.bodyMedium)
                         Text(
-                            "Kill cow #666 in ${hunt.relic.zoneInstruction}, then confirm you picked up the relic.",
+                            "Switch to ${hunt.relic.zoneInstruction} by $ZONE_REMINDER_COUNT recorded kills to allow for counting mistakes. Kill cow #666 there, then confirm you picked up the relic.",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -481,8 +485,11 @@ fun CowCounter(
         }
 
         "count" -> CountDialog(hunt, onDismiss = { dialog = null }) {
-            update(hunt.setCount(it)); dialog = null
+            dialog = null
+            update(hunt.setCount(it))
         }
+
+        "zone" -> ZoneReminderDialog(hunt, onDismiss = { dialog = null })
 
         "final" -> AlertDialog(
             onDismissRequest = { dialog = null },
@@ -532,6 +539,87 @@ fun CowCounter(
             }
         )
     }
+}
+
+@Composable
+private fun ZoneReminderDialog(hunt: Hunt, onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        containerColor = MaterialTheme.colorScheme.surface,
+        tonalElevation = 0.dp,
+        shape = RoundedCornerShape(24.dp),
+        title = {
+            Text(
+                "Switch zones before more kills",
+                fontFamily = FontFamily.Serif,
+                style = MaterialTheme.typography.headlineSmall
+            )
+        },
+        text = {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .verticalScroll(rememberScrollState()),
+            ) {
+                Text("Manual counting can miss kills. Your actual total may be higher, so your relic could drop before this counter shows 666.")
+                Surface(
+                    shape = RoundedCornerShape(14.dp),
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onSurface,
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = Modifier.padding(16.dp),
+                    ) {
+                        Text(
+                            "CHARACTER",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.primary,
+                            letterSpacing = 1.sp
+                        )
+                        Text(hunt.name, style = MaterialTheme.typography.titleMedium)
+                        HorizontalDivider(
+                            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
+                            modifier = Modifier.padding(vertical = 4.dp),
+                        )
+                        Text(
+                            "SWITCH NOW TO",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            letterSpacing = 1.sp
+                        )
+                        Text(
+                            hunt.relic.zoneInstruction,
+                            fontFamily = FontFamily.Serif,
+                            style = MaterialTheme.typography.titleLarge,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                        Text(
+                            "RELIC TO COLLECT",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            letterSpacing = 1.sp,
+                            modifier = Modifier.padding(top = 4.dp),
+                        )
+                        Text(hunt.relic.title, style = MaterialTheme.typography.titleMedium)
+                    }
+                }
+                Text(
+                    "Switch early to avoid getting a relic you already have. If you are already in a target zone, keep farming there.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        },
+        confirmButton = {
+            Button(onClick = onDismiss, shape = RoundedCornerShape(12.dp)) {
+                Text("Got it")
+            }
+        }
+    )
 }
 
 @Composable

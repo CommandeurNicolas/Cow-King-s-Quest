@@ -10,7 +10,7 @@ An unofficial, offline Android companion for Diablo IV’s secret cow level. Tra
 
 - Three named character counters, each assigned to a different relic.
 - Quick **+1**, **+5**, and **+10** buttons, one-step undo, and manual count correction.
-- A stop at **665** with a separate confirmation for the final cow.
+- An early zone reminder at **600**, plus a stop at **665** with a separate confirmation for the final cow.
 - A **27-step unlock checklist** with saved checkmarks and collapsible sections.
 - Offline farming maps for Farobru, Cerrigar, and Zarbinzet, with directions and estimated yields.
 - Full-screen maps with pinch zoom, bounded panning, and **Reset zoom**.
@@ -25,7 +25,7 @@ An unofficial, offline Android companion for Diablo IV’s secret cow level. Tra
 1. Open **Counter** and select a character card.
 2. Tap **Edit**, enter a name, and choose **Save name**. The assigned relic and all valid final-kill zones are shown as read-only information.
 3. Record actual kills with **+1**, **+5**, or **+10**. **Undo** reverses the last count change for that character, including an entire batch. **Correct count** accepts a total from 0 to 666.
-4. At **665**, travel to a valid zone below. Count buttons stop at 665 even when a batch would cross it.
+4. By **600 recorded kills**, travel to a valid zone below. A reminder appears when an addition or count correction reaches or crosses 600. Missed counts can mean your actual 666th kill—and relic drop—happens before the counter shows 666, so switch early to avoid getting a relic you already have. Count buttons still stop at 665 even when a batch would cross it.
 5. After making the final kill, tap **Record final cow** and confirm with **Record cow #666**.
 6. Check **Relic collected** after picking up the item in game. Reaching 666 does not check it automatically.
 

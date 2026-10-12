@@ -17,6 +17,61 @@ import org.junit.runner.RunWith
 class CowCounterTest {
     @get:Rule val compose = createComposeRule()
 
+    @Test fun earlyZoneReminderHandlesSingleAndBulkKillsForEachRelic() {
+        var state by mutableStateOf(HuntState(hunts = Relic.entries.mapIndexed { index, relic ->
+            Hunt(relic, "Character ${index + 1}", count = listOf(598, 596, 595)[index])
+        }))
+        compose.setContent { DiabloCowCounterTheme { CowCounter(state) { state = it } } }
+
+        compose.onNodeWithText("+1   Cow killed").performScrollTo().performClick()
+        compose.onNodeWithText("Switch zones before more kills").assertDoesNotExist()
+        listOf("+1   Cow killed", "+5", "+10").forEachIndexed { index, button ->
+            compose.runOnIdle { state = state.copy(selected = index) }
+            compose.onNodeWithText(button).performScrollTo().performClick()
+            compose.onNodeWithText("Switch zones before more kills").assertIsDisplayed()
+            val relic = Relic.entries[index]
+            compose.onNode(hasText("Character ${index + 1}") and hasAnyAncestor(isDialog()))
+                .performScrollTo().assertIsDisplayed()
+            compose.onNode(hasText(relic.zoneInstruction) and hasAnyAncestor(isDialog()))
+                .performScrollTo().assertIsDisplayed()
+            compose.onNode(hasText(relic.title) and hasAnyAncestor(isDialog()))
+                .performScrollTo().assertIsDisplayed()
+            compose.runOnIdle {
+                assertEquals(listOf(600, 601, 605)[index], state.hunts[index].count)
+                assertFalse(state.hunts[index].collected)
+            }
+            compose.onNodeWithText("Got it").performClick()
+            compose.onNodeWithText("+1   Cow killed").performScrollTo().performClick()
+            compose.onNodeWithText("Switch zones before more kills").assertDoesNotExist()
+        }
+    }
+
+    @Test fun correctingPastReminderThresholdWarnsWithoutChangingTheSavedCount() {
+        var state by mutableStateOf(HuntState())
+        compose.setContent { DiabloCowCounterTheme { CowCounter(state) { state = it } } }
+        compose.onNodeWithText("Correct count").performScrollTo().performClick()
+        compose.onNode(hasSetTextAction()).performTextReplacement("645")
+        compose.onNodeWithText("Save count").performClick()
+        compose.onNodeWithText("Switch zones before more kills").assertIsDisplayed()
+        compose.onNodeWithText("Got it").performClick()
+        compose.runOnIdle { assertEquals(645, state.hunts[0].count) }
+        compose.onNodeWithText("Undo").performScrollTo().performClick()
+        compose.runOnIdle { assertEquals(0, state.hunts[0].count) }
+    }
+
+    @Test fun undoAndRecrossingThresholdShowsReminderAgain() {
+        var state by mutableStateOf(HuntState(hunts = Relic.entries.map { relic ->
+            Hunt(relic, "Test", count = 599)
+        }))
+        compose.setContent { DiabloCowCounterTheme { CowCounter(state) { state = it } } }
+        compose.onNodeWithText("+1   Cow killed").performScrollTo().performClick()
+        compose.onNodeWithText("Got it").performClick()
+        compose.onNodeWithText("Undo").performScrollTo().performClick()
+        compose.runOnIdle { assertEquals(599, state.hunts[0].count) }
+        compose.onNodeWithText("+1   Cow killed").performScrollTo().performClick()
+        compose.onNodeWithText("Switch zones before more kills").assertIsDisplayed()
+    }
+
     @Test fun countingSwitchingAndFinalConfirmation() {
         var state by mutableStateOf(HuntState())
         compose.setContent { DiabloCowCounterTheme { CowCounter(state) { state = it } } }

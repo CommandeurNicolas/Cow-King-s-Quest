@@ -185,7 +185,7 @@ fun FarmingRoutesScreen(hunt: Hunt, onBack: () -> Unit, openLink: ((String) -> U
                             )
                             Text(
                                 if (hunt.count < 666)
-                                    "Farm early kills wherever convenient. At 665, stop and travel to ${hunt.relic.zoneInstruction} before the last kill."
+                                    "Farm early kills wherever convenient. By $ZONE_REMINDER_COUNT recorded kills, travel to ${hunt.relic.zoneInstruction}. Counting mistakes can make the relic drop before the counter shows 666."
                                 else "Your count is complete. Confirm the relic pickup on the counter screen.",
                                 style = MaterialTheme.typography.bodyMedium
                             )
