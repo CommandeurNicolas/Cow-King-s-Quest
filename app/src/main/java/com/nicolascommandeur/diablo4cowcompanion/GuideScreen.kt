@@ -270,7 +270,7 @@ fun GuideScreen(
                                         .semantics {
                                             progressBarRangeInfo = ProgressBarRangeInfo(1f, 0f..1f)
                                             stateDescription =
-                                                "Udderly complete. All 27 required steps and the optional step completed."
+                                                "Udderly complete. All ${requiredGuideStepIds.size} required steps and ${guideStepIds.size - requiredGuideStepIds.size} optional steps completed."
                                         }
                                 )
                             } else LinearProgressIndicator(
@@ -290,7 +290,7 @@ fun GuideScreen(
                             )
                         }
                         Text(
-                            "27 required steps + 1 optional shortcut for future seasons. The bar tracks required steps; finish the bonus step too for 28 / 27. Tap to check or uncheck. Saved separately from your cow counts.",
+                            "${requiredGuideStepIds.size} required steps + ${guideStepIds.size - requiredGuideStepIds.size} optional steps. The bar tracks required steps; finish the optional steps too for ${guideStepIds.size} / ${requiredGuideStepIds.size}. Tap checklist steps to check or uncheck them. Route instructions have no checkboxes. Saved separately from your cow counts.",
                             style = MaterialTheme.typography.bodyMedium
                         )
                         Text(

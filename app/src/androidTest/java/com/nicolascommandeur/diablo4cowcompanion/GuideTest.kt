@@ -99,7 +99,7 @@ class GuideTest {
             )
         )
         compose.runOnIdle { completed = guideStepIds - "king" }
-        compose.onNodeWithTag("guide_progress").assertTextEquals("27 / 27 steps complete")
+        compose.onNodeWithTag("guide_progress").assertTextEquals("28 / 27 steps complete")
         compose.onNodeWithTag("guide_progress_bar").assert(
             SemanticsMatcher.expectValue(
                 SemanticsProperties.ProgressBarRangeInfo, ProgressBarRangeInfo(26f / 27f, 0f..1f)
@@ -111,9 +111,11 @@ class GuideTest {
         compose.onNodeWithText("The hunt is complete. Enjoy the cow level!").assertIsDisplayed()
         compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("step_travel_pouch"))
         compose.onNodeWithTag("step_travel_pouch").assertIsOff().performClick().assertIsOn()
+        compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("step_vivid_whimsy"))
+        compose.onNodeWithTag("step_vivid_whimsy").assertIsOff().performClick().assertIsOn()
         compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("view_completed_guide"))
         compose.onNodeWithTag("view_completed_guide").performClick()
-        compose.onNodeWithTag("guide_progress").assertTextEquals("28 / 27 steps complete")
+        compose.onNodeWithTag("guide_progress").assertTextEquals("29 / 27 steps complete")
         compose.onNodeWithTag("guide_progress_bar").assert(
             SemanticsMatcher.expectValue(
                 SemanticsProperties.ProgressBarRangeInfo, ProgressBarRangeInfo(1f, 0f..1f)
@@ -124,7 +126,7 @@ class GuideTest {
         compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("step_travel_pouch"))
         compose.onNodeWithTag("step_travel_pouch").performClick().assertIsOff()
         compose.onNodeWithTag("guide_list").performScrollToIndex(0)
-        compose.onNodeWithTag("guide_progress").assertTextEquals("27 / 27 steps complete")
+        compose.onNodeWithTag("guide_progress").assertTextEquals("28 / 27 steps complete")
         compose.onNodeWithText("The hunt is complete. Enjoy the cow level!").assertIsDisplayed()
     }
 
@@ -158,7 +160,7 @@ class GuideTest {
         compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("view_completed_guide"))
         compose.onNodeWithTag("view_completed_guide").performClick()
         compose.onNodeWithTag("guide_progress").assertIsDisplayed()
-            .assertTextEquals("28 / 27 steps complete")
+            .assertTextEquals("29 / 27 steps complete")
         compose.onNodeWithText("Udderly complete.").assertIsDisplayed()
     }
 

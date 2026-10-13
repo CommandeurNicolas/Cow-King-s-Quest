@@ -11,7 +11,7 @@ An unofficial, offline Android companion for Diablo IV’s secret cow level. Tra
 - Three named character counters, each assigned to a different relic.
 - Quick **+1**, **+5**, and **+10** buttons, one-step undo, and manual count correction.
 - An early zone reminder at **600**, plus a stop at **665** with a separate confirmation for the final cow.
-- A **27-step unlock checklist plus one optional bonus step**, with saved checkmarks and collapsible sections.
+- A **27-step unlock checklist plus two optional steps**, with saved checkmarks and collapsible sections.
 - Offline quest maps and screenshots beside the unlock steps, plus farming maps for Farobru, Cerrigar, and Zarbinzet.
 - Compact, rounded map viewers with pinch zoom, bounded panning, and **Reset zoom**.
 - A charcoal-and-gold interface, crowned cow launcher icon, and matching dark splash screen.
@@ -44,16 +44,16 @@ The **Unlock guide** tab covers four required stages and an optional final stage
 1. Stamina Potion — the original three relics and Forlorn Hovel.
 2. Rusted Bardiche — the Nahantu relics and Forlorn Burrow.
 3. Neyrelle’s Hand — the Skovos sin quests.
-4. The portal and Cow King — combining the rewards and entering the level.
+4. The portal and Cow King — combining the rewards, optionally catching Vivid Whimsy on Scylara, and entering the level.
 5. *Optional:* Outcast’s Travel Pouch — combine the Torn Page with 3 fished Rusted Cow Bells in the Horadric Cube to unlock purchases from Squirt the Peddler in Temis for future seasons.
 
-The progress bar tracks the 27 required steps. Leaving the optional step unchecked still counts as completing the hunt. A purchased pouch supplies the three final rewards, so return to **Combine the three rewards** to skip the relic quests in a new season.
+The progress bar tracks the 27 required steps. Leaving either optional step unchecked still counts as completing the hunt. A purchased pouch supplies the three final rewards, so return to **Combine the three rewards** to skip the relic quests in a new season.
 
 Tap a step to check or uncheck it, and tap a section header to collapse or expand it. This is one shared checklist for the journey. Its checkmarks are independent of the counter’s **Relic collected** checkboxes. **Reset checklist** asks for confirmation and leaves character progress untouched.
 
 Swipe through the location images inside each illustrated step card, then tap an image to open the enlarged viewer. Pinch to zoom, drag to pan, or use the zoom buttons. Previous and Next browse the images for that step. Images are bundled for offline use, and opening them never checks off a step.
 
-The Outcast’s Journal reference appears above the Neyrelle’s Hand steps because you return there between sins. Crooked Staff includes Kichuk and scroll preparation, the default-Attack restrictions, and a note that the scroll is not a confirmed spawn requirement. Inside **Open the secret cow level**, the Scylara route comes first, including its Tuesday entrance. The titled Moo route follows with its own instruction cards for everyday access. The shared portal checkmark applies to either entrance.
+The Outcast’s Journal reference appears above the Neyrelle’s Hand steps because you return there between sins. Crooked Staff includes Kichuk and scroll preparation, the default-Attack restrictions, and a note that the scroll is not a confirmed spawn requirement. Inside **Open the secret cow level**, the Scylara route includes an optional Vivid Whimsy fishing step before its Tuesday entrance. The titled Moo route follows with its own instruction cards for everyday access. The shared portal checkmark applies to either entrance.
 
 The guide includes expansion prerequisites and source links to Wowhead, VULKK, and DiabloFilter.
 

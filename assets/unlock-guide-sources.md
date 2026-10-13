@@ -14,7 +14,7 @@ enlarged viewer. Third-party artwork is excluded from the repository’s MIT lic
 The two additional Forlorn Burrow jump/passage screenshots are from Sliver of time’s gameplay,
 reproduced
 in [Nerd’s Chalk’s pre-expansion item walkthrough](https://nerdschalk.com/diablo-4-how-to-obtain-all-cow-level-items-before-lord-of-hatred-locations-requirements-and-items-guide/),
-steps 21–22. Their separate source credit is shown in the app. There are 35 bundled quest images in
+steps 21–22. Their separate source credit is shown in the app. There are 36 bundled quest images in
 total.
 
 ## Findings and limitations

@@ -213,9 +213,17 @@ val unlockGuide = listOf(
             GuideStep(
                 "boat",
                 "Sail to Scylara",
-                "With the Torn Page, take the Outcast’s Boat on eastern Philios’s shore in Skovos. On the island, you can fish for Vivid Whimsy in the rainbow pool beside the horse skeleton. Then enter the Forlorn Cellar for the Tuesday cow-level entrance.",
+                "With the Torn Page, take the Outcast’s Boat on eastern Philios’s shore in Skovos. Enter the island’s Forlorn Cellar for the Tuesday cow-level entrance.",
                 groupTitle = "Reach Scylara · Tuesday entrance",
                 images = guideImages("boat")
+            ),
+            GuideStep(
+                "vivid_whimsy",
+                "Catch Vivid Whimsy",
+                "On Scylara, fish in the rainbow-colored pool beside the horse skeleton near the dock to catch the Vivid Whimsy Mythic Fish.",
+                groupTitle = "Reach Scylara · Tuesday entrance",
+                optional = true,
+                images = guideImages("vivid_whimsy_pool")
             ),
             GuideStep(
                 "scylara_entrance",

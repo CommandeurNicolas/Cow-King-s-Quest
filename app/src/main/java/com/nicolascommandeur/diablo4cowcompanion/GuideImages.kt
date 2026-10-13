@@ -230,6 +230,13 @@ val unlockGuideImages = listOf(
         "VULKK"
     ),
     GuideImage(
+        "vivid_whimsy_pool",
+        "Vivid Whimsy · Scylara",
+        "Fish in the rainbow pool beside the horse skeleton near the dock.",
+        R.drawable.guide_vivid_whimsy,
+        "VULKK"
+    ),
+    GuideImage(
         "cedar",
         "Holy Cedar Tablets · Kyovashad",
         "Return to the tablets at Kyovashad’s entrance to inscribe and burn Moo.",
