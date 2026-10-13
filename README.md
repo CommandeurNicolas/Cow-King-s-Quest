@@ -12,8 +12,8 @@ An unofficial, offline Android companion for Diablo IV’s secret cow level. Tra
 - Quick **+1**, **+5**, and **+10** buttons, one-step undo, and manual count correction.
 - An early zone reminder at **600**, plus a stop at **665** with a separate confirmation for the final cow.
 - A **27-step unlock checklist plus one optional bonus step**, with saved checkmarks and collapsible sections.
-- Offline farming maps for Farobru, Cerrigar, and Zarbinzet, with directions and estimated yields.
-- Full-screen maps with pinch zoom, bounded panning, and **Reset zoom**.
+- Offline quest maps and screenshots beside the unlock steps, plus farming maps for Farobru, Cerrigar, and Zarbinzet.
+- Compact, rounded map viewers with pinch zoom, bounded panning, and **Reset zoom**.
 - A charcoal-and-gold interface, crowned cow launcher icon, and matching dark splash screen.
 - Locally saved progress and an optional **Keep screen awake** setting while the counter is open.
 - A little surprise might be waiting when you launch the app.
@@ -51,13 +51,17 @@ The progress bar tracks the 27 required steps. Leaving the optional step uncheck
 
 Tap a step to check or uncheck it, and tap a section header to collapse or expand it. This is one shared checklist for the journey. Its checkmarks are independent of the counter’s **Relic collected** checkboxes. **Reset checklist** asks for confirmation and leaves character progress untouched.
 
-The guide includes expansion prerequisites and links to Wowhead, VULKK, and DiabloFilter for detailed instructions and maps.
+Swipe through the location images inside each illustrated step card, then tap an image to open the enlarged viewer. Pinch to zoom, drag to pan, or use the zoom buttons. Previous and Next browse the images for that step. Images are bundled for offline use, and opening them never checks off a step.
+
+The Outcast’s Journal reference appears above the Neyrelle’s Hand steps because you return there between sins. Crooked Staff includes Kichuk and scroll preparation, the default-Attack restrictions, and a note that the scroll is not a confirmed spawn requirement. Inside **Open the secret cow level**, the Scylara route comes first, including its Tuesday entrance. The titled Moo route follows with its own instruction cards for everyday access. The shared portal checkmark applies to either entrance.
+
+The guide includes expansion prerequisites and source links to Wowhead, VULKK, and DiabloFilter.
 
 ### Find a farming route
 
 Tap **Where to farm cows · Maps & routes** from either tab. Each route card includes an annotated map, brief directions, and an estimated number of cows per lap. The current character’s valid final-kill zones appear above the cards, and matching routes are marked.
 
-Tap an image or **Enlarge map** for the full-screen viewer. Maps are bundled with the app and work offline. Their rounded corners are drawn by the UI; the source images are unchanged. Route estimates never add kills automatically.
+Tap an image or **Enlarge map** for the enlarged viewer. Maps are bundled with the app and work offline. Their rounded corners are drawn by the UI; the source images are unchanged. Route estimates never add kills automatically.
 
 ### A rare visitor
 
@@ -96,7 +100,7 @@ The application ID and source namespace are `com.nicolascommandeur.diablo4cowcom
 ## Guide sources and artwork
 
 The bundled guide and routes were researched on **October 5, 2026**. These links provide the source walkthroughs; they are not fetched or updated automatically by the app.
-The optional Season 15 pouch shortcut was checked against VULKK’s complete walkthrough on **October 12, 2026**.
+The optional Season 15 pouch shortcut was checked against VULKK’s complete walkthrough on **October 12, 2026**. Location imagery, Crooked Staff preparation, zombie respawns, and alternate portal access were checked on **October 13, 2026**. See [unlock guide sources](assets/unlock-guide-sources.md) for findings, conflicting reports, and image provenance.
 
 - [Wowhead — cow level guide](https://www.wowhead.com/diablo-4/guide/zones/secret-cow-level). At the time of review, its article covered the earlier stages rather than the final unlock.
 - [VULKK — Nahantu relics and maps](https://vulkk.com/2024/10/16/secrets-of-diablo-4-the-secret-cow-level-continues/).
@@ -104,7 +108,7 @@ The optional Season 15 pouch shortcut was checked against VULKK’s complete wal
 - [DiabloFilter — full route and farming maps](https://diablofilter.com/guide/the-ultimate-secret-cow-level-guide).
 - [Games Fuze — Skovos quest sequence](https://gamesfuze.com/guides/cow-level-full-guide-lord-of-hatred-in-diablo-4/).
 
-Farming screenshots are credited in the app. Their original URLs and attribution are recorded in [farming map sources](assets/farming-map-sources.md). Diablo IV game imagery belongs to Blizzard Entertainment. Cow King’s Quest is an unofficial project and is not affiliated with Blizzard.
+Quest and farming screenshots are credited in the app. Their original URLs and attribution are recorded in [farming map sources](assets/farming-map-sources.md). Diablo IV game imagery belongs to Blizzard Entertainment. Cow King’s Quest is an unofficial project and is not affiliated with Blizzard.
 
 Additional game artwork is credited to Blizzard Entertainment, with extraction by
 napalm22. See [artwork credits and provenance (contains spoilers)](assets/hell-bovine-source.md).

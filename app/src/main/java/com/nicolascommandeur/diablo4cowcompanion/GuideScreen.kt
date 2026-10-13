@@ -171,15 +171,28 @@ fun GuideScreen(
     var sweepFinished by remember { mutableStateOf(false) }
     val sweepProgress = remember { Animatable(0f) }
 
+    // Reset dialog
     var resetDialog by rememberSaveable { mutableStateOf(false) }
 
+    // Expanded image dialog
+    var imageIds by rememberSaveable { mutableStateOf(emptyList<String>()) }
+    var enlargedImageId by rememberSaveable { mutableStateOf<String?>(null) }
+
+    fun showImage(images: List<GuideImage>, image: GuideImage) {
+        imageIds = images.map { it.id }
+        enlargedImageId = image.id
+    }
+
+    // Expanded sections
     var expanded by rememberSaveable { mutableStateOf(unlockGuide.map { it.id }) }
 
+    // Completed steps
     val completed = completedSteps.intersect(guideStepIds)
     val requiredCompleted = completed.intersect(requiredGuideStepIds).size
     val requiredComplete = requiredCompleted == requiredGuideStepIds.size
     val allComplete = completed.containsAll(guideStepIds)
 
+    // Progress bar
     val progressColor = MaterialTheme.colorScheme.primary
     val progressDescription = when {
         allComplete -> "Udderly complete."
@@ -187,6 +200,7 @@ fun GuideScreen(
         else -> "$requiredCompleted / ${requiredGuideStepIds.size} required steps complete"
     }
 
+    // Rainbow sweep animation
     LaunchedEffect(celebratedStep, allComplete) {
         if (!allComplete) {
             celebratedStep = null
@@ -200,6 +214,7 @@ fun GuideScreen(
         }
     }
 
+    // Open online guides
     fun browse(url: String) {
         try {
             if (openLink != null) openLink(url) else uriHandler.openUri(url)
@@ -242,7 +257,9 @@ fun GuideScreen(
                                 Text(
                                     "${completed.size} / ${requiredGuideStepIds.size} steps complete",
                                     color = progressColor,
-                                    modifier = Modifier.weight(1f).testTag("guide_progress"),
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .testTag("guide_progress"),
                                 )
                                 if (allComplete) GuideCompletionCrown()
                             }
@@ -298,11 +315,11 @@ fun GuideScreen(
                             modifier = Modifier.padding(16.dp),
                         ) {
                             Text(
-                                "Maps & detailed walkthroughs",
+                                "Offline images & guide sources",
                                 style = MaterialTheme.typography.titleSmall
                             )
                             Text(
-                                "Checked October 5, 2026. Wowhead currently covers the earlier stages; use the complete guide for the final unlock and alternate access routes.",
+                                "Location maps and screenshots are included below each relevant step. Tap to enlarge, zoom and browse without leaving the app. Quest details checked October 13, 2026; community reports can differ after game updates.",
                                 style = MaterialTheme.typography.bodySmall
                             )
                             TextButton(
@@ -365,7 +382,7 @@ fun GuideScreen(
                                         style = MaterialTheme.typography.titleMedium
                                     )
                                     Text(
-                                        "${section.steps.count { it.id in completed }} / ${section.steps.size} complete",
+                                        "${section.steps.count { it.id in completed }} / ${section.steps.count { it.checkable }} complete",
                                         style = MaterialTheme.typography.bodySmall
                                     )
                                 }
@@ -377,6 +394,11 @@ fun GuideScreen(
                         }
                     }
                     if (section.id in expanded) {
+                        section.reference?.let { reference ->
+                            item(key = "reference_${section.id}") {
+                                GuideReferenceCard(reference, section.id, ::showImage)
+                            }
+                        }
                         section.description?.let { description ->
                             item(key = "description_${section.id}") {
                                 Text(
@@ -405,7 +427,8 @@ fun GuideScreen(
                             }
                             item(key = "step_${step.id}") {
                                 val checked = step.id in completed
-                                val celebrating = allComplete && celebratedStep == step.id
+                                val celebrating =
+                                    step.checkable && allComplete && celebratedStep == step.id
                                 val sweeping = celebrating && !sweepFinished
 
                                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -416,53 +439,77 @@ fun GuideScreen(
                                             .padding(start = if (step.groupTitle != null) 16.dp else 0.dp)
                                             .then(if (sweeping) Modifier.testTag("guide_rainbow_sweep") else Modifier)
                                     ) {
-                                        Row(
-                                            verticalAlignment = Alignment.Top,
-                                            modifier = Modifier
-                                                .fillMaxWidth()
-                                                .testTag("step_${step.id}")
-                                                .clip(RoundedCornerShape(12.dp))
-                                                .then(if (sweeping) Modifier.rainbowSweep { sweepProgress.value } else Modifier)
-                                                .toggleable(
-                                                    value = checked,
-                                                    role = Role.Checkbox,
-                                                    onValueChange = {
-                                                        val next =
-                                                            if (it) completed + step.id else completed - step.id
-                                                        if (it && !allComplete && next.containsAll(
-                                                                guideStepIds
-                                                            )
-                                                        ) {
-                                                            celebratedStep = step.id
-                                                            sweepFinished = false
-                                                        } else {
-                                                            celebratedStep = null
-                                                            sweepFinished = false
-                                                        }
-                                                        onChange(next)
-                                                    })
-                                                .padding(end = 16.dp, top = 12.dp, bottom = 12.dp),
-                                        ) {
-                                            Checkbox(
-                                                checked = checked,
-                                                onCheckedChange = null,
-                                                modifier = Modifier.padding(12.dp)
-                                            )
-                                            Column(
-                                                verticalArrangement = Arrangement.spacedBy(6.dp),
-                                                modifier = Modifier.weight(1f),
+                                        Column {
+                                            Row(
+                                                verticalAlignment = Alignment.Top,
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .testTag("step_${step.id}")
+                                                    .clip(RoundedCornerShape(12.dp))
+                                                    .then(if (sweeping) Modifier.rainbowSweep { sweepProgress.value } else Modifier)
+                                                    .then(
+                                                        if (step.checkable) Modifier.toggleable(
+                                                            value = checked,
+                                                            role = Role.Checkbox,
+                                                            onValueChange = {
+                                                                val next =
+                                                                    if (it) completed + step.id else completed - step.id
+                                                                if (it && !allComplete && next.containsAll(
+                                                                        guideStepIds
+                                                                    )
+                                                                ) {
+                                                                    celebratedStep = step.id
+                                                                    sweepFinished = false
+                                                                } else {
+                                                                    celebratedStep = null
+                                                                    sweepFinished = false
+                                                                }
+                                                                onChange(next)
+                                                            }) else Modifier
+                                                    )
+                                                    .padding(
+                                                        start = if (step.checkable) 0.dp else 16.dp,
+                                                        end = 16.dp,
+                                                        top = 12.dp,
+                                                        bottom = 12.dp
+                                                    ),
                                             ) {
-                                                Text(
-                                                    if (step.optional) "${step.title} · Optional" else step.title,
-                                                    style = MaterialTheme.typography.titleSmall,
-                                                    color = if (checked) MaterialTheme.colorScheme.primary
-                                                    else MaterialTheme.colorScheme.onSurface
-                                                )
-                                                Text(
-                                                    step.detail,
-                                                    style = MaterialTheme.typography.bodyMedium,
-                                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                                )
+                                                if (step.checkable) {
+                                                    Checkbox(
+                                                        checked = checked,
+                                                        onCheckedChange = null,
+                                                        modifier = Modifier.padding(12.dp)
+                                                    )
+                                                }
+                                                Column(
+                                                    verticalArrangement = Arrangement.spacedBy(6.dp),
+                                                    modifier = Modifier.weight(1f),
+                                                ) {
+                                                    Text(
+                                                        if (step.optional) "${step.title} · Optional" else step.title,
+                                                        style = MaterialTheme.typography.titleSmall,
+                                                        color = if (checked) MaterialTheme.colorScheme.primary
+                                                        else MaterialTheme.colorScheme.onSurface
+                                                    )
+                                                    Text(
+                                                        step.detail,
+                                                        style = MaterialTheme.typography.bodyMedium,
+                                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                                    )
+                                                }
+                                            }
+                                            if (step.images.isNotEmpty()) {
+                                                Column(
+                                                    Modifier.padding(
+                                                        start = 16.dp,
+                                                        end = 16.dp,
+                                                        bottom = 16.dp
+                                                    )
+                                                ) {
+                                                    GuideImageGallery(step.images, step.id) {
+                                                        showImage(step.images, it)
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -493,7 +540,7 @@ fun GuideScreen(
                         Text("Reset checklist")
                     }
                     Text(
-                        "Unofficial checklist. Follow the linked maps for exact locations; game updates may change the steps.",
+                        "Unofficial checklist with offline location images. Sources are credited beside the images. Game updates may change the steps; source walkthroughs are linked above.",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -501,6 +548,14 @@ fun GuideScreen(
             }
         }
     }
+
+    // Expanded image dialog
+    enlargedImageId?.let { initialId ->
+        val images = imageIds.mapNotNull { unlockGuideImages[it] }
+        if (images.isNotEmpty()) GuideImageViewer(images, initialId) { enlargedImageId = null }
+    }
+
+    // Reset dialog
     if (resetDialog) AlertDialog(
         onDismissRequest = { resetDialog = false }, title = { Text("Reset checklist?") },
         text = {
@@ -523,4 +578,33 @@ fun GuideScreen(
             }
         }
     )
+}
+
+@Composable
+private fun GuideReferenceCard(
+    reference: GuideReference,
+    sectionId: String,
+    showImage: (List<GuideImage>, GuideImage) -> Unit
+) {
+    Surface(
+        shape = RoundedCornerShape(12.dp),
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        modifier = Modifier.testTag("reference_$sectionId")
+    ) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                reference.title,
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.semantics { heading() }
+            )
+            Text(reference.detail, style = MaterialTheme.typography.bodyMedium)
+            GuideImageGallery(reference.images, "reference_$sectionId") {
+                showImage(reference.images, it)
+            }
+        }
+    }
 }

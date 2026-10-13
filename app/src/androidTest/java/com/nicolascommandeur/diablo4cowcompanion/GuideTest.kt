@@ -32,9 +32,60 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class GuideTest {
-    @get:Rule val compose = createComposeRule()
+    @get:Rule
+    val compose = createComposeRule()
 
-    @Test fun optionalStepDoesNotReplaceRequiredProgressAndCanExceedTheTotal() {
+    @Test
+    fun imageViewerZoomNavigationAndRestorationNeverChangeCheckmarks() {
+        var completed by mutableStateOf(setOf("gemstone"))
+        val restoration = StateRestorationTester(compose)
+        restoration.setContent {
+            DiabloCowCounterTheme {
+                GuideScreen(completed, onChange = { completed = it })
+            }
+        }
+        compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("images_gemstone"))
+        compose.onNodeWithTag("image_gemstone_graves_map").performClick()
+        compose.onNodeWithTag("guide_image_viewer").assertIsDisplayed()
+        compose.onNodeWithTag("guide_image_title").assertTextEquals("Graves · Kurast Docks")
+        compose.onNodeWithTag("guide_zoom_in").performClick()
+        compose.onNodeWithTag("guide_zoom_level").assertTextEquals("150%")
+        compose.onNodeWithText("Reset zoom").performClick()
+        compose.onNodeWithTag("guide_zoom_level").assertTextEquals("100%")
+        compose.onNodeWithTag("guide_zoom_in").performClick()
+        compose.onNodeWithText("Next").performClick()
+        compose.onNodeWithTag("guide_image_title").assertTextEquals("Thanks emote · grave order")
+        compose.onNodeWithTag("guide_zoom_level").assertTextEquals("100%")
+        restoration.emulateSavedInstanceStateRestore()
+        compose.onNodeWithTag("guide_image_title").assertTextEquals("Thanks emote · grave order")
+        compose.onNodeWithText("Previous").performClick()
+        compose.onNodeWithTag("guide_image_title").assertTextEquals("Graves · Kurast Docks")
+        compose.onNodeWithText("Close").performClick()
+        compose.onNodeWithTag("guide_image_viewer").assertDoesNotExist()
+        compose.runOnIdle { assertEquals(setOf("gemstone"), completed) }
+        compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("step_gemstone"))
+        compose.onNodeWithTag("step_gemstone").assertIsOn()
+    }
+
+    @Test
+    fun journalReferencePrecedesHandStepsAndSectionCanCollapse() {
+        compose.setContent {
+            DiabloCowCounterTheme { GuideScreen(emptySet(), onChange = {}) }
+        }
+        compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("reference_hand"))
+        compose.onNodeWithTag("reference_hand").assertIsDisplayed()
+        compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("images_reference_hand"))
+        compose.onNodeWithTag("image_reference_hand_journal_map").performClick()
+        compose.onNodeWithTag("guide_image_title").assertTextEquals("Outcast’s Journal · Skartara")
+        compose.onNodeWithText("Close").performClick()
+        compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("section_hand"))
+        compose.onNodeWithTag("section_hand").performClick()
+        compose.onNodeWithTag("reference_hand").assertDoesNotExist()
+        compose.onNodeWithTag("images_reference_hand").assertDoesNotExist()
+    }
+
+    @Test
+    fun optionalStepDoesNotReplaceRequiredProgressAndCanExceedTheTotal() {
         var completed by mutableStateOf(setOf("travel_pouch"))
         compose.setContent {
             DiabloCowCounterTheme {
@@ -77,7 +128,8 @@ class GuideTest {
         compose.onNodeWithText("The hunt is complete. Enjoy the cow level!").assertIsDisplayed()
     }
 
-    @Test fun finalRequiredStepCelebratesLocallyWithoutReplayingSavedCompletion() {
+    @Test
+    fun finalRequiredStepCelebratesLocallyWithoutReplayingSavedCompletion() {
         var completed by mutableStateOf(guideStepIds)
         compose.setContent {
             DiabloCowCounterTheme {
@@ -110,7 +162,8 @@ class GuideTest {
         compose.onNodeWithText("Udderly complete.").assertIsDisplayed()
     }
 
-    @Test fun checklistNavigationRestorationLinksAndReset() {
+    @Test
+    fun checklistNavigationRestorationLinksAndReset() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val guideStore = GuideStore(context)
         val original = guideStore.load()
@@ -123,7 +176,8 @@ class GuideTest {
             restoration.setContent {
                 var completed by remember { mutableStateOf(GuideStore(context).load()) }
                 DiabloCowCounterTheme {
-                    CowHuntApp(currentHunt, completed,
+                    CowHuntApp(
+                        currentHunt, completed,
                         onHuntChange = { currentHunt = it },
                         onGuideChange = { completed = it; guideStore.save(it) },
                         openLink = { openedUrl = it })
@@ -160,7 +214,8 @@ class GuideTest {
         }
     }
 
-    @Test fun guideStorageNeverChangesLegacyHuntData() {
+    @Test
+    fun guideStorageNeverChangesLegacyHuntData() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val hunts = HuntStore(context)
         val before = hunts.load()

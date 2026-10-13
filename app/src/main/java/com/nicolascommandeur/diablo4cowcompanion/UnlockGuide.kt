@@ -13,7 +13,9 @@ data class GuideStep(
     val title: String,
     val detail: String,
     val groupTitle: String? = null,
-    val optional: Boolean = false
+    val optional: Boolean = false,
+    val images: List<GuideImage> = emptyList(),
+    val checkable: Boolean = true
 )
 
 data class GuideSection(
@@ -21,10 +23,13 @@ data class GuideSection(
     val title: String,
     val subtitle: String,
     val steps: List<GuideStep>,
-    val description: String? = null
+    val description: String? = null,
+    val reference: GuideReference? = null
 )
 
-/** Short, independently worded checklist. Linked walkthroughs provide the location maps. */
+data class GuideReference(val title: String, val detail: String, val images: List<GuideImage>)
+
+/** Offline checklist and location references. IDs remain stable for saved progress. */
 val unlockGuide = listOf(
     GuideSection(
         "potion",
@@ -59,7 +64,8 @@ val unlockGuide = listOf(
             GuideStep(
                 "stamina",
                 "Forlorn Hovel",
-                "Unlock the hovel at Scosglen’s eastern tip. Kill its cows; keep the Stamina Potion."
+                "Unlock the hovel at Scosglen’s eastern tip. Kill its cows; keep the Stamina Potion.",
+                images = guideImages("hovel_map")
             )
         ),
     ),
@@ -71,32 +77,38 @@ val unlockGuide = listOf(
             GuideStep(
                 "gemstone",
                 "Jabbering Gemstone",
-                "At the graves south of Kurast Docks, use Thanks in order: middle, middle-left, middle-right."
+                "At the graves south of Kurast Docks, use Thanks in order: middle, middle-left, middle-right.",
+                images = guideImages("graves_map", "graves")
             ),
             GuideStep(
                 "staff",
                 "Crooked Staff",
-                "Reset skills, remove skill-rank gear and dismiss mercenaries. Defeat Blood Lightning east of the Den using the default Attack."
+                "1. For the lore clue, clear Kichuk stronghold and read ‘The Triumph of Lord Uacax’ scroll. This is optional preparation: players report obtaining the staff by approaching from Ichorfall without clearing Kichuk. Reading the scroll is not confirmed as a requirement to spawn Blood Lightning.\n\n2. Refund every skill point and remove all gear and talismans that grant skill ranks. Dismiss mercenaries and disable thorns, summons and other passive damage.\n\n3. Go southwest of Kichuk and kill Blood Lightning using only the default Attack, then collect the Crooked Staff. A skill from the Basic category does not count.",
+                images = guideImages("kichuk_map", "scroll", "lightning_map")
             ),
             GuideStep(
                 "bell",
                 "Rusted Old Bell",
-                "Visit all 12 Five Hills bird statues in the walkthrough’s mapped order, starting east of Samuk; return to the first."
+                "Start east of Samuk. Follow the numbered map through all 12 Five Hills bird statues, getting close to each one, then return to statue 1 to collect the bell.",
+                images = guideImages("samuk_map", "birds_route")
             ),
             GuideStep(
                 "corrupt",
                 "Corrupt the relics",
-                "Group three Cordycepic Zombies north of Ichorfall; kill them together. Drop the relics into their mushrooms; retrieve them after corruption."
+                "Clear the route around the three marked spawn points north of Ichorfall first. The Cordycepic Zombies can respawn before the other enemies, so return to their spawn points after clearing everything.\n\nRemove passive damage and summons, then gather all three zombies while keeping them on screen. Kill them together and drop the relics into their mushrooms.\n\nBefore picking them up, take a few seconds to check for purple smoke around each dropped relic. This confirms corruption: only corrupted relics can be offered at Oka’bo Temple’s braziers.",
+                images = guideImages("zombies_map")
             ),
             GuideStep(
                 "unusual_key",
                 "Unusual Key",
-                "Offer the corrupted relics at Oka’bo Temple’s three braziers, southeast of Kurast Bazaar."
+                "Offer the corrupted relics at Oka’bo Temple’s three braziers, southeast of Kurast Bazaar.",
+                images = guideImages("temple_map", "temple_braziers")
             ),
             GuideStep(
                 "bardiche",
                 "Forlorn Burrow",
-                "Take the key to this cellar west of Kurast Bazaar. Break the hidden wall; kill the cows and keep the bardiche."
+                "Take the Unusual Key to this cellar west of Kurast Bazaar. Break the hidden wall, cross the passage behind it, then kill the cows and keep the bardiche.",
+                images = guideImages("burrow_map", "burrow_wall", "burrow_jump", "burrow_passage")
             )
         ),
     ),
@@ -109,25 +121,29 @@ val unlockGuide = listOf(
                 "fear",
                 "Follow the crow and offer the skull",
                 "Burn Fear at Kyovashad’s Holy Cedar shrine. Read the Outcast’s Journal north of Fool’s Quarry in Skovos. Dismiss mercenaries, then interact with and follow the crow in Lycander’s Ruins of Broken Reason without attacking or losing it. Pick up the Hierophant’s Skull and burn it at the Temple of Life brazier.",
-                groupTitle = "Fear"
+                groupTitle = "Fear",
+                images = guideImages("crow_map", "crow_route", "life_map", "life_brazier")
             ),
             GuideStep(
                 "anger",
                 "Get the Amazon Training Helm",
                 "Burn Anger at the Kyovashad shrine; reread the journal. Attack the training dummy in Temis until the Amazon Training Helm drops, then equip it.",
-                groupTitle = "Anger"
+                groupTitle = "Anger",
+                images = guideImages("dummy_map")
             ),
             GuideStep(
                 "armor",
                 "Complete the Amazon set",
                 "Farm Corrupted Amazons near Athulua’s Observatory. Equip tunic, pants, gloves and boots as they drop.",
-                groupTitle = "Anger"
+                groupTitle = "Anger",
+                images = guideImages("amazons_map")
             ),
             GuideStep(
                 "rose",
                 "Collect and offer Mother’s Rose",
                 "With all five Amazon pieces equipped, defeat Vasha the Unbroken and pick up Mother’s Rose. Burn it at the Temple of Courage brazier.",
-                groupTitle = "Anger"
+                groupTitle = "Anger",
+                images = guideImages("vasha_map", "courage_map", "courage_brazier")
             ),
             GuideStep(
                 "pride",
@@ -139,13 +155,15 @@ val unlockGuide = listOf(
                 "bolt",
                 "Amazonian Bolt and Idyllic Reach",
                 "Destroy ballistas around Akarat’s Bulwark and pick up an Amazonian Bolt. Enter the Idyllic Reach cellar, load and fire its unloaded ballista, then cross the rope into the hidden area.",
-                groupTitle = "Pride"
+                groupTitle = "Pride",
+                images = guideImages("ballistas_map", "idyllic_map")
             ),
             GuideStep(
                 "chains",
                 "Collect and offer Father’s Chains",
                 "Activate the Inarius statue to summon N’Facl, the Jailer of Angels. Defeat him, pick up Father’s Chains, then burn them at Antia’s Flame.",
-                groupTitle = "Pride"
+                groupTitle = "Pride",
+                images = guideImages("antia_map", "antia_brazier")
             ),
             GuideStep(
                 "deep_key",
@@ -156,7 +174,8 @@ val unlockGuide = listOf(
                 "greed",
                 "Fish up the coffin",
                 "Burn Greed at the Kyovashad shrine before fishing for the coffin. With fishing unlocked, fish from the very tip of Creaking Hulls in northeast Hawezar. Unlock the Locked Wooden Coffin with the Hadopelagic Key.",
-                groupTitle = "Greed"
+                groupTitle = "Greed",
+                images = guideImages("coffin_map", "coffin_spot")
             ),
             GuideStep(
                 "hand",
@@ -168,6 +187,11 @@ val unlockGuide = listOf(
         description = """
             Fear, Anger and Pride can be completed in any order. For each word, inscribe it on a Holy Cedar Tablet at Kyovashad’s entrance and burn it, then visit the chamber in Skartara to read the Outcast’s Journal. Follow the matching steps to collect and offer its relic, then repeat for the other two words. After all three offerings, collect the Hadopelagic Key, burn Greed at the shrine and follow the final steps to retrieve Neyrelle’s Hand.
         """.trimIndent(),
+        reference = GuideReference(
+            "Your return point · Outcast’s Journal",
+            "Keep this location handy for the whole Hand quest. Return after burning Fear, Anger and Pride. Reading the journal is required for Pride; the other visits are recommended. Greed also has a clue here after you change sins.",
+            guideImages("journal_map", "journal")
+        ),
     ),
     GuideSection(
         "portal",
@@ -177,29 +201,56 @@ val unlockGuide = listOf(
             GuideStep(
                 "cube",
                 "Combine the three rewards",
-                "In Temis’s Horadric Cube, transmute Stamina Potion + Rusted Bardiche + Neyrelle’s Hand using the ??? recipe."
+                "In Temis’s Horadric Cube, transmute Stamina Potion + Rusted Bardiche + Neyrelle’s Hand using the ??? recipe.",
+                groupTitle = "Reach Scylara · Tuesday entrance"
             ),
             GuideStep(
                 "page",
                 "Open Trophy of the Faithful",
-                "Open the cache for the Torn Page and Moo emote."
+                "Open the cache for the Torn Page and Moo emote.",
+                groupTitle = "Reach Scylara · Tuesday entrance"
             ),
             GuideStep(
                 "boat",
                 "Sail to Scylara",
-                "With the Torn Page, take the Outcast’s Boat on eastern Philios’s shore in Skovos. Enter the island’s Forlorn Cellar."
+                "With the Torn Page, take the Outcast’s Boat on eastern Philios’s shore in Skovos. On the island, you can fish for Vivid Whimsy in the rainbow pool beside the horse skeleton. Then enter the Forlorn Cellar for the Tuesday cow-level entrance.",
+                groupTitle = "Reach Scylara · Tuesday entrance",
+                images = guideImages("boat")
+            ),
+            GuideStep(
+                "scylara_entrance",
+                "Open the Scylara portal",
+                "On Tuesday, kill the cows in the Forlorn Cellar’s ritual circle and enter the portal. If they remain invulnerable, try later in the Tuesday window.",
+                groupTitle = "Reach Scylara · Tuesday entrance",
+                checkable = false
+            ),
+            GuideStep(
+                "moo_tablet",
+                "1. Burn Moo at the Holy Cedar Tablets",
+                "Return to the tablets outside Kyovashad, inscribe Moo and burn it. If Moo is missing, have a player who has completed the cow level or has Moo selected use their Moo emote near you. This route does not require a prior visit to Scylara.",
+                groupTitle = "Enter on any day · Moo portal",
+                images = guideImages("cedar"),
+                checkable = false
+            ),
+            GuideStep(
+                "moo_journal",
+                "2. Enter through the Outcast’s Journal alcove",
+                "Go to the journal chamber north of Fool’s Quarry and take the portal. Community guides report that players who receive Moo can use it without completing the relic quests or Neyrelle’s Hand. This does not award your own Moo emote; that comes from Trophy of the Faithful. Older reports disagree about shortcut access, so check that the portal appears after you burn Moo.",
+                groupTitle = "Enter on any day · Moo portal",
+                images = guideImages("journal_map", "moo_portal"),
+                checkable = false
             ),
             GuideStep(
                 "portal",
-                "Open the portal",
-                "On Tuesday, kill the cows in the cellar’s ritual circle and enter the portal. If they are invulnerable, check the walkthrough’s current timing notes."
+                "Enter the secret cow level",
+                "Take either entrance above, then check off this step. You do not need to visit Scylara before using the Moo portal."
             ),
             GuideStep(
                 "king",
                 "Defeat the Cow King",
                 "Clear bovines until the king appears; defeat him and collect his crown."
             )
-        ),
+        )
     ),
     GuideSection(
         "future_seasons",
@@ -216,9 +267,10 @@ val unlockGuide = listOf(
     )
 )
 
-val guideStepIds: Set<String> = unlockGuide.flatMap { it.steps }.map { it.id }.toSet()
+val guideStepIds: Set<String> = unlockGuide.flatMap { it.steps }
+    .filter { it.checkable }.map { it.id }.toSet()
 val requiredGuideStepIds: Set<String> = unlockGuide.flatMap { it.steps }
-    .filterNot { it.optional }.map { it.id }.toSet()
+    .filter { it.checkable && !it.optional }.map { it.id }.toSet()
 
 class GuideStore(context: Context) {
     // Separate from cow_hunts_v1: checking or resetting the guide never changes counters.

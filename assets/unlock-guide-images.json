@@ -1,0 +1,282 @@
+[
+  {
+    "id": "hovel_map",
+    "title": "Forlorn Hovel · Scosglen",
+    "caption": "Travel to the marked cellar at Scosglen’s eastern tip.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Forlorn-Hovel-Map.jpg",
+    "filename": "guide_hovel_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "graves_map",
+    "title": "Graves · Kurast Docks",
+    "caption": "The graves are just south of Kurast Docks.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Jabbering-Gemstone-Map-1.jpg",
+    "filename": "guide_graves_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "graves",
+    "title": "Thanks emote · grave order",
+    "caption": "Use Thanks at the middle, middle-left, then middle-right grave.",
+    "url": "https://vulkk.com/wp-content/uploads/2024/10/Diablo-4-Reverance-of-Uacax-Shrine-scaled.webp",
+    "filename": "guide_graves.webp",
+    "source": "VULKK"
+  },
+  {
+    "id": "kichuk_map",
+    "title": "Kichuk · scroll location",
+    "caption": "Clear the stronghold to reach the Uacax scroll marked here.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Uacax-Triumph-Map.jpg",
+    "filename": "guide_kichuk_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "scroll",
+    "title": "The Triumph of Lord Uacax",
+    "caption": "The scroll is a clue; reading it is not confirmed as a spawn requirement.",
+    "url": "https://vulkk.com/wp-content/uploads/2024/10/Diablo-4-Triumph-of-Uacax-Location.jpg",
+    "filename": "guide_scroll.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "lightning_map",
+    "title": "Blood Lightning · Nahantu",
+    "caption": "Find the elite southwest of Kichuk; you can approach from Ichorfall.",
+    "url": "https://vulkk.com/wp-content/uploads/2024/10/Diablo-4-Blood-Lightning-Location-1.jpg",
+    "filename": "guide_lightning_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "samuk_map",
+    "title": "Samuk · Five Hills",
+    "caption": "Use Samuk as your starting waypoint, then head east to statue 1.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Uacax-Accession-Map.jpg",
+    "filename": "guide_samuk_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "birds_route",
+    "title": "The twelve bird statues",
+    "caption": "Follow 1–12, then return to 1. Move right up to each statue.",
+    "url": "https://vulkk.com/wp-content/uploads/2024/10/Diablo-4-Accession-Bird-Locations-Route-Marked.png",
+    "filename": "guide_birds_route.png",
+    "source": "VULKK"
+  },
+  {
+    "id": "zombies_map",
+    "title": "Three Cordycepic Zombies",
+    "caption": "The marked spawns are in the Field of Giants, north of Ichorfall.",
+    "url": "https://vulkk.com/wp-content/uploads/2024/10/Diablo-4-Cordycepic-Zombie-Locations.jpg",
+    "filename": "guide_zombies_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "temple_map",
+    "title": "Oka’bo Temple · Nahantu",
+    "caption": "Travel southeast from Kurast Bazaar to the marked temple.",
+    "url": "https://vulkk.com/wp-content/uploads/2024/10/Diablo-4-Okabo-Temple-Location.jpg",
+    "filename": "guide_temple_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "temple_braziers",
+    "title": "Oka’bo Temple · three braziers",
+    "caption": "Offer one corrupted relic at each brazier near the entrance.",
+    "url": "https://vulkk.com/wp-content/uploads/2024/10/Diablo-4-Okabo-Temple.jpg",
+    "filename": "guide_temple_braziers.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "burrow_map",
+    "title": "Forlorn Burrow · Nahantu",
+    "caption": "Enter the marked cellar west of Kurast Bazaar with the Unusual Key.",
+    "url": "https://vulkk.com/wp-content/uploads/2024/10/Diablo-4-Forlorn-Burrow-Location.jpg",
+    "filename": "guide_burrow_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "burrow_wall",
+    "title": "Forlorn Burrow · hidden wall",
+    "caption": "Break this wall with the Unusual Key, then follow the passage into the cow chamber.",
+    "url": "https://vulkk.com/wp-content/uploads/2024/10/Diablo-4-Forlorn-Burrow-Breakable-Wall.jpg",
+    "filename": "guide_burrow_wall.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "journal_map",
+    "title": "Outcast’s Journal · Skartara",
+    "caption": "Return to this nook north of Fool’s Quarry after changing sins.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Outcast-Journal-Map.jpg",
+    "filename": "guide_journal_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "journal",
+    "title": "Inside the journal chamber",
+    "caption": "Read the journal here; this is also the destination for the Moo portal.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Outcast-Journal.jpg",
+    "filename": "guide_journal.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "crow_map",
+    "title": "Crow · Ruins of Broken Reason",
+    "caption": "Find the large crow east of the Xanderos waypoint.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Heirophants-Skull-Crow-Map.jpg",
+    "filename": "guide_crow_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "crow_route",
+    "title": "Follow the crow",
+    "caption": "Stay close and wait while it circles. Follow the player route shown on the map.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Heirophants-Skull-Crow-Map-Marked.jpg",
+    "filename": "guide_crow_route.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "life_map",
+    "title": "Temple of Life · brazier location",
+    "caption": "Bring the Hierophant’s Skull to the marked brazier in Lycander.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Temple-of-Life-Brazier-Map.jpg",
+    "filename": "guide_life_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "life_brazier",
+    "title": "Temple of Life · signal brazier",
+    "caption": "Interact with this brazier to offer the skull.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Temple-of-Life-Brazier.jpg",
+    "filename": "guide_life_brazier.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "dummy_map",
+    "title": "Training Grounds · Temis",
+    "caption": "Enter Temis’s Training Grounds to find the dummy.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Temis-Training-Grounds.jpg",
+    "filename": "guide_dummy_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "amazons_map",
+    "title": "Corrupted Amazons · Athalua",
+    "caption": "Hunt around the observatory and equip each Amazon armor piece as it drops.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Mothers-Rose-Amazon-Location.jpg",
+    "filename": "guide_amazons_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "vasha_map",
+    "title": "Vasha the Unbroken",
+    "caption": "Keep all five Amazon armor pieces equipped for this fight.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Mothers-Rose-Vasha-Map.jpg",
+    "filename": "guide_vasha_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "courage_map",
+    "title": "Temple of Courage · brazier location",
+    "caption": "Bring Mother’s Rose to this marked location.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Temple-of-Courage-Brazier-Map.jpg",
+    "filename": "guide_courage_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "courage_brazier",
+    "title": "Temple of Courage · signal brazier",
+    "caption": "Interact with this brazier to offer the rose.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Temple-of-Courage-Brazier.jpg",
+    "filename": "guide_courage_brazier.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "ballistas_map",
+    "title": "Ballistas · Athalua",
+    "caption": "After burning Pride and reading the journal, destroy a ballista here.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Fathers-Chains-Ballista-Map.jpg",
+    "filename": "guide_ballistas_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "idyllic_map",
+    "title": "Idyllic Reach · Philios",
+    "caption": "Take the Amazonian Bolt to this cellar.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Fathers-Chains-Idyllic-Reach-Map.jpg",
+    "filename": "guide_idyllic_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "antia_map",
+    "title": "Antia’s Flame · brazier location",
+    "caption": "Bring Father’s Chains to the marked brazier in Philios.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Antias-Flame-Brazier-Map.jpg",
+    "filename": "guide_antia_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "antia_brazier",
+    "title": "Antia’s Flame · signal brazier",
+    "caption": "Interact with this brazier to offer the chains.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Antias-Flame-Brazier.jpg",
+    "filename": "guide_antia_brazier.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "coffin_map",
+    "title": "Creaking Hulls · Hawezar",
+    "caption": "Travel to the end of the path at the Temple of the Deathspeaker.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Coffin-Fishing-Spot-Map.jpg",
+    "filename": "guide_coffin_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "coffin_spot",
+    "title": "Fish from the very tip",
+    "caption": "Use this exact fishing position to retrieve the coffin.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Coffin-Fishing-Spot.jpg",
+    "filename": "guide_coffin_spot.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "boat",
+    "title": "Outcast’s Boat · eastern Philios",
+    "caption": "Carry the Torn Page and use the marked boat to sail to Scylara.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Outcasts-Boat.jpg",
+    "filename": "guide_boat.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "cedar",
+    "title": "Holy Cedar Tablets · Kyovashad",
+    "caption": "Return to the tablets at Kyovashad’s entrance to inscribe and burn Moo.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Kyovashad-Sins.jpg",
+    "filename": "guide_cedar.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "moo_portal",
+    "title": "Moo portal · journal chamber",
+    "caption": "After burning Moo, return here to enter the secret cow level.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Secret-Cow-Level-Portal-2.jpg",
+    "filename": "guide_moo_portal.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "burrow_jump",
+    "title": "Behind the wall · jump point",
+    "caption": "After breaking the wall, use the Jump prompt to enter the hidden passage.",
+    "url": "https://cdn.nerdschalk.com/wp-content/uploads/2026/04/diablo-4-all-cow-level-items-62.png",
+    "filename": "guide_burrow_jump.png",
+    "source": "Sliver of time / Nerd’s Chalk"
+  },
+  {
+    "id": "burrow_passage",
+    "title": "Forlorn Burrow · hidden passage",
+    "caption": "Cross the gap and follow the passage to the cow chamber.",
+    "url": "https://cdn.nerdschalk.com/wp-content/uploads/2026/04/diablo-4-all-cow-level-items-63.png",
+    "filename": "guide_burrow_passage.png",
+    "source": "Sliver of time / Nerd’s Chalk"
+  }
+]

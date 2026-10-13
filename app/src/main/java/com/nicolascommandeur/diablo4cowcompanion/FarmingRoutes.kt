@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -24,7 +25,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -43,7 +46,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
@@ -299,8 +302,8 @@ fun FarmingRoutesScreen(hunt: Hunt, onBack: () -> Unit, openLink: ((String) -> U
 
 @Composable
 private fun RouteMapDialog(route: FarmingRoute, onDismiss: () -> Unit) {
-    var scale by remember { mutableFloatStateOf(1f) }
-    var offset by remember { mutableStateOf(Offset.Zero) }
+    var scale by remember(route.id) { mutableFloatStateOf(1f) }
+    var offset by remember(route.id) { mutableStateOf(Offset.Zero) }
 
     Dialog(
         onDismissRequest = onDismiss,
@@ -308,13 +311,17 @@ private fun RouteMapDialog(route: FarmingRoute, onDismiss: () -> Unit) {
     ) {
         Surface(
             color = MaterialTheme.colorScheme.background,
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .safeDrawingPadding()
+                .padding(8.dp)
+                .clip(RoundedCornerShape(24.dp)),
         ) {
             Column(
                 verticalArrangement = Arrangement.spacedBy(12.dp),
                 modifier = Modifier
-                    .fillMaxSize()
-                    .safeDrawingPadding()
+                    .fillMaxWidth()
+                    .verticalScroll(rememberScrollState())
                     .padding(16.dp),
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -331,42 +338,49 @@ private fun RouteMapDialog(route: FarmingRoute, onDismiss: () -> Unit) {
                 )
                 BoxWithConstraints(
                     Modifier
-                        .weight(1f)
                         .fillMaxWidth()
-                        .clipToBounds()
-                        .background(MaterialTheme.colorScheme.surface)
+                        .aspectRatio(1f)
                 ) {
+                    val painter = painterResource(route.map)
                     val viewportWidth = constraints.maxWidth.toFloat()
                     val viewportHeight = constraints.maxHeight.toFloat()
-                    val painter = painterResource(route.map)
-                    val fittedScale = minOf(
-                        viewportWidth / painter.intrinsicSize.width,
-                        viewportHeight / painter.intrinsicSize.height
-                    )
-                    val fittedWidth = painter.intrinsicSize.width * fittedScale
-                    val fittedHeight = painter.intrinsicSize.height * fittedScale
-                    val gestures = rememberTransformableState { zoom, pan, _ ->
-                        scale = (scale * zoom).coerceIn(1f, 5f)
-                        val xLimit = ((fittedWidth * scale - viewportWidth) / 2).coerceAtLeast(0f)
-                        val yLimit = ((fittedHeight * scale - viewportHeight) / 2).coerceAtLeast(0f)
-                        offset = Offset(
-                            (offset.x + pan.x).coerceIn(-xLimit, xLimit),
-                            (offset.y + pan.y).coerceIn(-yLimit, yLimit)
+                    Box(
+                        Modifier
+                            .fillMaxSize()
+                            .clip(RoundedCornerShape(16.dp))
+                            .background(MaterialTheme.colorScheme.surface)
+                    ) {
+                        val fittedScale = minOf(
+                            viewportWidth / painter.intrinsicSize.width,
+                            viewportHeight / painter.intrinsicSize.height
+                        )
+                        val fittedWidth = painter.intrinsicSize.width * fittedScale
+                        val fittedHeight = painter.intrinsicSize.height * fittedScale
+                        val gestures = rememberTransformableState { zoom, pan, _ ->
+                            scale = (scale * zoom).coerceIn(1f, 5f)
+                            val xLimit =
+                                ((fittedWidth * scale - viewportWidth) / 2).coerceAtLeast(0f)
+                            val yLimit =
+                                ((fittedHeight * scale - viewportHeight) / 2).coerceAtLeast(0f)
+                            offset = Offset(
+                                (offset.x + pan.x).coerceIn(-xLimit, xLimit),
+                                (offset.y + pan.y).coerceIn(-yLimit, yLimit)
+                            )
+                        }
+
+                        Image(
+                            painter = painter,
+                            contentDescription = route.mapDescription,
+                            contentScale = ContentScale.Fit,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .graphicsLayer {
+                                    scaleX = scale; scaleY = scale
+                                    translationX = offset.x; translationY = offset.y
+                                }
+                                .transformable(gestures)
                         )
                     }
-
-                    Image(
-                        painter = painter,
-                        contentDescription = route.mapDescription,
-                        contentScale = ContentScale.Fit,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .graphicsLayer {
-                                scaleX = scale; scaleY = scale
-                                translationX = offset.x; translationY = offset.y
-                            }
-                            .transformable(gestures)
-                    )
                 }
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
