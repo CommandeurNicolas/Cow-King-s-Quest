@@ -1,6 +1,10 @@
 package com.nicolascommandeur.diablo4cowcompanion
 
+import android.animation.ValueAnimator
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -32,6 +36,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,15 +46,20 @@ import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.progressBarRangeInfo
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import kotlinx.coroutines.launch
 
 @Composable
@@ -154,9 +164,42 @@ fun GuideScreen(
     val uriHandler = LocalUriHandler.current
     val snackbar = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
+    val listState = rememberLazyListState()
+
+    // Transient, click-triggered celebration: loading saved progress never replays it.
+    var celebratedStep by remember { mutableStateOf<String?>(null) }
+    var sweepFinished by remember { mutableStateOf(false) }
+    val sweepProgress = remember { Animatable(0f) }
+
     var resetDialog by rememberSaveable { mutableStateOf(false) }
+
     var expanded by rememberSaveable { mutableStateOf(unlockGuide.map { it.id }) }
+
     val completed = completedSteps.intersect(guideStepIds)
+    val requiredCompleted = completed.intersect(requiredGuideStepIds).size
+    val requiredComplete = requiredCompleted == requiredGuideStepIds.size
+    val allComplete = completed.containsAll(guideStepIds)
+
+    val progressColor = MaterialTheme.colorScheme.primary
+    val progressDescription = when {
+        allComplete -> "Udderly complete."
+        requiredComplete -> "The hunt is complete. Enjoy the cow level!"
+        else -> "$requiredCompleted / ${requiredGuideStepIds.size} required steps complete"
+    }
+
+    LaunchedEffect(celebratedStep, allComplete) {
+        if (!allComplete) {
+            celebratedStep = null
+            sweepFinished = false
+        } else if (celebratedStep != null) {
+            sweepProgress.snapTo(0f)
+            if (ValueAnimator.areAnimatorsEnabled()) {
+                sweepProgress.animateTo(1f, tween(1200, easing = LinearEasing))
+            }
+            sweepFinished = true
+        }
+    }
+
     fun browse(url: String) {
         try {
             if (openLink != null) openLink(url) else uriHandler.openUri(url)
@@ -166,6 +209,7 @@ fun GuideScreen(
             scope.launch { snackbar.showSnackbar("Could not open this guide in your browser.") }
         }
     }
+
     Scaffold(
         snackbarHost = { SnackbarHost(snackbar) },
         contentWindowInsets = WindowInsets(0, 0, 0, 0)
@@ -176,7 +220,7 @@ fun GuideScreen(
                 .padding(padding), contentAlignment = Alignment.TopCenter
         ) {
             LazyColumn(
-                state = rememberLazyListState(), contentPadding = PaddingValues(20.dp),
+                state = listState, contentPadding = PaddingValues(20.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
                 modifier = Modifier
                     .widthIn(max = 640.dp)
@@ -190,17 +234,46 @@ fun GuideScreen(
                             color = MaterialTheme.colorScheme.primary, letterSpacing = 2.sp
                         )
                         Text("Unlock guide", fontFamily = FontFamily.Serif, fontSize = 34.sp)
+                        Column {
+                            Row(
+                                verticalAlignment = Alignment.Bottom,
+                                modifier = Modifier.zIndex(1f)
+                            ) {
+                                Text(
+                                    "${completed.size} / ${requiredGuideStepIds.size} steps complete",
+                                    color = progressColor,
+                                    modifier = Modifier.weight(1f).testTag("guide_progress"),
+                                )
+                                if (allComplete) GuideCompletionCrown()
+                            }
+                            if (allComplete) {
+                                CowPatternProgressBar(
+                                    modifier = Modifier
+                                        .testTag("guide_progress_bar")
+                                        .semantics {
+                                            progressBarRangeInfo = ProgressBarRangeInfo(1f, 0f..1f)
+                                            stateDescription =
+                                                "Udderly complete. All 27 required steps and the optional step completed."
+                                        }
+                                )
+                            } else LinearProgressIndicator(
+                                progress = { requiredCompleted.toFloat() / requiredGuideStepIds.size },
+                                color = progressColor,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .testTag("guide_progress_bar")
+                                    .semantics { stateDescription = progressDescription }
+                            )
+                        }
+                        if (requiredComplete) {
+                            Text(
+                                progressDescription,
+                                color = progressColor,
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                        }
                         Text(
-                            "${completed.size} / ${guideStepIds.size} steps complete",
-                            color = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.testTag("guide_progress"),
-                        )
-                        LinearProgressIndicator(
-                            progress = { completed.size.toFloat() / guideStepIds.size },
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                        Text(
-                            "One shared checklist for your full journey. Tap a step to check or uncheck it. Saved separately from your cow counts.",
+                            "27 required steps + 1 optional shortcut for future seasons. The bar tracks required steps; finish the bonus step too for 28 / 27. Tap to check or uncheck. Saved separately from your cow counts.",
                             style = MaterialTheme.typography.bodyMedium
                         )
                         Text(
@@ -332,44 +405,79 @@ fun GuideScreen(
                             }
                             item(key = "step_${step.id}") {
                                 val checked = step.id in completed
-                                Surface(
-                                    shape = RoundedCornerShape(12.dp),
-                                    color = MaterialTheme.colorScheme.surface,
-                                    modifier = Modifier.padding(start = if (step.groupTitle != null) 16.dp else 0.dp)
-                                ) {
-                                    Row(
-                                        verticalAlignment = Alignment.Top,
+                                val celebrating = allComplete && celebratedStep == step.id
+                                val sweeping = celebrating && !sweepFinished
+
+                                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                    Surface(
+                                        shape = RoundedCornerShape(12.dp),
+                                        color = MaterialTheme.colorScheme.surface,
                                         modifier = Modifier
-                                            .fillMaxWidth()
-                                            .testTag("step_${step.id}")
-                                            .toggleable(
-                                                value = checked,
-                                                role = Role.Checkbox,
-                                                onValueChange = {
-                                                    onChange(if (it) completed + step.id else completed - step.id)
-                                                })
-                                            .padding(end = 16.dp, top = 12.dp, bottom = 12.dp),
+                                            .padding(start = if (step.groupTitle != null) 16.dp else 0.dp)
+                                            .then(if (sweeping) Modifier.testTag("guide_rainbow_sweep") else Modifier)
                                     ) {
-                                        Checkbox(
-                                            checked = checked,
-                                            onCheckedChange = null,
-                                            modifier = Modifier.padding(12.dp)
-                                        )
-                                        Column(
-                                            verticalArrangement = Arrangement.spacedBy(6.dp),
-                                            modifier = Modifier.weight(1f),
+                                        Row(
+                                            verticalAlignment = Alignment.Top,
+                                            modifier = Modifier
+                                                .fillMaxWidth()
+                                                .testTag("step_${step.id}")
+                                                .clip(RoundedCornerShape(12.dp))
+                                                .then(if (sweeping) Modifier.rainbowSweep { sweepProgress.value } else Modifier)
+                                                .toggleable(
+                                                    value = checked,
+                                                    role = Role.Checkbox,
+                                                    onValueChange = {
+                                                        val next =
+                                                            if (it) completed + step.id else completed - step.id
+                                                        if (it && !allComplete && next.containsAll(
+                                                                guideStepIds
+                                                            )
+                                                        ) {
+                                                            celebratedStep = step.id
+                                                            sweepFinished = false
+                                                        } else {
+                                                            celebratedStep = null
+                                                            sweepFinished = false
+                                                        }
+                                                        onChange(next)
+                                                    })
+                                                .padding(end = 16.dp, top = 12.dp, bottom = 12.dp),
                                         ) {
-                                            Text(
-                                                step.title,
-                                                style = MaterialTheme.typography.titleSmall,
-                                                color = if (checked) MaterialTheme.colorScheme.primary
-                                                else MaterialTheme.colorScheme.onSurface
+                                            Checkbox(
+                                                checked = checked,
+                                                onCheckedChange = null,
+                                                modifier = Modifier.padding(12.dp)
                                             )
-                                            Text(
-                                                step.detail,
-                                                style = MaterialTheme.typography.bodyMedium,
-                                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                                            )
+                                            Column(
+                                                verticalArrangement = Arrangement.spacedBy(6.dp),
+                                                modifier = Modifier.weight(1f),
+                                            ) {
+                                                Text(
+                                                    if (step.optional) "${step.title} · Optional" else step.title,
+                                                    style = MaterialTheme.typography.titleSmall,
+                                                    color = if (checked) MaterialTheme.colorScheme.primary
+                                                    else MaterialTheme.colorScheme.onSurface
+                                                )
+                                                Text(
+                                                    step.detail,
+                                                    style = MaterialTheme.typography.bodyMedium,
+                                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                                )
+                                            }
+                                        }
+                                    }
+                                    if (celebrating && sweepFinished) {
+                                        TextButton(
+                                            onClick = {
+                                                scope.launch {
+                                                    listState.animateScrollToItem(
+                                                        0
+                                                    )
+                                                }
+                                            },
+                                            modifier = Modifier.testTag("view_completed_guide")
+                                        ) {
+                                            Text("View completed guide ↑")
                                         }
                                     }
                                 }
@@ -378,12 +486,6 @@ fun GuideScreen(
                     }
                 }
                 item {
-                    if (completed.size == guideStepIds.size) {
-                        Text(
-                            "The hunt is complete. Enjoy the cow level!",
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    }
                     TextButton(
                         onClick = { resetDialog = true },
                         enabled = completed.isNotEmpty(),

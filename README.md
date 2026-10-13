@@ -11,7 +11,7 @@ An unofficial, offline Android companion for Diablo IV’s secret cow level. Tra
 - Three named character counters, each assigned to a different relic.
 - Quick **+1**, **+5**, and **+10** buttons, one-step undo, and manual count correction.
 - An early zone reminder at **600**, plus a stop at **665** with a separate confirmation for the final cow.
-- A **27-step unlock checklist** with saved checkmarks and collapsible sections.
+- A **27-step unlock checklist plus one optional bonus step**, with saved checkmarks and collapsible sections.
 - Offline farming maps for Farobru, Cerrigar, and Zarbinzet, with directions and estimated yields.
 - Full-screen maps with pinch zoom, bounded panning, and **Reset zoom**.
 - A charcoal-and-gold interface, crowned cow launcher icon, and matching dark splash screen.
@@ -39,12 +39,15 @@ Either listed zone works for its relic. Earlier kills can be farmed elsewhere. *
 
 ### Follow the unlock guide
 
-The **Unlock guide** tab covers four stages:
+The **Unlock guide** tab covers four required stages and an optional final stage:
 
 1. Stamina Potion — the original three relics and Forlorn Hovel.
 2. Rusted Bardiche — the Nahantu relics and Forlorn Burrow.
 3. Neyrelle’s Hand — the Skovos sin quests.
 4. The portal and Cow King — combining the rewards and entering the level.
+5. *Optional:* Outcast’s Travel Pouch — combine the Torn Page with 3 fished Rusted Cow Bells in the Horadric Cube to unlock purchases from Squirt the Peddler in Temis for future seasons.
+
+The progress bar tracks the 27 required steps. Leaving the optional step unchecked still counts as completing the hunt. A purchased pouch supplies the three final rewards, so return to **Combine the three rewards** to skip the relic quests in a new season.
 
 Tap a step to check or uncheck it, and tap a section header to collapse or expand it. This is one shared checklist for the journey. Its checkmarks are independent of the counter’s **Relic collected** checkboxes. **Reset checklist** asks for confirmation and leaves character progress untouched.
 
@@ -93,6 +96,7 @@ The application ID and source namespace are `com.nicolascommandeur.diablo4cowcom
 ## Guide sources and artwork
 
 The bundled guide and routes were researched on **October 5, 2026**. These links provide the source walkthroughs; they are not fetched or updated automatically by the app.
+The optional Season 15 pouch shortcut was checked against VULKK’s complete walkthrough on **October 12, 2026**.
 
 - [Wowhead — cow level guide](https://www.wowhead.com/diablo-4/guide/zones/secret-cow-level). At the time of review, its article covered the earlier stages rather than the final unlock.
 - [VULKK — Nahantu relics and maps](https://vulkk.com/2024/10/16/secrets-of-diablo-4-the-secret-cow-level-continues/).

@@ -12,7 +12,8 @@ data class GuideStep(
     val id: String,
     val title: String,
     val detail: String,
-    val groupTitle: String? = null
+    val groupTitle: String? = null,
+    val optional: Boolean = false
 )
 
 data class GuideSection(
@@ -199,10 +200,25 @@ val unlockGuide = listOf(
                 "Clear bovines until the king appears; defeat him and collect his crown."
             )
         ),
+    ),
+    GuideSection(
+        "future_seasons",
+        "Return in future seasons",
+        "05 / Optional · Season 15 onward",
+        listOf(
+            GuideStep(
+                "travel_pouch",
+                "Craft the Outcast’s Travel Pouch",
+                "In the Horadric Cube, combine the Torn Page from Trophy of the Faithful with 3 Rusted Cow Bells obtained by fishing. Crafting the pouch once unlocks future purchases from Squirt the Peddler in Temis, including in new seasons. Open a purchased pouch for the Stamina Potion, Rusted Bardiche and Neyrelle’s Hand, then resume at ‘Combine the three rewards’ to return without repeating the relic quests.\n\nYou can also give the pouch’s Stamina Potion and Rusted Bardiche to friends so they can skip the first two sections; they still need to obtain their own Neyrelle’s Hand, combine the three rewards and open Trophy of the Faithful to unlock the Moo emote.",
+                optional = true
+            )
+        ),
     )
 )
 
 val guideStepIds: Set<String> = unlockGuide.flatMap { it.steps }.map { it.id }.toSet()
+val requiredGuideStepIds: Set<String> = unlockGuide.flatMap { it.steps }
+    .filterNot { it.optional }.map { it.id }.toSet()
 
 class GuideStore(context: Context) {
     // Separate from cow_hunts_v1: checking or resetting the guide never changes counters.
