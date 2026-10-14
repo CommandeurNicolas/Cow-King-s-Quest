@@ -228,7 +228,7 @@ val unlockGuide = listOf(
             GuideStep(
                 "scylara_entrance",
                 "Open the Scylara portal",
-                "On Tuesday, kill the cows in the Forlorn Cellar’s ritual circle and enter the portal. If they remain invulnerable, try later in the Tuesday window.",
+                "On Tuesday, kill the cows in the Forlorn Cellar’s ritual circle on Scylara and enter the portal.\n\nIf the cows are invulnerable, make sure you inscribed Greed on a Holy Cedar Tablet, burned it, then visited the Outcast’s Journal. Inscribing and burning Moo to unlock the any-day portal makes the Scylara entrance unavailable, even on Tuesday. Either switch back to Greed and repeat the steps above, or use the any-day portal in the Outcast’s Journal chamber.",
                 groupTitle = "Reach Scylara · Tuesday entrance",
                 checkable = false
             ),
