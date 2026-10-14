@@ -194,8 +194,15 @@ fun GuideScreen(
         enlargedImageId = image.id
     }
 
-    // Expanded sections
-    var expanded by rememberSaveable { mutableStateOf(unlockGuide.map { it.id }) }
+    // Set defaults once per visit; checking the last step must not collapse its section.
+    // Keep this out of savedPages so returning to the guide uses the latest progress.
+    var expanded by remember {
+        mutableStateOf(
+            unlockGuide.filter { section ->
+                section.steps.any { it.checkable && it.id !in completedSteps }
+            }.map { it.id }
+        )
+    }
 
     // Completed steps
     val completed = completedSteps.intersect(guideStepIds)
@@ -528,13 +535,16 @@ fun GuideScreen(
                                                             label = "Image disclosure chevron"
                                                         )
                                                         TextButton(
-                                                            onClick = { imagesExpanded = !imagesExpanded },
+                                                            onClick = {
+                                                                imagesExpanded = !imagesExpanded
+                                                            },
                                                             modifier = Modifier.testTag("toggle_images_${step.id}")
                                                         ) {
                                                             Icon(
                                                                 painter = painterResource(R.drawable.ic_expand_more),
                                                                 contentDescription = null,
-                                                                modifier = Modifier.rotate(arrowRotation)
+                                                                modifier = Modifier
+                                                                    .rotate(arrowRotation)
                                                             )
                                                             Spacer(Modifier.width(4.dp))
                                                             Text(
@@ -545,8 +555,10 @@ fun GuideScreen(
                                                     }
                                                     AnimatedVisibility(
                                                         visible = !checked || imagesExpanded,
-                                                        enter = expandVertically(tween(180)) + fadeIn(tween(180)),
-                                                        exit = shrinkVertically(tween(180)) + fadeOut(tween(120))
+                                                        enter = expandVertically(tween(180))
+                                                                + fadeIn(tween(180)),
+                                                        exit = shrinkVertically(tween(180))
+                                                                + fadeOut(tween(120))
                                                     ) {
                                                         GuideImageGallery(step.images, step.id) {
                                                             showImage(step.images, it)

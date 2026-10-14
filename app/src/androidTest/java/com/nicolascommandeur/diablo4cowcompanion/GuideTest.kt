@@ -41,7 +41,7 @@ class GuideTest {
         val restoration = StateRestorationTester(compose)
         restoration.setContent {
             DiabloCowCounterTheme {
-                GuideScreen(completed, onChange = { completed = it })
+                GuideScreen(completedSteps = completed, onChange = { completed = it })
             }
         }
         compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("images_gemstone"))
@@ -72,7 +72,7 @@ class GuideTest {
         var completed by mutableStateOf(emptySet<String>())
         compose.setContent {
             DiabloCowCounterTheme {
-                GuideScreen(completed, onChange = { completed = it })
+                GuideScreen(completedSteps = completed, onChange = { completed = it })
             }
         }
         compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("images_stamina"))
@@ -97,7 +97,7 @@ class GuideTest {
     @Test
     fun journalReferencePrecedesHandStepsAndSectionCanCollapse() {
         compose.setContent {
-            DiabloCowCounterTheme { GuideScreen(emptySet(), onChange = {}) }
+            DiabloCowCounterTheme { GuideScreen(completedSteps = emptySet(), onChange = {}) }
         }
         compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("reference_hand"))
         compose.onNodeWithTag("reference_hand").assertIsDisplayed()
@@ -116,7 +116,7 @@ class GuideTest {
         var completed by mutableStateOf(setOf("travel_pouch"))
         compose.setContent {
             DiabloCowCounterTheme {
-                GuideScreen(completed, onChange = { completed = it })
+                GuideScreen(completedSteps = completed, onChange = { completed = it })
             }
         }
         compose.onNodeWithTag("guide_progress").assertTextEquals("1 / 27 steps complete")
@@ -136,6 +136,9 @@ class GuideTest {
         compose.runOnIdle { completed = requiredGuideStepIds }
         compose.onNodeWithTag("guide_progress").assertTextEquals("27 / 27 steps complete")
         compose.onNodeWithText("The hunt is complete. Enjoy the cow level!").assertIsDisplayed()
+        compose.onNodeWithTag("guide_list")
+            .performScrollToNode(hasTestTag("section_future_seasons"))
+        compose.onNodeWithTag("section_future_seasons").performClick()
         compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("step_travel_pouch"))
         compose.onNodeWithTag("step_travel_pouch").assertIsOff().performClick().assertIsOn()
         compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("step_vivid_whimsy"))
@@ -158,14 +161,22 @@ class GuideTest {
     }
 
     @Test
-    fun finalRequiredStepCelebratesLocallyWithoutReplayingSavedCompletion() {
+    fun finalStepCelebratesLocallyAndSectionCollapsesOnlyOnNextVisit() {
         var completed by mutableStateOf(guideStepIds)
         compose.setContent {
             DiabloCowCounterTheme {
-                GuideScreen(completed, onChange = { completed = it })
+                CowHuntApp(
+                    state = HuntState(),
+                    completedSteps = completed,
+                    onHuntChange = {},
+                    onGuideChange = { completed = it }
+                )
             }
         }
+        compose.onNodeWithText("Unlock guide").performClick()
         compose.onNodeWithText("Udderly complete.").assertIsDisplayed()
+        compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("section_portal"))
+        compose.onNodeWithTag("section_portal").assert(hasText("Show +")).performClick()
         compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("step_king"))
         compose.onNodeWithTag("guide_rainbow_sweep").assertDoesNotExist()
         compose.onNodeWithTag("view_completed_guide").assertDoesNotExist()
@@ -189,6 +200,11 @@ class GuideTest {
         compose.onNodeWithTag("guide_progress").assertIsDisplayed()
             .assertTextEquals("29 / 27 steps complete")
         compose.onNodeWithText("Udderly complete.").assertIsDisplayed()
+        compose.onNodeWithText("Counter", useUnmergedTree = true).performClick()
+        compose.onNodeWithText("Unlock guide").performClick()
+        compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("section_portal"))
+        compose.onNodeWithTag("section_portal").assert(hasText("Show +"))
+        compose.onNodeWithTag("guide_rainbow_sweep").assertDoesNotExist()
     }
 
     @Test
@@ -206,10 +222,12 @@ class GuideTest {
                 var completed by remember { mutableStateOf(GuideStore(context).load()) }
                 DiabloCowCounterTheme {
                     CowHuntApp(
-                        currentHunt, completed,
+                        state = currentHunt,
+                        completedSteps = completed,
                         onHuntChange = { currentHunt = it },
                         onGuideChange = { completed = it; guideStore.save(it) },
-                        openLink = { openedUrl = it })
+                        openLink = { openedUrl = it }
+                    )
                 }
             }
             compose.onNodeWithText("Unlock guide").performClick()
