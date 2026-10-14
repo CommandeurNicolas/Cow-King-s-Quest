@@ -256,9 +256,17 @@
     "source": "VULKK"
   },
   {
+    "id": "cedar_map",
+    "title": "Holy Cedar Tablets · Kyovashad map",
+    "caption": "The tablets are just outside Kyovashad’s southwest entrance.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/05/Kyovashad-Sins-Map.jpg",
+    "filename": "guide_cedar_map.jpg",
+    "source": "VULKK"
+  },
+  {
     "id": "cedar",
     "title": "Holy Cedar Tablets · Kyovashad",
-    "caption": "Return to the tablets at Kyovashad’s entrance to inscribe and burn Moo.",
+    "caption": "Inscribe your chosen sin on a tablet here, then burn it at the nearby fire.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Kyovashad-Sins.jpg",
     "filename": "guide_cedar.jpg",
     "source": "VULKK"

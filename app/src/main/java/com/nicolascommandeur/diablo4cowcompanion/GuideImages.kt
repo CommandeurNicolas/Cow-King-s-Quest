@@ -237,9 +237,16 @@ val unlockGuideImages = listOf(
         "VULKK"
     ),
     GuideImage(
+        "cedar_map",
+        "Holy Cedar Tablets · Kyovashad map",
+        "The tablets are just outside Kyovashad’s southwest entrance.",
+        R.drawable.guide_cedar_map,
+        "VULKK"
+    ),
+    GuideImage(
         "cedar",
         "Holy Cedar Tablets · Kyovashad",
-        "Return to the tablets at Kyovashad’s entrance to inscribe and burn Moo.",
+        "Inscribe your chosen sin on a tablet here, then burn it at the nearby fire.",
         R.drawable.guide_cedar,
         "VULKK"
     ),

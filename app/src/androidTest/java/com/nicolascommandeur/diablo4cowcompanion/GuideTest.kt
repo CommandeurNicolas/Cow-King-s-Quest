@@ -102,6 +102,7 @@ class GuideTest {
         compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("reference_hand"))
         compose.onNodeWithTag("reference_hand").assertIsDisplayed()
         compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("images_reference_hand"))
+        compose.onNodeWithTag("images_reference_hand").performScrollToNode(hasTestTag("image_reference_hand_journal_map"))
         compose.onNodeWithTag("image_reference_hand_journal_map").performClick()
         compose.onNodeWithTag("guide_image_title").assertTextEquals("Outcast’s Journal · Skartara")
         compose.onNodeWithText("Close").performClick()

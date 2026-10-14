@@ -184,13 +184,16 @@ val unlockGuide = listOf(
                 groupTitle = "Greed"
             )
         ),
-        description = """
-            Fear, Anger and Pride can be completed in any order. For each word, inscribe it on a Holy Cedar Tablet at Kyovashad’s entrance and burn it, then visit the chamber in Skartara to read the Outcast’s Journal. Follow the matching steps to collect and offer its relic, then repeat for the other two words. After all three offerings, collect the Hadopelagic Key, burn Greed at the shrine and follow the final steps to retrieve Neyrelle’s Hand.
-        """.trimIndent(),
         reference = GuideReference(
-            "Your return point · Outcast’s Journal",
-            "Keep this location handy for the whole Hand quest. Return after burning Fear, Anger and Pride. Reading the journal is required for Pride; the other visits are recommended. Greed also has a clue here after you change sins.",
-            guideImages("journal_map", "journal")
+            "Sin route · Outcast’s Journal",
+            """
+                Complete Fear, Anger and Pride in any order. For each, inscribe the word on a Holy Cedar Tablet at Kyovashad’s entrance and burn it at the shrine, then follow its steps to collect and offer the relic.
+
+                Return to the Outcast’s Journal in Skartara, north of Fool’s Quarry, after changing sins. Reading it is required for Pride’s Amazonian Bolt and recommended for Fear and Anger. Greed has a clue here too.
+
+                After all three offerings, collect the Hadopelagic Key, burn Greed at the shrine and follow the final steps to retrieve Neyrelle’s Hand.
+            """.trimIndent(),
+            guideImages("cedar_map", "cedar", "journal_map", "journal")
         ),
     ),
     GuideSection(

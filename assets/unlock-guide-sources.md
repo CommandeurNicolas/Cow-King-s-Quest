@@ -1,6 +1,6 @@
 # Unlock guide imagery and verification
 
-Checked October 13, 2026. Images are bundled in `app/src/main/res/drawable-nodpi` for offline use.
+Checked October 14, 2026. Images are bundled in `app/src/main/res/drawable-nodpi` for offline use.
 The source screenshots and annotations are unchanged; the app fits them in previews and provides a
 compact zoom/pan viewer. Individual URLs, resource filenames, titles, and captions are recorded
 in [unlock-guide-images.json](unlock-guide-images.json).
@@ -14,7 +14,7 @@ enlarged viewer. Third-party artwork is excluded from the repository’s MIT lic
 The two additional Forlorn Burrow jump/passage screenshots are from Sliver of time’s gameplay,
 reproduced
 in [Nerd’s Chalk’s pre-expansion item walkthrough](https://nerdschalk.com/diablo-4-how-to-obtain-all-cow-level-items-before-lord-of-hatred-locations-requirements-and-items-guide/),
-steps 21–22. Their separate source credit is shown in the app. There are 36 bundled quest images in
+steps 21–22. Their separate source credit is shown in the app. There are 37 bundled quest images in
 total.
 
 ## Findings and limitations
