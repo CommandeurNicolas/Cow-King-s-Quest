@@ -37,7 +37,7 @@ class GuideTest {
 
     @Test
     fun imageViewerZoomNavigationAndRestorationNeverChangeCheckmarks() {
-        var completed by mutableStateOf(setOf("gemstone"))
+        var completed by mutableStateOf(setOf("shard"))
         val restoration = StateRestorationTester(compose)
         restoration.setContent {
             DiabloCowCounterTheme {
@@ -62,9 +62,36 @@ class GuideTest {
         compose.onNodeWithTag("guide_image_title").assertTextEquals("Graves · Kurast Docks")
         compose.onNodeWithText("Close").performClick()
         compose.onNodeWithTag("guide_image_viewer").assertDoesNotExist()
-        compose.runOnIdle { assertEquals(setOf("gemstone"), completed) }
+        compose.runOnIdle { assertEquals(setOf("shard"), completed) }
         compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("step_gemstone"))
-        compose.onNodeWithTag("step_gemstone").assertIsOn()
+        compose.onNodeWithTag("step_gemstone").assertIsOff()
+    }
+
+    @Test
+    fun checkingStepCollapsesImagesAndUncheckingShowsThem() {
+        var completed by mutableStateOf(emptySet<String>())
+        compose.setContent {
+            DiabloCowCounterTheme {
+                GuideScreen(completed, onChange = { completed = it })
+            }
+        }
+        compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("images_stamina"))
+        compose.onNodeWithTag("images_stamina").assertIsDisplayed()
+        compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("step_stamina"))
+        compose.onNodeWithTag("step_stamina").performClick().assertIsOn()
+        compose.onNodeWithTag("images_stamina").assertDoesNotExist()
+        compose.onNodeWithTag("toggle_images_stamina").performClick()
+        compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("images_stamina"))
+        compose.onNodeWithTag("images_stamina").assertIsDisplayed()
+        compose.onNodeWithTag("image_stamina_hovel_map").performClick()
+        compose.onNodeWithTag("guide_image_viewer").assertIsDisplayed()
+        compose.onNodeWithText("Close").performClick()
+        compose.runOnIdle { assertEquals(setOf("stamina"), completed) }
+        compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("step_stamina"))
+        compose.onNodeWithTag("step_stamina").performClick().assertIsOff()
+        compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("images_stamina"))
+        compose.onNodeWithTag("images_stamina").assertIsDisplayed()
+        compose.onNodeWithTag("toggle_images_stamina").assertDoesNotExist()
     }
 
     @Test

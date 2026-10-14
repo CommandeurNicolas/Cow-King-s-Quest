@@ -51,7 +51,7 @@ The progress bar tracks the 27 required steps. Leaving either optional step unch
 
 Tap a step to check or uncheck it, and tap a section header to collapse or expand it. This is one shared checklist for the journey. Its checkmarks are independent of the counter’s **Relic collected** checkboxes. **Reset checklist** asks for confirmation and leaves character progress untouched.
 
-Swipe through the location images inside each illustrated step card, then tap an image to open the enlarged viewer. Pinch to zoom, drag to pan, or use the zoom buttons. Previous and Next browse the images for that step. Images are bundled for offline use, and opening them never checks off a step.
+Swipe through the location images inside each illustrated step card, then tap an image to open the enlarged viewer. Completed steps collapse their images behind a **Show images** button; unfinished steps and shared reference images stay visible. Pinch to zoom, drag to pan, or use the zoom buttons. Previous and Next browse the images for that step. Images are bundled for offline use, and opening them never checks off a step.
 
 The Outcast’s Journal reference appears above the Neyrelle’s Hand steps because you return there between sins. Crooked Staff includes Kichuk and scroll preparation, the default-Attack restrictions, and a note that the scroll is not a confirmed spawn requirement. Inside **Open the secret cow level**, the Scylara route includes an optional Vivid Whimsy fishing step before its Tuesday entrance. The titled Moo route follows with its own instruction cards for everyday access. The shared portal checkmark applies to either entrance.
 

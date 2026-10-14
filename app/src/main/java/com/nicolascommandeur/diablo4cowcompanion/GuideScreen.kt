@@ -2,20 +2,28 @@ package com.nicolascommandeur.diablo4cowcompanion
 
 import android.animation.ValueAnimator
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -23,6 +31,7 @@ import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -47,9 +56,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
@@ -427,6 +438,9 @@ fun GuideScreen(
                             }
                             item(key = "step_${step.id}") {
                                 val checked = step.id in completed
+                                var imagesExpanded by rememberSaveable(step.id) {
+                                    mutableStateOf(false)
+                                }
                                 val celebrating =
                                     step.checkable && allComplete && celebratedStep == step.id
                                 val sweeping = celebrating && !sweepFinished
@@ -451,10 +465,11 @@ fun GuideScreen(
                                                         if (step.checkable) Modifier.toggleable(
                                                             value = checked,
                                                             role = Role.Checkbox,
-                                                            onValueChange = {
+                                                            onValueChange = { newValue ->
                                                                 val next =
-                                                                    if (it) completed + step.id else completed - step.id
-                                                                if (it && !allComplete && next.containsAll(
+                                                                    if (newValue) completed + step.id else completed - step.id
+                                                                if (newValue) imagesExpanded = false
+                                                                if (newValue && !allComplete && next.containsAll(
                                                                         guideStepIds
                                                                     )
                                                                 ) {
@@ -506,8 +521,36 @@ fun GuideScreen(
                                                         bottom = 16.dp
                                                     )
                                                 ) {
-                                                    GuideImageGallery(step.images, step.id) {
-                                                        showImage(step.images, it)
+                                                    if (checked) {
+                                                        val arrowRotation by animateFloatAsState(
+                                                            targetValue = if (imagesExpanded) 0f else -90f,
+                                                            animationSpec = tween(180),
+                                                            label = "Image disclosure chevron"
+                                                        )
+                                                        TextButton(
+                                                            onClick = { imagesExpanded = !imagesExpanded },
+                                                            modifier = Modifier.testTag("toggle_images_${step.id}")
+                                                        ) {
+                                                            Icon(
+                                                                painter = painterResource(R.drawable.ic_expand_more),
+                                                                contentDescription = null,
+                                                                modifier = Modifier.rotate(arrowRotation)
+                                                            )
+                                                            Spacer(Modifier.width(4.dp))
+                                                            Text(
+                                                                if (imagesExpanded) "Hide images (${step.images.size})"
+                                                                else "Show images (${step.images.size})"
+                                                            )
+                                                        }
+                                                    }
+                                                    AnimatedVisibility(
+                                                        visible = !checked || imagesExpanded,
+                                                        enter = expandVertically(tween(180)) + fadeIn(tween(180)),
+                                                        exit = shrinkVertically(tween(180)) + fadeOut(tween(120))
+                                                    ) {
+                                                        GuideImageGallery(step.images, step.id) {
+                                                            showImage(step.images, it)
+                                                        }
                                                     }
                                                 }
                                             }
