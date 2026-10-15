@@ -140,6 +140,52 @@ internal fun GuideImageGallery(
 }
 
 @Composable
+internal fun GuideItemReference(image: GuideImage) {
+    val painter = painterResource(image.resource)
+
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text(
+            "Item reference", style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.primary
+        )
+        Surface(
+            shape = RoundedCornerShape(12.dp),
+            color = MaterialTheme.colorScheme.surfaceVariant
+        ) {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Image(
+                    painter,
+                    contentDescription = "${image.title}. ${image.caption}",
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(painter.intrinsicSize.width / painter.intrinsicSize.height)
+                        .clip(RoundedCornerShape(12.dp))
+                        .testTag("bell_item_reference")
+                )
+                Text(
+                    image.title,
+                    style = MaterialTheme.typography.titleSmall,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 12.dp, end = 12.dp, bottom = 8.dp)
+                )
+            }
+        }
+        Text(
+            "Image: ${image.source} · Diablo IV © Blizzard",
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        Text(
+            image.caption,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
+}
+
+@Composable
 internal fun GuideImageViewer(
     images: List<GuideImage>,
     initialImageId: String,

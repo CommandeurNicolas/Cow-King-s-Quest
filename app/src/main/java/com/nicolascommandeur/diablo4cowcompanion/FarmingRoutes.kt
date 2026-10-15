@@ -107,7 +107,14 @@ private val farmingRoutes = listOf(
 )
 
 @Composable
-fun FarmingRoutesScreen(hunt: Hunt, onBack: () -> Unit, openLink: ((String) -> Unit)? = null) {
+fun FarmingRoutesScreen(
+    hunt: Hunt,
+    onBack: () -> Unit,
+    openLink: ((String) -> Unit)? = null,
+    rngPhase: Boolean = false,
+    cowSource: CowSource = CowSource.WORLD_COWS,
+    collected: Boolean = false
+) {
     var enlargedMap by rememberSaveable { mutableStateOf<String?>(null) }
     val snackbar = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
@@ -179,17 +186,28 @@ fun FarmingRoutesScreen(hunt: Hunt, onBack: () -> Unit, openLink: ((String) -> U
                             modifier = Modifier.padding(16.dp),
                         ) {
                             Text(
-                                "${hunt.name} · ${hunt.count} / 666",
+                                when {
+                                    cowSource == CowSource.BELL_OF_THE_BOVINE -> "${hunt.name} · Bell of the Bovine"
+                                    rngPhase -> "${hunt.name} · ${hunt.count} cows recorded"
+                                    else -> "${hunt.name} · ${hunt.count} / 666"
+                                },
                                 style = MaterialTheme.typography.labelLarge
                             )
                             Text(
-                                if (hunt.count < 666) "Final cow: ${hunt.relic.zoneLabel}" else "Target relic: ${hunt.relic.shortName}",
+                                "Target relic: ${hunt.relic.shortName} · ${hunt.relic.zoneLabel}",
                                 style = MaterialTheme.typography.titleMedium
                             )
                             Text(
-                                if (hunt.count < 666)
-                                    "Farm early kills wherever convenient. By $ZONE_REMINDER_COUNT recorded kills, travel to ${hunt.relic.zoneInstruction}. Counting mistakes can make the relic drop before the counter shows 666."
-                                else "Your count is complete. Confirm the relic pickup on the counter screen.",
+                                when {
+                                    collected -> "This relic is already collected. Choose a missing relic on the counter screen."
+                                    cowSource == CowSource.BELL_OF_THE_BOVINE -> "These maps show world cows. With the Bell equipped, attack enemies in ${hunt.relic.zoneInstruction} instead. Confirm relic pickups on the counter screen; Bell summons are not counted." +
+                                            if (rngPhase) " Further relic drops are random, with no guaranteed kill count." else ""
+
+                                    rngPhase -> "Farm cows in ${hunt.relic.zoneInstruction} until the relic drops. Further drops are random, with no guaranteed kill count."
+                                    hunt.firstRelicObtained -> "This character already obtained its first relic. Choose One character in Farming setup to continue with random drops."
+                                    hunt.count < 666 -> "Farm early kills wherever convenient. By $ZONE_REMINDER_COUNT recorded kills, travel to ${hunt.relic.zoneInstruction}. Counting mistakes can make the relic drop before the counter shows 666."
+                                    else -> "Your first-drop count is complete. Confirm the relic pickup on the counter screen."
+                                },
                                 style = MaterialTheme.typography.bodyMedium
                             )
                         }
@@ -221,7 +239,8 @@ fun FarmingRoutesScreen(hunt: Hunt, onBack: () -> Unit, openLink: ((String) -> U
                             )
                             if (route.region in hunt.relic.zones) {
                                 Text(
-                                    "Valid final-kill zone for your relic",
+                                    if (rngPhase || cowSource == CowSource.BELL_OF_THE_BOVINE) "Farming zone for your target relic"
+                                    else "Valid final-kill zone for your relic",
                                     color = MaterialTheme.colorScheme.primary,
                                     style = MaterialTheme.typography.bodySmall
                                 )

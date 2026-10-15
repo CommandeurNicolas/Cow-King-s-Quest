@@ -28,33 +28,47 @@ data class Hunt(
     val relic: Relic,
     val name: String,
     val count: Int = 0,
-    val collected: Boolean = false,
-    val previousCount: Int? = null
+    val previousCount: Int? = null,
+    val obtainedRelics: Set<Relic> = emptySet()
 ) {
-    // Bulk taps never consume the final kill: it must be recorded separately.
-    fun add(amount: Int): Hunt =
-        if (count >= COW_GOAL - 1 || amount <= 0) this
-        else {
-            setCount((count.toLong() + amount).coerceAtMost((COW_GOAL - 1).toLong()).toInt())
-        }
+    val firstRelicObtained: Boolean get() = obtainedRelics.isNotEmpty()
+    val pastFirstDrop: Boolean get() = firstRelicObtained || count >= COW_GOAL
+
+    // Before the first drop, bulk taps stop before the separately confirmed kill.
+    fun add(amount: Int, continueAfterGoal: Boolean = false): Hunt {
+        val limit = if (continueAfterGoal && pastFirstDrop) Int.MAX_VALUE else COW_GOAL - 1
+        return if (count >= limit || amount <= 0) this
+        else setCount(
+            (count.toLong() + amount).coerceAtMost(limit.toLong()).toInt(),
+            continueAfterGoal
+        )
+    }
 
     fun recordFinalKill(): Hunt = if (count == COW_GOAL - 1) setCount(COW_GOAL) else this
 
-    fun setCount(value: Int): Hunt {
-        val next = value.coerceIn(0, COW_GOAL)
+    fun setCount(value: Int, continueAfterGoal: Boolean = false): Hunt {
+        val next = value.coerceIn(0, if (continueAfterGoal) Int.MAX_VALUE else COW_GOAL)
         return if (next == count) this else copy(
             count = next,
-            previousCount = count,
-            collected = collected && next == COW_GOAL
+            previousCount = count
         )
     }
 
     fun undo(): Hunt = previousCount?.let {
-        copy(count = it, previousCount = null, collected = collected && it == COW_GOAL)
+        copy(count = it, previousCount = null)
     } ?: this
 
-    fun markCollected(value: Boolean): Hunt = copy(collected = value && count == COW_GOAL)
-    fun reset(): Hunt = copy(count = 0, collected = false, previousCount = null)
+    fun reset(): Hunt = copy(count = 0, obtainedRelics = emptySet(), previousCount = null)
+}
+
+enum class CharacterStrategy(val title: String) {
+    THREE_CHARACTERS("Three characters"),
+    ONE_CHARACTER("One character")
+}
+
+enum class CowSource(val title: String) {
+    WORLD_COWS("World cows"),
+    BELL_OF_THE_BOVINE("Bell of the Bovine")
 }
 
 data class HuntState(
@@ -65,5 +79,39 @@ data class HuntState(
         )
     },
     val selected: Int = 0,
-    val keepAwake: Boolean = false
-)
+    val keepAwake: Boolean = false,
+    val strategy: CharacterStrategy = CharacterStrategy.THREE_CHARACTERS,
+    val cowSource: CowSource = CowSource.WORLD_COWS,
+    val singleCharacter: Int = 0,
+    val singleTarget: Relic = Relic.SHARD,
+    val collectedRelics: Set<Relic> = emptySet()
+) {
+    val activeIndex: Int get() = if (strategy == CharacterStrategy.ONE_CHARACTER) singleCharacter else selected
+    val activeHunt: Hunt get() = hunts[activeIndex]
+    val targetRelic: Relic get() = if (strategy == CharacterStrategy.ONE_CHARACTER) singleTarget else activeHunt.relic
+    val isRngPhase: Boolean get() = strategy == CharacterStrategy.ONE_CHARACTER && activeHunt.pastFirstDrop
+
+    fun updateActive(next: Hunt): HuntState = copy(hunts = hunts.mapIndexed { index, old ->
+        if (index == activeIndex) next else old
+    })
+
+    fun markRelic(relic: Relic, collected: Boolean): HuntState {
+        val next = if (collected) collectedRelics + relic else collectedRelics - relic
+        return copy(
+            // A shared checkbox can be changed while a different character is selected.
+            hunts = hunts.mapIndexed { index, hunt ->
+                when {
+                    !collected -> hunt.copy(obtainedRelics = hunt.obtainedRelics - relic)
+                    relic !in collectedRelics && index == activeIndex ->
+                        hunt.copy(obtainedRelics = hunt.obtainedRelics + relic)
+
+                    else -> hunt
+                }
+            },
+            collectedRelics = next,
+            singleTarget = if (collected && singleTarget == relic)
+                Relic.entries.firstOrNull { it !in next } ?: singleTarget
+            else singleTarget
+        )
+    }
+}

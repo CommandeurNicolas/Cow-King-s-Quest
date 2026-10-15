@@ -294,5 +294,55 @@
     "url": "https://cdn.nerdschalk.com/wp-content/uploads/2026/04/diablo-4-all-cow-level-items-63.png",
     "filename": "guide_burrow_passage.png",
     "source": "Sliver of time / Nerd’s Chalk"
+  },
+  {
+    "id": "bell_quest_map",
+    "title": "Butcher quest · Old Tristram map",
+    "caption": "Follow the orange arrow to the circled blue quest marker, then speak to the Wounded Townsman.",
+    "filename": "guide_bell_quest_map.png",
+    "source": "App author · screenshot & annotations",
+    "providedBy": "Screenshot captured and annotated by the app author"
+  },
+  {
+    "id": "bell_townsman",
+    "title": "Wounded Townsman · Old Tristram",
+    "caption": "Find the Butcher quest giver just outside the Cathedral in northern Old Tristram.",
+    "url": "https://static.icy-veins.com/wp/wp-content/uploads/2026/10/d4_wounded_townsman.jpg",
+    "filename": "guide_bell_townsman.jpg",
+    "source": "Icy Veins"
+  },
+  {
+    "id": "bell_altar_map",
+    "title": "Mainland altar · Skovos map",
+    "caption": "From Tyrael’s Encampment, head east to the circled Altar of the Heifer.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/09/Diablo-4-Bovine-Sanctum-Altar-of-the-Heifer-Map-fix.jpg",
+    "filename": "guide_bell_altar_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "bell_altar",
+    "title": "Mainland altar · crossing to the Sanctum",
+    "caption": "Use this altar with five Prime Ribs in your inventory. The crossing does not consume them.",
+    "url": "https://static.icy-veins.com/wp/wp-content/uploads/2026/09/d4_bovine_sanctuary_altar.jpg",
+    "filename": "guide_bell_altar.jpg",
+    "source": "Icy Veins"
+  },
+  {
+    "id": "bell_summon_altar",
+    "title": "Arena altar · summon Moophisto",
+    "caption": "Inside the Bovine Sanctum, the northern arena altar consumes five Prime Ribs to summon Moophisto.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/09/Diablo-4-Bovine-Sanctum-Altar-of-the-Heifer.jpg",
+    "filename": "guide_bell_summon_altar.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "bell_item",
+    "title": "Bell of the Bovine · Item reference",
+    "caption": "Look for this name and cow-summoning effect. Item stats may vary.",
+    "url": "https://static.icy-veins.com/wp/wp-content/uploads/2026/10/d4_bell_of_the_bovine.jpg",
+    "filename": "guide_bell_item.png",
+    "source": "Icy Veins",
+    "sourcePage": "https://www.icy-veins.com/d4/news/skip-the-cow-grind-and-unlock-the-secret-sheep-level-in-diablo-4-season-15/",
+    "providedBy": "User-supplied screenshot; original PNG copied unchanged."
   }
 ]

@@ -271,6 +271,48 @@ val unlockGuideImages = listOf(
         R.drawable.guide_burrow_passage,
         "Sliver of time / Nerd’s Chalk"
     ),
+    GuideImage(
+        "bell_quest_map",
+        "Butcher quest · Old Tristram map",
+        "Follow the orange arrow to the circled blue quest marker, then speak to the Wounded Townsman.",
+        R.drawable.guide_bell_quest_map,
+        "App author · screenshot & annotations"
+    ),
+    GuideImage(
+        "bell_townsman",
+        "Wounded Townsman · Old Tristram",
+        "Find the Butcher quest giver just outside the Cathedral in northern Old Tristram.",
+        R.drawable.guide_bell_townsman,
+        "Icy Veins"
+    ),
+    GuideImage(
+        "bell_altar_map",
+        "Mainland altar · Skovos map",
+        "From Tyrael’s Encampment, head east to the circled Altar of the Heifer.",
+        R.drawable.guide_bell_altar_map,
+        "VULKK"
+    ),
+    GuideImage(
+        "bell_altar",
+        "Mainland altar · crossing to the Sanctum",
+        "Use this altar with five Prime Ribs in your inventory. The crossing does not consume them.",
+        R.drawable.guide_bell_altar,
+        "Icy Veins"
+    ),
+    GuideImage(
+        "bell_summon_altar",
+        "Arena altar · summon Moophisto",
+        "Inside the Bovine Sanctum, the northern arena altar consumes five Prime Ribs to summon Moophisto.",
+        R.drawable.guide_bell_summon_altar,
+        "VULKK"
+    ),
+    GuideImage(
+        "bell_item",
+        "Bell of the Bovine · Item reference",
+        "Look for this name and cow-summoning effect. Item stats may vary.",
+        R.drawable.guide_bell_item,
+        "Icy Veins"
+    ),
 ).associateBy { it.id }
 
 internal fun guideImages(vararg ids: String): List<GuideImage> =

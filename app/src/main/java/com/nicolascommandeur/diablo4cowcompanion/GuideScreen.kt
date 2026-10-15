@@ -139,9 +139,12 @@ internal fun CowHuntApp(
                     )
 
                     "routes" -> FarmingRoutesScreen(
-                        state.hunts[state.selected],
+                        state.activeHunt.copy(relic = state.targetRelic),
                         onBack = { page = routesFrom },
-                        openLink = openLink
+                        openLink = openLink,
+                        rngPhase = state.isRngPhase,
+                        cowSource = state.cowSource,
+                        collected = state.targetRelic in state.collectedRelics
                     )
 
                     else -> GuideScreen(
@@ -159,7 +162,7 @@ internal fun CowHuntApp(
             CowVisitor(
                 visitorSession,
                 splashFinished,
-                countBounds = countBounds.takeIf { page == "counter" }
+                countBounds = countBounds.takeIf { page == "counter" && state.cowSource == CowSource.WORLD_COWS }
             )
         }
     }

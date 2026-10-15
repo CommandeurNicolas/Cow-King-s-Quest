@@ -39,17 +39,17 @@ val unlockGuide = listOf(
             GuideStep(
                 "shard",
                 "Bloody Wooden Shard",
-                "666th cow: Hawezar or Kehjistan. Pick up the relic."
+                "Farm in Hawezar or Kehjistan. Each character’s first relic drops at 666 cow kills; subsequent relics on that character are random. Pick up the shard."
             ),
             GuideStep(
                 "tome",
                 "Musty Tome",
-                "666th cow on another character: Scosglen or Fractured Peaks. Collect it."
+                "Farm in Scosglen or Fractured Peaks. Use a different character’s first 666 kills for a guaranteed first drop, or keep farming with your original character for a random drop. Collect the tome."
             ),
             GuideStep(
                 "fragment",
                 "Intricate Metallic Fragment",
-                "666th cow on your third character: Dry Steppes. Collect it."
+                "Farm in Dry Steppes. Use a third character’s first 666 kills for a guaranteed first drop, or keep farming with your original character for a random drop. Collect the fragment."
             ),
             GuideStep(
                 "cleanse",
@@ -68,6 +68,7 @@ val unlockGuide = listOf(
                 images = guideImages("hovel_map")
             )
         ),
+        description = "Choose your character strategy and cow source in Counter → Farming setup. World cows and Bell of the Bovine summons both contribute to the hidden cow-kill progress. The Bell requires level 70 to equip and can be shared through the common stash; the app tracks its relic pickups without counting summons. Farm in the correct region when a relic may drop.",
     ),
     GuideSection(
         "bardiche",
