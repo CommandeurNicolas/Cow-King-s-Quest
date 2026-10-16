@@ -55,15 +55,17 @@ import kotlin.math.roundToInt
 internal fun CowVisitor(
     session: CowVisitorSession?,
     splashFinished: Boolean,
-    countBounds: Rect? = null
+    countBounds: Rect? = null,
+    celebrationRequested: Boolean = false,
+    isCounterScreen: Boolean = true
 ) {
-    if (session == null || !session.lucky) return
+    if (session == null || !session.canVisit) return
 
     val view = LocalView.current
-    var visit by remember(session) { mutableStateOf(session.advance(0)) }
+    var visit by remember(session, celebrationRequested) { mutableStateOf(session.advance(0)) }
     var animate by remember { mutableStateOf(ValueAnimator.areAnimatorsEnabled()) }
 
-    LaunchedEffect(session, splashFinished, view) {
+    LaunchedEffect(session, splashFinished, view, celebrationRequested) {
         if (!splashFinished) return@LaunchedEffect
 
         val lifecycle = view.findViewTreeLifecycleOwner()?.lifecycle ?: return@LaunchedEffect
@@ -71,7 +73,7 @@ internal fun CowVisitor(
         lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
             // Reset the clock on resume: time in the background never advances a visit.
             var previous = SystemClock.uptimeMillis()
-            while (isActive) {
+            while (isActive && session.canVisit) {
                 val now = SystemClock.uptimeMillis()
                 visit = session.advance(elapsedMs = now - previous)
                 previous = now
@@ -85,7 +87,7 @@ internal fun CowVisitor(
         }
     }
 
-    if (splashFinished) visit?.let { current ->
+    if (splashFinished) visit?.takeIf { it.isVisible(isCounterScreen) }?.let { current ->
         CowVisitorStage(
             current,
             animate,

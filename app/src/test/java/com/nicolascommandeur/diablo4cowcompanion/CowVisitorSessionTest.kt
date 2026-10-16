@@ -8,6 +8,95 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class CowVisitorSessionTest {
+    private val allRelics = Relic.entries.toSet()
+
+    @Test
+    fun completingAgainAfterTheVisitOrAFullResetNeverReplaysIt() {
+        var saves = 0
+        val session = CowVisitorSession(lucky = false, onCelebrationUsed = { saves++ })
+
+        assertTrue(session.onRelicsChanged(allRelics - Relic.FRAGMENT, allRelics))
+        assertEquals(1, saves)
+        session.advance(CowVisitorSession.VISIT_DURATION_MS)
+        assertFalse(session.onRelicsChanged(allRelics - Relic.FRAGMENT, allRelics))
+        assertFalse(session.onRelicsChanged(allRelics, emptySet()))
+        assertFalse(session.onRelicsChanged(emptySet(), allRelics))
+        assertNull(session.advance(0))
+        assertEquals(1, saves)
+    }
+
+    @Test
+    fun consumedMilestoneDoesNotDisableRareLaunchVisits() {
+        val session = CowVisitorSession(lucky = true, celebrationUsed = true)
+
+        assertFalse(session.onRelicsChanged(allRelics - Relic.TOME, allRelics))
+        assertFalse(session.advance(600)!!.counterOnly)
+        assertFalse(session.advance(CowVisitorSession.RETURN_INTERVAL_MS)!!.counterOnly)
+    }
+
+    @Test
+    fun finalRelicTriggersOneCounterOnlyVisitEvenOnAnUnluckyLaunch() {
+        val session = CowVisitorSession(lucky = false)
+
+        assertTrue(session.onRelicsChanged(allRelics - Relic.FRAGMENT, allRelics))
+
+        val visit = session.advance(0)!!
+
+        assertEquals(0L, visit.ageMs)
+        assertTrue(visit.isVisible(isCounterScreen = true))
+        assertFalse(visit.isVisible(isCounterScreen = false))
+        assertEquals("There is no cow level.", session.tap()!!.line)
+        assertNotNull(session.advance(CowVisitorSession.VISIT_DURATION_MS - 1))
+        assertNull(session.advance(1))
+        assertFalse(session.canVisit)
+        assertFalse(session.lucky)
+        assertNull(session.advance(CowVisitorSession.RETURN_INTERVAL_MS))
+    }
+
+    @Test
+    fun partialCollectionUncheckingAndAlreadyCompleteProgressDoNotCelebrate() {
+        val session = CowVisitorSession(lucky = false)
+
+        assertFalse(session.onRelicsChanged(emptySet(), setOf(Relic.SHARD)))
+        assertFalse(session.onRelicsChanged(setOf(Relic.SHARD), allRelics - Relic.FRAGMENT))
+        assertFalse(session.onRelicsChanged(allRelics, allRelics - Relic.FRAGMENT))
+        assertFalse(session.onRelicsChanged(allRelics, allRelics))
+        assertFalse(session.canVisit)
+        assertNull(session.advance(600))
+    }
+
+    @Test
+    fun repeatedChecksAndRecreationDoNotRestartActiveCelebration() {
+        val session = CowVisitorSession(lucky = false)
+
+        assertTrue(session.onRelicsChanged(allRelics - Relic.TOME, allRelics))
+        session.advance(4_000)
+        session.tap()
+        assertFalse(session.onRelicsChanged(allRelics - Relic.TOME, allRelics))
+
+        val restored = session.advance(0)!!
+
+        assertEquals(4_000L, restored.ageMs)
+        assertEquals("There is no cow level.", restored.line)
+    }
+
+    @Test
+    fun celebrationReplacesCurrentCowWithoutChangingLuckyReturnSchedule() {
+        val session = CowVisitorSession(lucky = true)
+
+        assertFalse(session.advance(600)!!.counterOnly)
+        assertTrue(session.onRelicsChanged(allRelics - Relic.SHARD, allRelics))
+        assertTrue(session.advance(0)!!.counterOnly)
+        assertNull(session.advance(CowVisitorSession.VISIT_DURATION_MS))
+
+        val next =
+            session.advance(CowVisitorSession.RETURN_INTERVAL_MS - CowVisitorSession.VISIT_DURATION_MS)!!
+
+        assertEquals(0L, next.ageMs)
+        assertFalse(next.counterOnly)
+        assertTrue(next.isVisible(isCounterScreen = false))
+    }
+
     @Test
     fun ordinarySessionNeverShowsCowEvenAfterMultipleIntervals() {
         val session = CowVisitorSession(lucky = false)

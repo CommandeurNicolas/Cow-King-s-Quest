@@ -87,6 +87,7 @@ internal fun CowHuntApp(
     var routesFrom by rememberSaveable { mutableStateOf("counter") }
     val savedPages = rememberSaveableStateHolder()
     var countBounds by remember { mutableStateOf<Rect?>(null) }
+    var celebrationRequested by rememberSaveable { mutableStateOf(false) }
 
     BackHandler(enabled = page != "counter") {
         page = if (page == "routes") routesFrom else "counter"
@@ -133,7 +134,17 @@ internal fun CowHuntApp(
                 when (page) {
                     "counter" -> CowCounter(
                         state,
-                        onChange = onHuntChange,
+                        onChange = { next ->
+                            onHuntChange(next)
+                            if (
+                                visitorSession?.onRelicsChanged(
+                                    state.collectedRelics,
+                                    next.collectedRelics
+                                ) == true
+                            ) {
+                                celebrationRequested = true
+                            }
+                        },
                         onCountBounds = { countBounds = it },
                         onOpenRoutes = { routesFrom = "counter"; page = "routes" }
                     )
@@ -162,7 +173,9 @@ internal fun CowHuntApp(
             CowVisitor(
                 visitorSession,
                 splashFinished,
-                countBounds = countBounds.takeIf { page == "counter" && state.cowSource == CowSource.WORLD_COWS }
+                countBounds = countBounds.takeIf { page == "counter" && state.cowSource == CowSource.WORLD_COWS },
+                celebrationRequested = celebrationRequested,
+                isCounterScreen = page == "counter"
             )
         }
     }
@@ -266,10 +279,16 @@ fun GuideScreen(
                 item {
                     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                         Text(
-                            "THE PATH TO THE PORTAL", style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.primary, letterSpacing = 2.sp
+                            "THE PATH TO THE PORTAL",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.primary,
+                            letterSpacing = 2.sp
                         )
-                        Text("Unlock guide", fontFamily = FontFamily.Serif, fontSize = 34.sp)
+                        Text(
+                            "Unlock guide",
+                            fontFamily = FontFamily.Serif,
+                            fontSize = 34.sp
+                        )
                         Column {
                             Row(
                                 verticalAlignment = Alignment.Bottom,
@@ -526,9 +545,7 @@ fun GuideScreen(
                                             if (step.images.isNotEmpty()) {
                                                 Column(
                                                     Modifier.padding(
-                                                        start = 16.dp,
-                                                        end = 16.dp,
-                                                        bottom = 16.dp
+                                                        start = 16.dp, end = 16.dp, bottom = 16.dp
                                                     )
                                                 ) {
                                                     if (checked) {
@@ -615,7 +632,8 @@ fun GuideScreen(
 
     // Reset dialog
     if (resetDialog) AlertDialog(
-        onDismissRequest = { resetDialog = false }, title = { Text("Reset checklist?") },
+        onDismissRequest = { resetDialog = false },
+        title = { Text("Reset checklist?") },
         text = {
             Text("Clear all guide checkmarks? Your character names, cow counts and collected relics will stay saved.")
         },

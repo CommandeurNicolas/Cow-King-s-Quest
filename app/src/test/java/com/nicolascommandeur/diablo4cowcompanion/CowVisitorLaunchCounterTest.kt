@@ -2,11 +2,41 @@ package com.nicolascommandeur.diablo4cowcompanion
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertSame
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class CowVisitorLaunchCounterTest {
+    @Test
+    fun collectionMilestoneSurvivesNewLaunchesIncludingAnInterruptedVisit() {
+        var count = 0
+        var used = false
+        var writes = 0
+
+        fun launch() = CowVisitorLaunchCounter(
+            loadCount = { count },
+            saveCount = { count = it },
+            rollLucky = { false },
+            loadCelebrationUsed = { used },
+            saveCelebrationUsed = {
+                used = true
+                writes++
+            }
+        ).session
+
+        val all = Relic.entries.toSet()
+        assertTrue(launch().onRelicsChanged(all - Relic.FRAGMENT, all))
+        assertTrue(used)
+
+        // Simulate process death before the first visit even finishes.
+        val restarted = launch()
+        assertFalse(restarted.onRelicsChanged(all - Relic.FRAGMENT, all))
+        assertNull(restarted.advance(0))
+        assertFalse(restarted.onRelicsChanged(emptySet(), all))
+        assertEquals(1, writes)
+    }
+
     @Test
     fun storedCountGuaranteesEvery666thLaunchAndRestartsTheCycle() {
         var storedCount = 0
