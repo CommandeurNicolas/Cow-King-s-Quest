@@ -313,6 +313,34 @@ val unlockGuideImages = listOf(
         R.drawable.guide_bell_item,
         "Icy Veins"
     ),
+    GuideImage(
+        "squirt_peddler",
+        "Squirt the Peddler",
+        "Find Squirt beside the fountain in Temis to buy another pouch in a future season.",
+        R.drawable.guide_squirt_peddler,
+        "VULKK"
+    ),
+    GuideImage(
+        "squirt_peddler_map",
+        "Squirt the Peddler · Temis map",
+        "The circled spot marks Squirt’s location on the western side of Temis.",
+        R.drawable.guide_squirt_peddler_map,
+        "VULKK"
+    ),
+    GuideImage(
+        "travel_pouch_recipe",
+        "Outcast’s Travel Pouch · recipe",
+        "Place the Torn Page and three Rusted Cow Bells in the Horadric Cube before transmuting.",
+        R.drawable.guide_travel_pouch_recipe,
+        "VULKK"
+    ),
+    GuideImage(
+        "travel_pouch_transmuted",
+        "Outcast’s Travel Pouch · transmuted",
+        "The resulting pouch appears in the cube after transmutation.",
+        R.drawable.guide_travel_pouch_transmuted,
+        "VULKK"
+    ),
 ).associateBy { it.id }
 
 internal fun guideImages(vararg ids: String): List<GuideImage> =

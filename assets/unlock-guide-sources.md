@@ -14,8 +14,12 @@ enlarged viewer. Third-party artwork is excluded from the repository’s MIT lic
 The two additional Forlorn Burrow jump/passage screenshots are from Sliver of time’s gameplay,
 reproduced
 in [Nerd’s Chalk’s pre-expansion item walkthrough](https://nerdschalk.com/diablo-4-how-to-obtain-all-cow-level-items-before-lord-of-hatred-locations-requirements-and-items-guide/),
-steps 21–22. Their separate source credit is shown in the app. There are 43 bundled quest and Bell reference images in
+steps 21–22. Their separate source credit is shown in the app. There are 47 bundled guide images in
 total.
+
+Four Outcast’s Travel Pouch screenshots were added on October 26, 2026 from
+[VULKK’s complete cow-level walkthrough](https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/):
+Squirt the Peddler, the Temis location map, the Horadric Cube recipe, and the resulting pouch.
 
 ## Findings and limitations
 

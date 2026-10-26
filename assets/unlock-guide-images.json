@@ -344,5 +344,37 @@
     "source": "Icy Veins",
     "sourcePage": "https://www.icy-veins.com/d4/news/skip-the-cow-grind-and-unlock-the-secret-sheep-level-in-diablo-4-season-15/",
     "providedBy": "User-supplied screenshot; original PNG copied unchanged."
+  },
+  {
+    "id": "squirt_peddler",
+    "title": "Squirt the Peddler",
+    "caption": "Find Squirt beside the fountain in Temis to buy another pouch in a future season.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/09/Diablo-4-Squirt-the-Peddler.jpg",
+    "filename": "guide_squirt_peddler.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "squirt_peddler_map",
+    "title": "Squirt the Peddler · Temis map",
+    "caption": "The circled spot marks Squirt’s location on the western side of Temis.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/09/Diablo-4-Squirt-the-Peddler-Map-fix.jpg",
+    "filename": "guide_squirt_peddler_map.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "travel_pouch_recipe",
+    "title": "Outcast’s Travel Pouch · recipe",
+    "caption": "Place the Torn Page and three Rusted Cow Bells in the Horadric Cube before transmuting.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/09/Diablo-4-Outcasts-Travel-Pouch-Recipe.jpg",
+    "filename": "guide_travel_pouch_recipe.jpg",
+    "source": "VULKK"
+  },
+  {
+    "id": "travel_pouch_transmuted",
+    "title": "Outcast’s Travel Pouch · transmuted",
+    "caption": "The resulting pouch appears in the cube after transmutation.",
+    "url": "https://vulkk.com/wp-content/uploads/2026/09/Diablo-4-Outcasts-Travel-Pouch-Transmuted.jpg",
+    "filename": "guide_travel_pouch_transmuted.jpg",
+    "source": "VULKK"
   }
 ]
