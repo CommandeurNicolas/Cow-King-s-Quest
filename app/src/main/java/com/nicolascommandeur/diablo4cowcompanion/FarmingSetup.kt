@@ -143,7 +143,7 @@ internal fun FarmingSetupSheet(
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.primary
                 )
-                BellHelp()
+                CounterCard { BellHelp() }
             }
             Text(
                 "Bell kills are not recorded. If you switch to world cows, saved totals cover only manually recorded kills; confirm relics whenever they drop.",

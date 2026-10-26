@@ -567,7 +567,7 @@ fun CowCounter(
 }
 
 @Composable
-private fun CounterCard(content: @Composable ColumnScope.() -> Unit) {
+internal fun CounterCard(content: @Composable ColumnScope.() -> Unit) {
     Surface(
         shape = RoundedCornerShape(20.dp),
         color = MaterialTheme.colorScheme.surface
