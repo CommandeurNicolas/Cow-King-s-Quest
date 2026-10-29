@@ -264,6 +264,11 @@ fun FarmingRoutesScreen(
                                 )
                             }
                             Text(
+                                "Map: DiabloFilter / Rizarjay · Diablo IV imagery © Blizzard",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            Text(
                                 route.directions,
                                 style = MaterialTheme.typography.bodyMedium
                             )
@@ -272,11 +277,6 @@ fun FarmingRoutesScreen(
                             ) {
                                 Text("Enlarge map")
                             }
-                            Text(
-                                "Map: DiabloFilter / Rizarjay · Diablo IV imagery © Blizzard",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
                         }
                     }
                 }
@@ -401,6 +401,11 @@ private fun RouteMapDialog(route: FarmingRoute, onDismiss: () -> Unit) {
                         )
                     }
                 }
+                Text(
+                    "Map: DiabloFilter / Rizarjay · Diablo IV imagery © Blizzard",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically,
@@ -418,11 +423,6 @@ private fun RouteMapDialog(route: FarmingRoute, onDismiss: () -> Unit) {
                         Text("Reset zoom")
                     }
                 }
-                Text(
-                    "Map: DiabloFilter / Rizarjay · Diablo IV imagery © Blizzard",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
             }
         }
     }

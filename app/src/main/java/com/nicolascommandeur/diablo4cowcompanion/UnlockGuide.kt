@@ -3,11 +3,6 @@ package com.nicolascommandeur.diablo4cowcompanion
 import android.content.Context
 import androidx.core.content.edit
 
-const val WOWHEAD_GUIDE_URL = "https://www.wowhead.com/diablo-4/guide/zones/secret-cow-level"
-const val COMPLETE_GUIDE_URL =
-    "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
-const val COMMUNITY_GUIDE_URL = "https://diablofilter.com/guide/the-ultimate-secret-cow-level-guide"
-
 data class GuideStep(
     val id: String,
     val title: String,

@@ -67,7 +67,7 @@ internal fun GuideImageGallery(
             val singleImage = images.size == 1
             val cardWidth = if (singleImage) maxWidth else minOf(maxWidth * 0.88f, 360.dp)
 
-            // Reserve the tallest wrapped title's height at the current width and font scale.
+            // Reserve the tallest wrapped title and credit at the current width and font scale.
             val density = LocalDensity.current
             val textMeasurer = rememberTextMeasurer()
             val titleStyle = MaterialTheme.typography.titleSmall
@@ -78,6 +78,17 @@ internal fun GuideImageGallery(
                         text = it.title,
                         style = titleStyle,
                         constraints = Constraints(maxWidth = titleWidth)
+                    ).size.height
+                } ?: 0
+                height.toDp()
+            }
+            val sourceHeight = if (singleImage) 0.dp else with(density) {
+                val sourceWidth = (cardWidth.roundToPx() - 2 * 12.dp.roundToPx()).coerceAtLeast(1)
+                val height = images.maxOfOrNull {
+                    textMeasurer.measure(
+                        text = it.sourceCredit,
+                        style = MaterialTheme.typography.labelSmall,
+                        constraints = Constraints(maxWidth = sourceWidth)
                     ).size.height
                 } ?: 0
                 height.toDp()
@@ -119,24 +130,34 @@ internal fun GuideImageGallery(
                                     .padding(
                                         start = 12.dp,
                                         end = 12.dp,
-                                        bottom = 8.dp,
                                     )
                                     .fillMaxWidth()
                                     .then(if (singleImage) Modifier else Modifier.height(titleHeight))
+                            )
+                            GuideImageSource(
+                                image,
+                                modifier = Modifier
+                                    .padding(start = 12.dp, end = 12.dp, bottom = 12.dp)
+                                    .fillMaxWidth()
+                                    .then(if (singleImage) Modifier else Modifier.height(sourceHeight))
+                                    .testTag("image_source_${owner}_${image.id}")
                             )
                         }
                     }
                 }
             }
         }
-        Text(
-            "Images: ${
-                images.map { it.source }.distinct().joinToString("; ")
-            } · Diablo IV © Blizzard",
-            style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
     }
+}
+
+@Composable
+private fun GuideImageSource(image: GuideImage, modifier: Modifier = Modifier) {
+    Text(
+        image.sourceCredit,
+        style = MaterialTheme.typography.labelSmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        modifier = modifier
+    )
 }
 
 @Composable
@@ -172,11 +193,7 @@ internal fun GuideItemReference(image: GuideImage) {
                 )
             }
         }
-        Text(
-            "Image: ${image.source} · Diablo IV © Blizzard",
-            style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
+        GuideImageSource(image)
         Text(
             image.caption,
             style = MaterialTheme.typography.bodySmall,
@@ -324,6 +341,7 @@ internal fun GuideImageViewer(
                         }
                     }
                 }
+                GuideImageSource(image)
                 Text(image.caption, style = MaterialTheme.typography.bodySmall)
                 if (images.size > 1) {
                     Row(
@@ -345,11 +363,6 @@ internal fun GuideImageViewer(
                         ) { Text("Next") }
                     }
                 }
-                Text(
-                    "Image: ${image.source} · Diablo IV © Blizzard",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
             }
         }
     }

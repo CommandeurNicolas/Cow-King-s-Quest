@@ -68,6 +68,7 @@ import androidx.compose.ui.semantics.progressBarRangeInfo
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
@@ -348,35 +349,36 @@ fun GuideScreen(
                 item {
                     Surface(
                         shape = RoundedCornerShape(14.dp),
-                        color = MaterialTheme.colorScheme.surfaceVariant
+                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        modifier = Modifier.fillMaxWidth()
                     ) {
                         Column(
                             verticalArrangement = Arrangement.spacedBy(4.dp),
-                            modifier = Modifier.padding(16.dp),
+                            modifier = Modifier.padding(16.dp)
                         ) {
                             Text(
-                                "Offline images & guide sources",
+                                "Online guides & sources",
                                 style = MaterialTheme.typography.titleSmall
                             )
-                            Text(
-                                "Location maps and screenshots are included below each relevant step. Tap to enlarge, zoom and browse without leaving the app. Quest details checked October 13, 2026; community reports can differ after game updates.",
-                                style = MaterialTheme.typography.bodySmall
-                            )
-                            TextButton(
-                                onClick = { browse(WOWHEAD_GUIDE_URL) },
-                                modifier = Modifier.testTag("wowhead_link")
-                            ) {
-                                Text("Open Wowhead ↗")
-                            }
-                            TextButton(
-                                onClick = { browse(COMPLETE_GUIDE_URL) },
-                            ) {
-                                Text("Complete walkthrough · VULKK ↗")
-                            }
-                            TextButton(
-                                onClick = { browse(COMMUNITY_GUIDE_URL) },
-                            ) {
-                                Text("Community walkthrough · DiabloFilter ↗")
+                            guideSources.chunked(2).forEach { sources ->
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    sources.forEach { source ->
+                                        TextButton(
+                                            onClick = { browse(source.url) },
+                                            contentPadding = PaddingValues(8.dp),
+                                            modifier = Modifier
+                                                .weight(1f)
+                                                .testTag("${source.id}_link")
+                                        ) {
+                                            Text("${source.title} ↗", textAlign = TextAlign.Center)
+                                        }
+                                    }
+                                    if (sources.size == 1) Spacer(Modifier.weight(1f))
+                                }
                             }
                         }
                     }
@@ -540,6 +542,16 @@ fun GuideScreen(
                                                         style = MaterialTheme.typography.bodyMedium,
                                                         color = MaterialTheme.colorScheme.onSurfaceVariant
                                                     )
+                                                }
+                                            }
+                                            if (step.id == "staff") {
+                                                TextButton(
+                                                    onClick = { browse(crookedStaffReport.url) },
+                                                    modifier = Modifier
+                                                        .padding(horizontal = 16.dp)
+                                                        .testTag("${crookedStaffReport.id}_link")
+                                                ) {
+                                                    Text("${crookedStaffReport.title} ↗")
                                                 }
                                             }
                                             if (step.images.isNotEmpty()) {

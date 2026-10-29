@@ -8,7 +8,10 @@ data class GuideImage(
     val caption: String,
     @param:DrawableRes val resource: Int,
     val source: String
-)
+) {
+    val sourceCredit: String
+        get() = "Image: $source · Diablo IV © Blizzard"
+}
 
 // Original image URLs and attribution: assets/unlock-guide-images.json.
 val unlockGuideImages = listOf(
