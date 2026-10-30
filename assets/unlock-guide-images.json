@@ -5,7 +5,9 @@
     "caption": "Travel to the marked cellar at Scosglen’s eastern tip.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Forlorn-Hovel-Map.jpg",
     "filename": "guide_hovel_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "graves_map",
@@ -13,7 +15,9 @@
     "caption": "The graves are just south of Kurast Docks.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Jabbering-Gemstone-Map-1.jpg",
     "filename": "guide_graves_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "graves",
@@ -21,7 +25,9 @@
     "caption": "Use Thanks at the middle, middle-left, then middle-right grave.",
     "url": "https://vulkk.com/wp-content/uploads/2024/10/Diablo-4-Reverance-of-Uacax-Shrine-scaled.webp",
     "filename": "guide_graves.webp",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2024/10/16/secrets-of-diablo-4-the-secret-cow-level-continues/"
   },
   {
     "id": "kichuk_map",
@@ -29,7 +35,9 @@
     "caption": "Clear the stronghold to reach the Uacax scroll marked here.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Uacax-Triumph-Map.jpg",
     "filename": "guide_kichuk_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "scroll",
@@ -37,7 +45,9 @@
     "caption": "The scroll is a clue; reading it is not confirmed as a spawn requirement.",
     "url": "https://vulkk.com/wp-content/uploads/2024/10/Diablo-4-Triumph-of-Uacax-Location.jpg",
     "filename": "guide_scroll.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2024/10/16/secrets-of-diablo-4-the-secret-cow-level-continues/"
   },
   {
     "id": "lightning_map",
@@ -45,7 +55,9 @@
     "caption": "Find the elite southwest of Kichuk; you can approach from Ichorfall.",
     "url": "https://vulkk.com/wp-content/uploads/2024/10/Diablo-4-Blood-Lightning-Location-1.jpg",
     "filename": "guide_lightning_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2024/10/16/secrets-of-diablo-4-the-secret-cow-level-continues/"
   },
   {
     "id": "samuk_map",
@@ -53,7 +65,9 @@
     "caption": "Use Samuk as your starting waypoint, then head east to statue 1.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Uacax-Accession-Map.jpg",
     "filename": "guide_samuk_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "birds_route",
@@ -61,7 +75,9 @@
     "caption": "Follow 1–12, then return to 1. Move right up to each statue.",
     "url": "https://vulkk.com/wp-content/uploads/2024/10/Diablo-4-Accession-Bird-Locations-Route-Marked.png",
     "filename": "guide_birds_route.png",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2024/10/16/secrets-of-diablo-4-the-secret-cow-level-continues/"
   },
   {
     "id": "zombies_map",
@@ -69,7 +85,9 @@
     "caption": "The marked spawns are in the Field of Giants, north of Ichorfall.",
     "url": "https://vulkk.com/wp-content/uploads/2024/10/Diablo-4-Cordycepic-Zombie-Locations.jpg",
     "filename": "guide_zombies_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2024/10/16/secrets-of-diablo-4-the-secret-cow-level-continues/"
   },
   {
     "id": "temple_map",
@@ -77,7 +95,9 @@
     "caption": "Travel southeast from Kurast Bazaar to the marked temple.",
     "url": "https://vulkk.com/wp-content/uploads/2024/10/Diablo-4-Okabo-Temple-Location.jpg",
     "filename": "guide_temple_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2024/10/16/secrets-of-diablo-4-the-secret-cow-level-continues/"
   },
   {
     "id": "temple_braziers",
@@ -85,7 +105,9 @@
     "caption": "Offer one corrupted relic at each brazier near the entrance.",
     "url": "https://vulkk.com/wp-content/uploads/2024/10/Diablo-4-Okabo-Temple.jpg",
     "filename": "guide_temple_braziers.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2024/10/16/secrets-of-diablo-4-the-secret-cow-level-continues/"
   },
   {
     "id": "burrow_map",
@@ -93,7 +115,9 @@
     "caption": "Enter the marked cellar west of Kurast Bazaar with the Unusual Key.",
     "url": "https://vulkk.com/wp-content/uploads/2024/10/Diablo-4-Forlorn-Burrow-Location.jpg",
     "filename": "guide_burrow_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2024/10/16/secrets-of-diablo-4-the-secret-cow-level-continues/"
   },
   {
     "id": "burrow_wall",
@@ -101,7 +125,9 @@
     "caption": "Break this wall with the Unusual Key, then follow the passage into the cow chamber.",
     "url": "https://vulkk.com/wp-content/uploads/2024/10/Diablo-4-Forlorn-Burrow-Breakable-Wall.jpg",
     "filename": "guide_burrow_wall.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2024/10/16/secrets-of-diablo-4-the-secret-cow-level-continues/"
   },
   {
     "id": "journal_map",
@@ -109,7 +135,9 @@
     "caption": "Return to this nook north of Fool’s Quarry after changing sins.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Outcast-Journal-Map.jpg",
     "filename": "guide_journal_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "journal",
@@ -117,7 +145,9 @@
     "caption": "Read the journal here; this is also the destination for the Moo portal.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Outcast-Journal.jpg",
     "filename": "guide_journal.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "crow_map",
@@ -125,7 +155,9 @@
     "caption": "Find the large crow east of the Xanderos waypoint.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Heirophants-Skull-Crow-Map.jpg",
     "filename": "guide_crow_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "crow_route",
@@ -133,7 +165,9 @@
     "caption": "Stay close and wait while it circles. Follow the player route shown on the map.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Heirophants-Skull-Crow-Map-Marked.jpg",
     "filename": "guide_crow_route.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "life_map",
@@ -141,7 +175,9 @@
     "caption": "Bring the Hierophant’s Skull to the marked brazier in Lycander.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Temple-of-Life-Brazier-Map.jpg",
     "filename": "guide_life_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "life_brazier",
@@ -149,7 +185,9 @@
     "caption": "Interact with this brazier to offer the skull.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Temple-of-Life-Brazier.jpg",
     "filename": "guide_life_brazier.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "dummy_map",
@@ -157,7 +195,9 @@
     "caption": "Enter Temis’s Training Grounds to find the dummy.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Temis-Training-Grounds.jpg",
     "filename": "guide_dummy_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "amazons_map",
@@ -165,7 +205,9 @@
     "caption": "Hunt around the observatory and equip each Amazon armor piece as it drops.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Mothers-Rose-Amazon-Location.jpg",
     "filename": "guide_amazons_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "vasha_map",
@@ -173,7 +215,9 @@
     "caption": "Keep all five Amazon armor pieces equipped for this fight.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Mothers-Rose-Vasha-Map.jpg",
     "filename": "guide_vasha_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "courage_map",
@@ -181,7 +225,9 @@
     "caption": "Bring Mother’s Rose to this marked location.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Temple-of-Courage-Brazier-Map.jpg",
     "filename": "guide_courage_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "courage_brazier",
@@ -189,7 +235,9 @@
     "caption": "Interact with this brazier to offer the rose.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Temple-of-Courage-Brazier.jpg",
     "filename": "guide_courage_brazier.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "ballistas_map",
@@ -197,7 +245,9 @@
     "caption": "After burning Pride and reading the journal, destroy a ballista here.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Fathers-Chains-Ballista-Map.jpg",
     "filename": "guide_ballistas_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "idyllic_map",
@@ -205,7 +255,9 @@
     "caption": "Take the Amazonian Bolt to this cellar.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Fathers-Chains-Idyllic-Reach-Map.jpg",
     "filename": "guide_idyllic_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "antia_map",
@@ -213,7 +265,9 @@
     "caption": "Bring Father’s Chains to the marked brazier in Philios.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Antias-Flame-Brazier-Map.jpg",
     "filename": "guide_antia_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "antia_brazier",
@@ -221,7 +275,9 @@
     "caption": "Interact with this brazier to offer the chains.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Antias-Flame-Brazier.jpg",
     "filename": "guide_antia_brazier.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "coffin_map",
@@ -229,7 +285,9 @@
     "caption": "Travel to the end of the path at the Temple of the Deathspeaker.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Coffin-Fishing-Spot-Map.jpg",
     "filename": "guide_coffin_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "coffin_spot",
@@ -237,7 +295,9 @@
     "caption": "Use this exact fishing position to retrieve the coffin.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Coffin-Fishing-Spot.jpg",
     "filename": "guide_coffin_spot.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "boat",
@@ -245,7 +305,9 @@
     "caption": "Carry the Torn Page and use the marked boat to sail to Scylara.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Outcasts-Boat.jpg",
     "filename": "guide_boat.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "vivid_whimsy_pool",
@@ -253,7 +315,9 @@
     "caption": "Fish in the rainbow pool beside the horse skeleton near the dock.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Cow-Level-Horse-Skeleton.jpg",
     "filename": "guide_vivid_whimsy.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "cedar_map",
@@ -261,7 +325,9 @@
     "caption": "The tablets are just outside Kyovashad’s southwest entrance.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Kyovashad-Sins-Map.jpg",
     "filename": "guide_cedar_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "cedar",
@@ -269,7 +335,9 @@
     "caption": "Inscribe your chosen sin on a tablet here, then burn it at the nearby fire.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Kyovashad-Sins.jpg",
     "filename": "guide_cedar.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "moo_portal",
@@ -277,7 +345,9 @@
     "caption": "After burning Moo, return here to enter the secret cow level.",
     "url": "https://vulkk.com/wp-content/uploads/2026/05/Secret-Cow-Level-Portal-2.jpg",
     "filename": "guide_moo_portal.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "burrow_jump",
@@ -285,7 +355,9 @@
     "caption": "After breaking the wall, use the Jump prompt to enter the hidden passage.",
     "url": "https://cdn.nerdschalk.com/wp-content/uploads/2026/04/diablo-4-all-cow-level-items-62.png",
     "filename": "guide_burrow_jump.png",
-    "source": "Sliver of time / Nerd’s Chalk"
+    "source": "Sliver of time / Nerd’s Chalk",
+    "category": "guide",
+    "sourcePage": "https://nerdschalk.com/diablo-4-how-to-obtain-all-cow-level-items-before-lord-of-hatred-locations-requirements-and-items-guide/"
   },
   {
     "id": "burrow_passage",
@@ -293,7 +365,9 @@
     "caption": "Cross the gap and follow the passage to the cow chamber.",
     "url": "https://cdn.nerdschalk.com/wp-content/uploads/2026/04/diablo-4-all-cow-level-items-63.png",
     "filename": "guide_burrow_passage.png",
-    "source": "Sliver of time / Nerd’s Chalk"
+    "source": "Sliver of time / Nerd’s Chalk",
+    "category": "guide",
+    "sourcePage": "https://nerdschalk.com/diablo-4-how-to-obtain-all-cow-level-items-before-lord-of-hatred-locations-requirements-and-items-guide/"
   },
   {
     "id": "bell_quest_map",
@@ -301,7 +375,12 @@
     "caption": "Follow the orange arrow to the circled blue quest marker, then speak to the Wounded Townsman.",
     "filename": "guide_bell_quest_map.png",
     "source": "App author · screenshot & annotations",
-    "providedBy": "Screenshot captured and annotated by the app author"
+    "providedBy": "I captured and annotated this screenshot.",
+    "category": "guide",
+    "originalFile": "assets/source/old-tristram_butcher-quest_location.png",
+    "modifications": [
+      "Increased brightness for readability; original annotations preserved."
+    ]
   },
   {
     "id": "bell_townsman",
@@ -309,7 +388,9 @@
     "caption": "Find the Butcher quest giver just outside the Cathedral in northern Old Tristram.",
     "url": "https://static.icy-veins.com/wp/wp-content/uploads/2026/10/d4_wounded_townsman.jpg",
     "filename": "guide_bell_townsman.jpg",
-    "source": "Icy Veins"
+    "source": "Icy Veins",
+    "category": "guide",
+    "sourcePage": "https://www.icy-veins.com/d4/news/easily-unlock-the-bovine-sanctuary-without-the-secret-cow-level-in-diablo-4-season-15/"
   },
   {
     "id": "bell_altar_map",
@@ -317,7 +398,9 @@
     "caption": "From Tyrael’s Encampment, head east to the circled Altar of the Heifer.",
     "url": "https://vulkk.com/wp-content/uploads/2026/09/Diablo-4-Bovine-Sanctum-Altar-of-the-Heifer-Map-fix.jpg",
     "filename": "guide_bell_altar_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/09/17/secrets-of-diablo-4-bovine-sanctum-and-moophisto-the-divine-bovine/"
   },
   {
     "id": "bell_altar",
@@ -325,7 +408,9 @@
     "caption": "Use this altar with five Prime Ribs in your inventory. The crossing does not consume them.",
     "url": "https://static.icy-veins.com/wp/wp-content/uploads/2026/09/d4_bovine_sanctuary_altar.jpg",
     "filename": "guide_bell_altar.jpg",
-    "source": "Icy Veins"
+    "source": "Icy Veins",
+    "category": "guide",
+    "sourcePage": "https://www.icy-veins.com/d4/news/easily-unlock-the-bovine-sanctuary-without-the-secret-cow-level-in-diablo-4-season-15/"
   },
   {
     "id": "bell_summon_altar",
@@ -333,7 +418,9 @@
     "caption": "Inside the Bovine Sanctum, the northern arena altar consumes five Prime Ribs to summon Moophisto.",
     "url": "https://vulkk.com/wp-content/uploads/2026/09/Diablo-4-Bovine-Sanctum-Altar-of-the-Heifer.jpg",
     "filename": "guide_bell_summon_altar.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/09/17/secrets-of-diablo-4-bovine-sanctum-and-moophisto-the-divine-bovine/"
   },
   {
     "id": "bell_item",
@@ -343,7 +430,7 @@
     "filename": "guide_bell_item.png",
     "source": "Icy Veins",
     "sourcePage": "https://www.icy-veins.com/d4/news/skip-the-cow-grind-and-unlock-the-secret-sheep-level-in-diablo-4-season-15/",
-    "providedBy": "User-supplied screenshot; original PNG copied unchanged."
+    "category": "guide"
   },
   {
     "id": "squirt_peddler",
@@ -351,7 +438,9 @@
     "caption": "Find Squirt beside the fountain in Temis to buy another pouch in a future season.",
     "url": "https://vulkk.com/wp-content/uploads/2026/09/Diablo-4-Squirt-the-Peddler.jpg",
     "filename": "guide_squirt_peddler.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "squirt_peddler_map",
@@ -359,7 +448,9 @@
     "caption": "The circled spot marks Squirt’s location on the western side of Temis.",
     "url": "https://vulkk.com/wp-content/uploads/2026/09/Diablo-4-Squirt-the-Peddler-Map-fix.jpg",
     "filename": "guide_squirt_peddler_map.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "travel_pouch_recipe",
@@ -367,7 +458,9 @@
     "caption": "Place the Torn Page and three Rusted Cow Bells in the Horadric Cube before transmuting.",
     "url": "https://vulkk.com/wp-content/uploads/2026/09/Diablo-4-Outcasts-Travel-Pouch-Recipe.jpg",
     "filename": "guide_travel_pouch_recipe.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
   },
   {
     "id": "travel_pouch_transmuted",
@@ -375,6 +468,56 @@
     "caption": "The resulting pouch appears in the cube after transmutation.",
     "url": "https://vulkk.com/wp-content/uploads/2026/09/Diablo-4-Outcasts-Travel-Pouch-Transmuted.jpg",
     "filename": "guide_travel_pouch_transmuted.jpg",
-    "source": "VULKK"
+    "source": "VULKK",
+    "category": "guide",
+    "sourcePage": "https://vulkk.com/2026/05/07/the-complete-guide-to-diablo-4s-secret-cow-level/"
+  },
+  {
+    "id": "route_farobru",
+    "title": "Farobru · Dry Steppes",
+    "caption": "Start at the waypoint. Head south and follow the yellow loop through the nearby farms, returning to town.",
+    "url": "https://diablofilter.com/uploads/guides/2_1778234779_126813f77b1e64f8.webp",
+    "filename": "route_farobru.webp",
+    "source": "DiabloFilter / Rizarjay",
+    "category": "farming-map",
+    "sourcePage": "https://diablofilter.com/guide/the-ultimate-secret-cow-level-guide",
+    "description": "Farobru map: blue waypoint at the upper right; yellow farming loop runs south and west before returning."
+  },
+  {
+    "id": "route_cerrigar",
+    "title": "Cerrigar · Scosglen",
+    "caption": "Start at the waypoint. Check the farms along the yellow branches west and east of town; retrace your path between branches.",
+    "url": "https://diablofilter.com/uploads/guides/2_1778235084_10c2a2e0b8792322.webp",
+    "filename": "route_cerrigar.webp",
+    "source": "DiabloFilter / Rizarjay",
+    "category": "farming-map",
+    "sourcePage": "https://diablofilter.com/guide/the-ultimate-secret-cow-level-guide",
+    "description": "Cerrigar map: blue waypoint near the center; yellow farming branches extend west and east."
+  },
+  {
+    "id": "route_zarbinzet",
+    "title": "Zarbinzet · Hawezar",
+    "caption": "Leave the waypoint toward the southeast. Follow the yellow path through the farm areas south of town, then return.",
+    "url": "https://diablofilter.com/uploads/guides/2_1778235319_4964bdcd9f4599a4.webp",
+    "filename": "route_zarbinzet.webp",
+    "source": "DiabloFilter / Rizarjay",
+    "category": "farming-map",
+    "sourcePage": "https://diablofilter.com/guide/the-ultimate-secret-cow-level-guide",
+    "description": "Zarbinzet map: blue waypoint at the top; yellow path heads south into the farms and branches west."
+  },
+  {
+    "id": "hell_bovine_walk",
+    "title": "Hell Bovine · walking animation",
+    "caption": "Eight-frame walk cycles facing forward, right and away, used by the animated cow visitor.",
+    "url": "https://www.spriters-resource.com/media/assets/51/54312.gif?updated=1755473106",
+    "filename": "hell_bovine_walk.png",
+    "source": "Blizzard Entertainment / napalm22 / The Spriters Resource",
+    "category": "animation",
+    "sourcePage": "https://www.spriters-resource.com/pc_computer/diablo2diablo2lordofdestruction/asset/54312/",
+    "sourceDocument": "hell-bovine-source.md",
+    "modifications": [
+      "Extracted walk directions 0, 6 and 4 into three rows of eight 157 × 151 pixel frames without resizing.",
+      "Converted the flat #AAAAAA background to transparency."
+    ]
   }
 ]

@@ -1,13 +1,23 @@
-# Farming map sources
+# Farming route maps
 
-These screenshots are bundled unchanged for offline route reference in Cow King’s Quest.
+Cow King’s Quest bundles maps for Farobru, Cerrigar, and Zarbinzet for offline reference while farming world cows. I use the maps, route summaries, and yield estimates from [The Ultimate Secret Cow Level Guide](https://diablofilter.com/guide/the-ultimate-secret-cow-level-guide), by **Rizarjay on DiabloFilter**.
 
-Source: [The Ultimate Secret Cow Level Guide](https://diablofilter.com/guide/the-ultimate-secret-cow-level-guide), by Rizarjay on DiabloFilter. Retrieved October 5, 2026. Diablo IV game imagery belongs to Blizzard Entertainment; source credit is displayed on each card and enlarged map.
+## Map inventory
 
-| Resource | Map image |
-| --- | --- |
-| `route_farobru.webp` | [Farobru](https://diablofilter.com/uploads/guides/2_1778234779_126813f77b1e64f8.webp) |
-| `route_cerrigar.webp` | [Cerrigar](https://diablofilter.com/uploads/guides/2_1778235084_10c2a2e0b8792322.webp) |
-| `route_zarbinzet.webp` | [Zarbinzet](https://diablofilter.com/uploads/guides/2_1778235319_4964bdcd9f4599a4.webp) |
+| Route | Region | Bundled resource | Source image |
+| --- | --- | --- | --- |
+| Farobru | Dry Steppes | [route_farobru.webp](../app/src/main/res/drawable-nodpi/route_farobru.webp) | [Original map](https://diablofilter.com/uploads/guides/2_1778234779_126813f77b1e64f8.webp) |
+| Cerrigar | Scosglen | [route_cerrigar.webp](../app/src/main/res/drawable-nodpi/route_cerrigar.webp) | [Original map](https://diablofilter.com/uploads/guides/2_1778235084_10c2a2e0b8792322.webp) |
+| Zarbinzet | Hawezar | [route_zarbinzet.webp](../app/src/main/res/drawable-nodpi/route_zarbinzet.webp) | [Original map](https://diablofilter.com/uploads/guides/2_1778235319_4964bdcd9f4599a4.webp) |
 
-The yellow annotations are part of the original images. Route summaries and yield estimates refer to the same guide; estimates are not guaranteed spawn counts. The app does not add kills automatically when viewing or completing a route.
+The [image manifest](unlock-guide-images.json) records these resources under the `farming-map` category, including their source URLs, route instructions, and accessibility descriptions. [FarmingRoutes.kt](../app/src/main/java/com/nicolascommandeur/diablo4cowcompanion/FarmingRoutes.kt) defines the routes displayed by the app.
+
+## Display and use
+
+The bundled images retain their original pixels and yellow route annotations. Rounded corners, zoom, and panning are applied by the interface. Each map displays a DiabloFilter / Rizarjay credit beneath it, including in the enlarged viewer.
+
+Cow counts per lap are estimates rather than guaranteed spawns. Viewing a map or completing a route does not add kills automatically. The maps show world-cow routes; Bell of the Bovine farming uses enemies in the target relic’s region instead.
+
+## Ownership and licensing
+
+Diablo IV game imagery belongs to Blizzard Entertainment. Route-map credit: Rizarjay / DiabloFilter. These third-party images are excluded from the repository’s [MIT license](../LICENSE). See [guide sources](unlock-guide-sources.md) for the wider quest walkthrough and attribution reference.

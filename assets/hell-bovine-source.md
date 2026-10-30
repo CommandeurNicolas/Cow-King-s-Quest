@@ -1,20 +1,33 @@
-# Hell Bovine walking animation
+# Hell Bovine artwork
 
-Original Diablo II / Lord of Destruction game artwork © Blizzard Entertainment.
-Sprite sheet ripped and submitted by **napalm22**, hosted by The Spriters Resource:
+The animated cow visitor uses Diablo II / Lord of Destruction artwork owned by Blizzard Entertainment. **napalm22** extracted and submitted the source sprite sheet to The Spriters Resource.
 
-- Asset page: https://www.spriters-resource.com/pc_computer/diablo2diablo2lordofdestruction/asset/54312/
-- Sheet: https://www.spriters-resource.com/media/assets/51/54312.gif?updated=1755473106
-- Retrieved October 6, 2026. Original sheet: 4978 × 5755 pixels.
+## Attribution
 
-`app/src/main/res/drawable-nodpi/hell_bovine_walk.png` contains the original
-eight-frame Walk cycles facing forward, right, and away. Each cell is 157 × 151 pixels.
-The source Walk grid begins at (0, 4548); directions 0, 6, and 4 were extracted into
-three rows without scaling or recoloring. The sheet's flat #AAAAAA background was
-converted to transparency. No generated or redrawn character art is used.
+- [Source asset page](https://www.spriters-resource.com/pc_computer/diablo2diablo2lordofdestruction/asset/54312/)
+- [Original sprite sheet](https://www.spriters-resource.com/media/assets/51/54312.gif?updated=1755473106)
+- [Bundled animation sprite sheet](../app/src/main/res/drawable-nodpi/hell_bovine_walk.png)
+- [Image manifest](unlock-guide-images.json): the `hell_bovine_walk` entry records the source and processing details.
 
-The app renders the frames at 10 fps during movement, holds a forward frame
-during the pause, and uses nearest-neighbor sampling to retain the sprite style.
-Only this compact atlas is bundled; no sound is included.
+## Sprite sheet layout
 
-This third-party game artwork is not covered by this repository's MIT license.
+| Property | Value |
+| --- | --- |
+| Original sheet dimensions | 4978 × 5755 pixels |
+| Walk grid origin in the source sheet | (0, 4548) |
+| Frame dimensions | 157 × 151 pixels |
+| Frames per direction | 8 |
+| Sprite sheet dimensions | 1256 × 453 pixels |
+| Sprite sheet rows, top to bottom | Forward (direction 0), right (direction 6), away (direction 4) |
+
+I assembled the bundled sprite sheet from three walk cycles without resizing the frames and converted the source sheet’s flat `#AAAAAA` background to transparency. Only the animation sprite sheet is bundled; the full source sheet and audio are not included.
+
+## Rendering
+
+[CowVisitor.kt](../app/src/main/java/com/nicolascommandeur/diablo4cowcompanion/CowVisitor.kt) selects frames from the sprite sheet and renders them with nearest-neighbor sampling. Movement advances at 10 frames per second; pauses hold a forward-facing frame. Attribution is provided in this document rather than beneath the animated visitor.
+
+The [README](../README.md#preview-the-rare-visitor) explains how to preview the visitor with a debug build.
+
+## Ownership and licensing
+
+Original game artwork © Blizzard Entertainment. Sprite extraction and submission credit: napalm22 / The Spriters Resource. This third-party artwork is excluded from the repository’s [MIT license](../LICENSE).
