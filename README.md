@@ -93,7 +93,7 @@ The app does not connect to Diablo IV, detect kills, verify drops, or track the 
 
 Counters, checklists, and bundled images work offline. External guide links open in a browser and require internet access.
 
-To preserve progress when updating, install over the existing app using the same application ID and signing key. Do not uninstall or clear app data first. The application ID is `com.nicolascommandeur.diablo4cowcompanion`; installations with a different ID use separate app data.
+To preserve progress when updating, install over the existing app. Do not uninstall or clear app data first.
 
 ## Build and test
 
@@ -122,8 +122,8 @@ Some launch behavior is intended to be discovered while using the app.
 With a debug build installed and a device or emulator connected through ADB:
 
 ```sh
-adb shell am force-stop com.nicolascommandeur.diablo4cowcompanion
-adb shell am start -n com.nicolascommandeur.diablo4cowcompanion/.MainActivity --ez cow_visitor_preview true
+adb shell am force-stop com.nicolascommandeur.cowkingsquest
+adb shell am start -n com.nicolascommandeur.cowkingsquest/.MainActivity --ez cow_visitor_preview true
 ```
 
 These commands restart the app with the visitor preview enabled while preserving saved progress. Release builds ignore the preview option. To return to normal behavior, force-stop the app and open it from its launcher icon.

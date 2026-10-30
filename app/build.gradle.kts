@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    namespace = "com.nicolascommandeur.diablo4cowcompanion"
+    namespace = "com.nicolascommandeur.cowkingsquest"
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = "com.nicolascommandeur.diablo4cowcompanion"
+        applicationId = "com.nicolascommandeur.cowkingsquest"
         minSdk = 29
         targetSdk = 37
         versionCode = 1

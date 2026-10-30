@@ -10,7 +10,7 @@ Cow King’s Quest bundles maps for Farobru, Cerrigar, and Zarbinzet for offline
 | Cerrigar | Scosglen | [route_cerrigar.webp](../app/src/main/res/drawable-nodpi/route_cerrigar.webp) | [Original map](https://diablofilter.com/uploads/guides/2_1778235084_10c2a2e0b8792322.webp) |
 | Zarbinzet | Hawezar | [route_zarbinzet.webp](../app/src/main/res/drawable-nodpi/route_zarbinzet.webp) | [Original map](https://diablofilter.com/uploads/guides/2_1778235319_4964bdcd9f4599a4.webp) |
 
-The [image manifest](unlock-guide-images.json) records these resources under the `farming-map` category, including their source URLs, route instructions, and accessibility descriptions. [FarmingRoutes.kt](../app/src/main/java/com/nicolascommandeur/diablo4cowcompanion/FarmingRoutes.kt) defines the routes displayed by the app.
+The [image manifest](unlock-guide-images.json) records these resources under the `farming-map` category, including their source URLs, route instructions, and accessibility descriptions. [FarmingRoutes.kt](../app/src/main/java/com/nicolascommandeur/cowkingsquest/FarmingRoutes.kt) defines the routes displayed by the app.
 
 ## Display and use
 

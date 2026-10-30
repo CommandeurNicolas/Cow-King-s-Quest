@@ -24,7 +24,7 @@ I assembled the bundled sprite sheet from three walk cycles without resizing the
 
 ## Rendering
 
-[CowVisitor.kt](../app/src/main/java/com/nicolascommandeur/diablo4cowcompanion/CowVisitor.kt) selects frames from the sprite sheet and renders them with nearest-neighbor sampling. Movement advances at 10 frames per second; pauses hold a forward-facing frame. Attribution is provided in this document rather than beneath the animated visitor.
+[CowVisitor.kt](../app/src/main/java/com/nicolascommandeur/cowkingsquest/CowVisitor.kt) selects frames from the sprite sheet and renders them with nearest-neighbor sampling. Movement advances at 10 frames per second; pauses hold a forward-facing frame. Attribution is provided in this document rather than beneath the animated visitor.
 
 The [README](../README.md#preview-the-rare-visitor) explains how to preview the visitor with a debug build.
 
