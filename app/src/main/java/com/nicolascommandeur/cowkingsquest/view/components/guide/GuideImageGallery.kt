@@ -26,7 +26,6 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import com.nicolascommandeur.cowkingsquest.model.guide.GuideImage
-import com.nicolascommandeur.cowkingsquest.view.components.image.roundedFittedImageCorners
 
 @Composable
 internal fun GuideImageGallery(
@@ -104,10 +103,7 @@ internal fun GuideImageGallery(
                                         if (singleImage) Modifier.aspectRatio(aspectRatio)
                                         else Modifier.height(190.dp)
                                     )
-                                    .then(
-                                        if (singleImage) Modifier.roundedFittedImageCorners(painter.intrinsicSize)
-                                        else Modifier.clip(RoundedCornerShape(12.dp))
-                                    )
+                                    .clip(RoundedCornerShape(12.dp))
                             )
 
                             // Image title

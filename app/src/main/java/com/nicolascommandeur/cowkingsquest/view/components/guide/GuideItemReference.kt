@@ -18,7 +18,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.nicolascommandeur.cowkingsquest.model.guide.GuideImage
-import com.nicolascommandeur.cowkingsquest.view.components.image.roundedFittedImageCorners
 
 @Composable
 internal fun GuideItemReference(image: GuideImage) {
@@ -41,7 +40,7 @@ internal fun GuideItemReference(image: GuideImage) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .aspectRatio(painter.intrinsicSize.width / painter.intrinsicSize.height)
-                        .roundedFittedImageCorners(painter.intrinsicSize)
+                        .clip(RoundedCornerShape(12.dp))
                         .testTag("bell_item_reference")
                 )
                 Text(

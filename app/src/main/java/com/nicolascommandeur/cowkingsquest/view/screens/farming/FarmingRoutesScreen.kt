@@ -4,14 +4,14 @@ import android.content.ActivityNotFoundException
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -52,7 +52,6 @@ import com.nicolascommandeur.cowkingsquest.model.hunt.Hunt
 import com.nicolascommandeur.cowkingsquest.model.hunt.ZONE_REMINDER_COUNT
 import com.nicolascommandeur.cowkingsquest.view.components.image.ImageViewerDialog
 import com.nicolascommandeur.cowkingsquest.view.components.image.ViewerImage
-import com.nicolascommandeur.cowkingsquest.view.components.image.roundedFittedImageCorners
 import kotlinx.coroutines.launch
 
 @Composable
@@ -210,15 +209,26 @@ fun FarmingRoutesScreen(
                                     .fillMaxWidth()
                                     .testTag("map_${route.id}")
                             ) {
-                                Image(
-                                    painter = mapPainter,
-                                    contentDescription = route.mapDescription,
-                                    contentScale = ContentScale.Fit,
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .heightIn(min = 140.dp, max = 300.dp)
-                                        .roundedFittedImageCorners(mapPainter.intrinsicSize)
-                                )
+                                BoxWithConstraints(Modifier.fillMaxWidth()) {
+                                    // Fit the width with max height 300dp
+                                    // Else fill the width, height is 300dp and crop the image
+                                    val mapAspectRatio =
+                                        mapPainter.intrinsicSize.width / mapPainter.intrinsicSize.height
+                                    val fullWidthHeight = maxWidth / mapAspectRatio
+                                    val maxPreviewHeight = 300.dp
+                                    val previewHeight = minOf(fullWidthHeight, maxPreviewHeight)
+
+                                    Image(
+                                        painter = mapPainter,
+                                        contentDescription = route.mapDescription,
+                                        contentScale = if (fullWidthHeight <= maxPreviewHeight)
+                                            ContentScale.Fit else ContentScale.Crop,
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(previewHeight)
+                                            .clip(RoundedCornerShape(12.dp))
+                                    )
+                                }
                             }
                             Text(
                                 "Map: DiabloFilter / Rizarjay · Diablo IV imagery © Blizzard",
