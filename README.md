@@ -18,11 +18,9 @@ An unofficial, offline Android companion for Diablo IV’s secret cow level. Tra
 
 Captured from the app running on a Pixel 8 Android emulator. Click a screenshot to view it at full size.
 
-| Cow counter | Farming setup |
-| --- | --- |
-| [<img src="assets/screenshots/counter.png" alt="Cow counter with three character slots, progress toward 666 kills, and the Cow killed button" width="280">](assets/screenshots/counter.png) | [<img src="assets/screenshots/farming-setup.png" alt="Farming setup with one-character and three-character strategies, world cows, and Bell of the Bovine options" width="280">](assets/screenshots/farming-setup.png) |
-| **Unlock guide** | **Farming maps and routes** |
-| [<img src="assets/screenshots/unlock-guide.png" alt="Unlock checklist showing relic cleansing, the Strange Key, and the Forlorn Hovel location reference" width="280">](assets/screenshots/unlock-guide.png) | [<img src="assets/screenshots/farming-routes.png" alt="Farobru farming route with an annotated map, estimated cows per lap, directions, and an Enlarge map control" width="280">](assets/screenshots/farming-routes.png) |
+| Cow counter | Farming setup | Unlock guide | Farming maps and routes |
+| --- | --- | --- | --- |
+| [<img src="assets/screenshots/counter.png" alt="Cow counter with three character slots, progress toward 666 kills, and the Cow killed button" width="200">](assets/screenshots/counter.png) | [<img src="assets/screenshots/farming-setup.png" alt="Farming setup with one-character and three-character strategies, world cows, and Bell of the Bovine options" width="200">](assets/screenshots/farming-setup.png) | [<img src="assets/screenshots/unlock-guide.png" alt="Unlock checklist showing relic cleansing, the Strange Key, and the Forlorn Hovel location reference" width="200">](assets/screenshots/unlock-guide.png) | [<img src="assets/screenshots/farming-routes.png" alt="Farobru farming route with an annotated map, estimated cows per lap, directions, and an Enlarge map control" width="200">](assets/screenshots/farming-routes.png) |
 
 ## Using the app
 
