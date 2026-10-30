@@ -23,7 +23,15 @@ import androidx.compose.ui.test.performScrollToIndex
 import androidx.compose.ui.test.performScrollToNode
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.nicolascommandeur.cowkingsquest.ui.theme.DiabloCowCounterTheme
+import com.nicolascommandeur.cowkingsquest.data.guide.guideSources
+import com.nicolascommandeur.cowkingsquest.data.guide.guideStepIds
+import com.nicolascommandeur.cowkingsquest.data.guide.requiredGuideStepIds
+import com.nicolascommandeur.cowkingsquest.data.local_storage.GuideStore
+import com.nicolascommandeur.cowkingsquest.data.local_storage.HuntStore
+import com.nicolascommandeur.cowkingsquest.model.hunt.HuntState
+import com.nicolascommandeur.cowkingsquest.view.navigation.CowHuntApp
+import com.nicolascommandeur.cowkingsquest.view.screens.guide.GuideScreen
+import com.nicolascommandeur.cowkingsquest.view.theme.DiabloCowCounterTheme
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -46,22 +54,22 @@ class GuideTest {
         }
         compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("images_gemstone"))
         compose.onNodeWithTag("image_gemstone_graves_map").performClick()
-        compose.onNodeWithTag("guide_image_viewer").assertIsDisplayed()
-        compose.onNodeWithTag("guide_image_title").assertTextEquals("Graves · Kurast Docks")
-        compose.onNodeWithTag("guide_zoom_in").performClick()
-        compose.onNodeWithTag("guide_zoom_level").assertTextEquals("150%")
+        compose.onNodeWithTag("image_viewer").assertIsDisplayed()
+        compose.onNodeWithTag("image_title").assertTextEquals("Graves · Kurast Docks")
+        compose.onNodeWithTag("zoom_in").performClick()
+        compose.onNodeWithTag("zoom_level").assertTextEquals("150%")
         compose.onNodeWithText("Reset zoom").performClick()
-        compose.onNodeWithTag("guide_zoom_level").assertTextEquals("100%")
-        compose.onNodeWithTag("guide_zoom_in").performClick()
+        compose.onNodeWithTag("zoom_level").assertTextEquals("100%")
+        compose.onNodeWithTag("zoom_in").performClick()
         compose.onNodeWithText("Next").performClick()
-        compose.onNodeWithTag("guide_image_title").assertTextEquals("Thanks emote · grave order")
-        compose.onNodeWithTag("guide_zoom_level").assertTextEquals("100%")
+        compose.onNodeWithTag("image_title").assertTextEquals("Thanks emote · grave order")
+        compose.onNodeWithTag("zoom_level").assertTextEquals("100%")
         restoration.emulateSavedInstanceStateRestore()
-        compose.onNodeWithTag("guide_image_title").assertTextEquals("Thanks emote · grave order")
+        compose.onNodeWithTag("image_title").assertTextEquals("Thanks emote · grave order")
         compose.onNodeWithText("Previous").performClick()
-        compose.onNodeWithTag("guide_image_title").assertTextEquals("Graves · Kurast Docks")
+        compose.onNodeWithTag("image_title").assertTextEquals("Graves · Kurast Docks")
         compose.onNodeWithText("Close").performClick()
-        compose.onNodeWithTag("guide_image_viewer").assertDoesNotExist()
+        compose.onNodeWithTag("image_viewer").assertDoesNotExist()
         compose.runOnIdle { assertEquals(setOf("shard"), completed) }
         compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("step_gemstone"))
         compose.onNodeWithTag("step_gemstone").assertIsOff()
@@ -84,7 +92,7 @@ class GuideTest {
         compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("images_stamina"))
         compose.onNodeWithTag("images_stamina").assertIsDisplayed()
         compose.onNodeWithTag("image_stamina_hovel_map").performClick()
-        compose.onNodeWithTag("guide_image_viewer").assertIsDisplayed()
+        compose.onNodeWithTag("image_viewer").assertIsDisplayed()
         compose.onNodeWithText("Close").performClick()
         compose.runOnIdle { assertEquals(setOf("stamina"), completed) }
         compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("step_stamina"))
@@ -104,7 +112,7 @@ class GuideTest {
         compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("images_reference_hand"))
         compose.onNodeWithTag("images_reference_hand").performScrollToNode(hasTestTag("image_reference_hand_journal_map"))
         compose.onNodeWithTag("image_reference_hand_journal_map").performClick()
-        compose.onNodeWithTag("guide_image_title").assertTextEquals("Outcast’s Journal · Skartara")
+        compose.onNodeWithTag("image_title").assertTextEquals("Outcast’s Journal · Skartara")
         compose.onNodeWithText("Close").performClick()
         compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("section_hand"))
         compose.onNodeWithTag("section_hand").performClick()
@@ -235,7 +243,7 @@ class GuideTest {
             compose.onNodeWithTag("guide_progress").assertTextEquals("0 / 27 steps complete")
             compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("wowhead_link"))
             compose.onNodeWithTag("wowhead_link").performClick()
-            compose.runOnIdle { assertEquals(WOWHEAD_GUIDE_URL, openedUrl) }
+            compose.runOnIdle { assertEquals(guideSources.single { it.id == "wowhead" }.url, openedUrl) }
             compose.onNodeWithTag("guide_list").performScrollToNode(hasTestTag("step_shard"))
             compose.onNodeWithTag("step_shard").performClick().assertIsOn()
             compose.runOnIdle { assertEquals(setOf("shard"), GuideStore(context).load()) }

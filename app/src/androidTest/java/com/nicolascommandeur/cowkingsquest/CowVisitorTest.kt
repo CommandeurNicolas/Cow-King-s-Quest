@@ -12,7 +12,12 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
-import com.nicolascommandeur.cowkingsquest.ui.theme.DiabloCowCounterTheme
+import com.nicolascommandeur.cowkingsquest.model.hunt.HuntState
+import com.nicolascommandeur.cowkingsquest.model.hunt.Relic
+import com.nicolascommandeur.cowkingsquest.model.visitor.CowVisitorSession
+import com.nicolascommandeur.cowkingsquest.view.components.visitor.CowVisitorStage
+import com.nicolascommandeur.cowkingsquest.view.navigation.CowHuntApp
+import com.nicolascommandeur.cowkingsquest.view.theme.DiabloCowCounterTheme
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Rule

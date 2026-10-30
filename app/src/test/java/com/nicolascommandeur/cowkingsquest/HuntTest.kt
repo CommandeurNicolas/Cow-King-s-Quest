@@ -1,5 +1,10 @@
 package com.nicolascommandeur.cowkingsquest
 
+import com.nicolascommandeur.cowkingsquest.model.hunt.CharacterStrategy
+import com.nicolascommandeur.cowkingsquest.model.hunt.CowSource
+import com.nicolascommandeur.cowkingsquest.model.hunt.Hunt
+import com.nicolascommandeur.cowkingsquest.model.hunt.HuntState
+import com.nicolascommandeur.cowkingsquest.model.hunt.Relic
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull

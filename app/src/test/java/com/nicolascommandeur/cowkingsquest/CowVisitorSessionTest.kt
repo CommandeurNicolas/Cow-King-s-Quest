@@ -1,5 +1,8 @@
 package com.nicolascommandeur.cowkingsquest
 
+import com.nicolascommandeur.cowkingsquest.model.hunt.Relic
+import com.nicolascommandeur.cowkingsquest.model.visitor.CowVisit
+import com.nicolascommandeur.cowkingsquest.model.visitor.CowVisitorSession
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull

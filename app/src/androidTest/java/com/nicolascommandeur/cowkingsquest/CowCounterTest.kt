@@ -20,7 +20,15 @@ import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextReplacement
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.nicolascommandeur.cowkingsquest.ui.theme.DiabloCowCounterTheme
+import com.nicolascommandeur.cowkingsquest.data.local_storage.HuntStore
+import com.nicolascommandeur.cowkingsquest.model.hunt.CharacterStrategy
+import com.nicolascommandeur.cowkingsquest.model.hunt.CowSource
+import com.nicolascommandeur.cowkingsquest.model.hunt.Hunt
+import com.nicolascommandeur.cowkingsquest.model.hunt.HuntState
+import com.nicolascommandeur.cowkingsquest.model.hunt.Relic
+import com.nicolascommandeur.cowkingsquest.view.navigation.CowHuntApp
+import com.nicolascommandeur.cowkingsquest.view.screens.counter.CounterScreen
+import com.nicolascommandeur.cowkingsquest.view.theme.DiabloCowCounterTheme
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -47,7 +55,7 @@ class CowCounterTest {
             )
         )
 
-        compose.setContent { DiabloCowCounterTheme { CowCounter(state) { state = it } } }
+        compose.setContent { DiabloCowCounterTheme { CounterScreen(state) { state = it } } }
 
         compose.onNodeWithText("+1   Cow killed").performScrollTo().performClick()
         compose.onNodeWithText("Switch zones before more kills").assertDoesNotExist()
@@ -79,7 +87,7 @@ class CowCounterTest {
     fun correctingPastReminderThresholdWarnsWithoutChangingTheSavedCount() {
         var state by mutableStateOf(HuntState())
 
-        compose.setContent { DiabloCowCounterTheme { CowCounter(state) { state = it } } }
+        compose.setContent { DiabloCowCounterTheme { CounterScreen(state) { state = it } } }
         compose.onNodeWithText("Correct count").performScrollTo().performClick()
         compose.onNode(hasSetTextAction()).performTextReplacement("645")
         compose.onNodeWithText("Save count").performClick()
@@ -100,7 +108,7 @@ class CowCounterTest {
             )
         )
 
-        compose.setContent { DiabloCowCounterTheme { CowCounter(state) { state = it } } }
+        compose.setContent { DiabloCowCounterTheme { CounterScreen(state) { state = it } } }
         compose.onNodeWithText("+1   Cow killed").performScrollTo().performClick()
         compose.onNodeWithText("Got it").performClick()
         compose.onNodeWithText("Undo").performScrollTo().performClick()
@@ -113,7 +121,7 @@ class CowCounterTest {
     fun countingSwitchingAndFinalConfirmation() {
         var state by mutableStateOf(HuntState())
 
-        compose.setContent { DiabloCowCounterTheme { CowCounter(state) { state = it } } }
+        compose.setContent { DiabloCowCounterTheme { CounterScreen(state) { state = it } } }
         compose.onNodeWithText("+1   Cow killed").performScrollTo().performClick()
         compose.runOnIdle { assertEquals(listOf(1, 0, 0), state.hunts.map { it.count }) }
         compose.onNodeWithContentDescription("Select Character 2, Tome, 0 of 666 cows")
@@ -231,7 +239,7 @@ class CowCounterTest {
     fun bellModeHidesAllCountingForBothCharacterStrategies() {
         var state by mutableStateOf(HuntState(cowSource = CowSource.BELL_OF_THE_BOVINE))
 
-        compose.setContent { DiabloCowCounterTheme { CowCounter(state) { state = it } } }
+        compose.setContent { DiabloCowCounterTheme { CounterScreen(state) { state = it } } }
 
         fun assertNoCounting() {
             listOf(
@@ -271,7 +279,7 @@ class CowCounterTest {
             )
         )
 
-        compose.setContent { DiabloCowCounterTheme { CowCounter(state) { state = it } } }
+        compose.setContent { DiabloCowCounterTheme { CounterScreen(state) { state = it } } }
         compose.onNodeWithText("+10").performScrollTo().performClick()
         compose.runOnIdle { assertEquals(listOf(676, 0, 0), state.hunts.map { it.count }) }
         compose.onNodeWithText("Record final cow").assertDoesNotExist()
@@ -292,7 +300,7 @@ class CowCounterTest {
             )
         )
 
-        compose.setContent { DiabloCowCounterTheme { CowCounter(state) { state = it } } }
+        compose.setContent { DiabloCowCounterTheme { CounterScreen(state) { state = it } } }
         compose.onNodeWithText("Change").performScrollTo().performClick()
         compose.onNodeWithText("One character", substring = false).performScrollTo().performClick()
         compose.onNode(hasText("Druid") and isSelectable()).performScrollTo().performClick()

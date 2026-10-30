@@ -9,10 +9,14 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.nicolascommandeur.cowkingsquest.ui.theme.DiabloCowCounterTheme
+import androidx.lifecycle.ViewModelProvider
+import com.nicolascommandeur.cowkingsquest.data.local_storage.CowVisitorLaunch
+import com.nicolascommandeur.cowkingsquest.view.navigation.CowHuntApp
+import com.nicolascommandeur.cowkingsquest.view.theme.DiabloCowCounterTheme
+import com.nicolascommandeur.cowkingsquest.viewmodel.CounterViewModel
+import com.nicolascommandeur.cowkingsquest.viewmodel.GuideViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,9 +43,9 @@ class MainActivity : ComponentActivity() {
             navigationBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT)
         )
 
-        // Load local data
-        val store = HuntStore(this)
-        val guideStore = GuideStore(this)
+        val viewModels = ViewModelProvider(this)
+        val counterViewModel = viewModels[CounterViewModel::class.java]
+        val guideViewModel = viewModels[GuideViewModel::class.java]
 
         // Moo ?
         val visitorSession = if (
@@ -56,14 +60,12 @@ class MainActivity : ComponentActivity() {
         }
 
         setContent {
-            var state by remember { mutableStateOf(store.load()) }
-            var completedSteps by remember { mutableStateOf(guideStore.load()) }
             DiabloCowCounterTheme {
                 CowHuntApp(
-                    state = state,
-                    completedSteps = completedSteps,
-                    onHuntChange = { next -> state = next; store.save(next) },
-                    onGuideChange = { next -> completedSteps = next; guideStore.save(next) },
+                    state = counterViewModel.state,
+                    completedSteps = guideViewModel.completedSteps,
+                    onHuntChange = counterViewModel::update,
+                    onGuideChange = guideViewModel::update,
                     visitorSession = visitorSession,
                     splashFinished = splashFinished
                 )

@@ -1,5 +1,7 @@
 package com.nicolascommandeur.cowkingsquest
 
+import com.nicolascommandeur.cowkingsquest.model.hunt.Relic
+import com.nicolascommandeur.cowkingsquest.model.visitor.CowVisitorLaunchCounter
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
