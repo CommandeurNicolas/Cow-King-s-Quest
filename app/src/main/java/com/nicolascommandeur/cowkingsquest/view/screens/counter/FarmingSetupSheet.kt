@@ -22,6 +22,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.nicolascommandeur.cowkingsquest.model.hunt.CharacterStrategy
 import com.nicolascommandeur.cowkingsquest.model.hunt.CowSource
@@ -60,6 +61,7 @@ internal fun FarmingSetupSheet(
         ) {
             Text(
                 "Farming setup",
+                fontFamily = FontFamily.Serif,
                 style = MaterialTheme.typography.headlineSmall
             )
             Text(

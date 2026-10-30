@@ -5,11 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -20,27 +16,20 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.nicolascommandeur.cowkingsquest.model.hunt.Hunt
+import com.nicolascommandeur.cowkingsquest.view.components.HuntDialog
 
 @Composable
 internal fun ZoneReminderDialog(hunt: Hunt, onDismiss: () -> Unit) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        containerColor = MaterialTheme.colorScheme.surface,
-        tonalElevation = 0.dp,
-        shape = RoundedCornerShape(24.dp),
-        title = {
-            Text(
-                "Switch zones before more kills",
-                fontFamily = FontFamily.Serif,
-                style = MaterialTheme.typography.headlineSmall
-            )
-        },
+    HuntDialog(
+        title = "Switch zones before more kills",
+        onDismiss = onDismiss,
+        onConfirm = onDismiss,
+        confirmLabel = "Got it",
+        dismissLabel = null,
         text = {
             Column(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .verticalScroll(rememberScrollState()),
+                modifier = Modifier.fillMaxWidth(),
             ) {
                 Text("Manual counting can miss kills. Your actual total may be higher, so your relic could drop before this counter shows 666.")
                 Surface(
@@ -98,11 +87,6 @@ internal fun ZoneReminderDialog(hunt: Hunt, onDismiss: () -> Unit) {
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-            }
-        },
-        confirmButton = {
-            Button(onClick = onDismiss, shape = RoundedCornerShape(12.dp)) {
-                Text("Got it")
             }
         }
     )

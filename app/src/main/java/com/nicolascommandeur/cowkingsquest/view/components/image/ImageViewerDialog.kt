@@ -47,7 +47,7 @@ internal fun ImageViewerDialog(
         Surface(
             color = MaterialTheme.colorScheme.surface,
             shape = RoundedCornerShape(16.dp),
-            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.35f)),
             shadowElevation = 8.dp,
             modifier = Modifier
                 .safeDrawingPadding()

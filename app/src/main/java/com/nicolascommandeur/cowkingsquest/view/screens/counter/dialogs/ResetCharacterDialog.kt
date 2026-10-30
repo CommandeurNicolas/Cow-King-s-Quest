@@ -1,9 +1,8 @@
 package com.nicolascommandeur.cowkingsquest.view.screens.counter.dialogs
 
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import com.nicolascommandeur.cowkingsquest.view.components.HuntDialog
 
 @Composable
 internal fun ResetCharacterDialog(
@@ -11,17 +10,13 @@ internal fun ResetCharacterDialog(
     onDismiss: () -> Unit,
     onConfirm: () -> Unit
 ) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text("Reset $characterName?") },
+    HuntDialog(
+        title = "Reset $characterName?",
+        onDismiss = onDismiss,
+        onConfirm = onConfirm,
+        confirmLabel = "Reset count",
         text = {
             Text("This clears this character’s recorded count, undo history and first-drop history. Collected relics and other characters keep their progress. Reset only if you are starting with a fresh in-game character.")
-        },
-        confirmButton = {
-            TextButton(onClick = onConfirm) { Text("Reset count") }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) { Text("Cancel") }
         }
     )
 }

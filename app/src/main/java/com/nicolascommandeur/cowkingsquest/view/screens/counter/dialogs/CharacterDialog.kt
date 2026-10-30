@@ -4,31 +4,26 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.nicolascommandeur.cowkingsquest.model.hunt.Hunt
 import com.nicolascommandeur.cowkingsquest.model.hunt.Relic
+import com.nicolascommandeur.cowkingsquest.view.components.HuntDialog
 
 @Composable
 internal fun CharacterDialog(
@@ -44,24 +39,16 @@ internal fun CharacterDialog(
         if (validName) onSave(name.trim())
     }
 
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        containerColor = MaterialTheme.colorScheme.surface,
-        tonalElevation = 0.dp,
-        shape = RoundedCornerShape(24.dp),
-        title = {
-            Text(
-                "Edit character",
-                fontFamily = FontFamily.Serif,
-                style = MaterialTheme.typography.headlineSmall
-            )
-        },
+    HuntDialog(
+        title = "Edit character",
+        onDismiss = onDismiss,
+        onConfirm = ::saveName,
+        confirmLabel = "Save name",
+        confirmEnabled = validName,
         text = {
             Column(
                 verticalArrangement = Arrangement.spacedBy(20.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .verticalScroll(rememberScrollState()),
+                modifier = Modifier.fillMaxWidth(),
             ) {
                 OutlinedTextField(
                     value = name,
@@ -119,20 +106,6 @@ internal fun CharacterDialog(
                         )
                     }
                 }
-            }
-        },
-        confirmButton = {
-            Button(
-                onClick = ::saveName,
-                enabled = validName,
-                shape = RoundedCornerShape(12.dp)
-            ) {
-                Text("Save name")
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text("Cancel")
             }
         }
     )
